@@ -1,11 +1,14 @@
 package tienda.models;
 
+import tienda.models.interfaces.Marca;
+import tienda.models.interfaces.Modelo;
+
 public class Producto {
     private String id;
     private String nombre;
     private Double price;
-    //private Marca marc;
-    //private Modelo model;
+    private Marca marc;
+    private Modelo model;
 
     public String imprimirProducto(){
         String producto="";
@@ -13,8 +16,8 @@ public class Producto {
         "ID: "+id+"\n"+
         "Nombre: "+nombre+"\n"+
         "Precio: "+price+"\n"
-        //+"Marca: "+marc.printMarca()+"\n"
-        //+"Modelo: "+model.printModel()+"\n"
+        +marc.printMarca()+"\n"
+        +model.printModel()+"\n"
         ;
         return producto;
     }
