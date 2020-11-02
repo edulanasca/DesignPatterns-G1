@@ -39,13 +39,14 @@ public class App {
         Javalin server = Javalin.create(
                 config -> {
                     config.registerPlugin(new OpenApiPlugin(openApi));
+                    config.enableCorsForAllOrigins(); // All CORS
                 }
         ).start(7000);
 
-        server.get("api/customer/:id", this.customerController::find);
-        server.delete("api/customer/:id", this.customerController::delete);
+        server.get("api/customers/:id", this.customerController::find);
+        server.delete("api/customers/:id", this.customerController::delete);
         server.get("api/customers", this.customerController::findAll);
-        server.post("api/customer", this.customerController::create);
+        server.post("api/customers", this.customerController::create);
 
         server.get("api/order/:id", this.orderController::find);
         server.delete("api/order/:id", this.orderController::delete);
