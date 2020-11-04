@@ -34,7 +34,7 @@ const CreateUser = props => {
       formData[identifier] = inputs[identifier].value;
     }
 
-    fetch("http://localhost:7000/api/customers", {
+    fetch(endpoints, {
       method: "POST",
       body: JSON.stringify(formData),
     }).then((data) => {
