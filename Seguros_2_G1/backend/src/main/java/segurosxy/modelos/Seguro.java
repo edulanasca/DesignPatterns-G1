@@ -8,9 +8,7 @@ public abstract class Seguro {
     protected Certificado certificado;
     protected Poliza poliza;
     protected String nivelRiesgo = "NINGUNO";
-    protected String bancoTarjeta;
-    protected String marca;
-    protected String modelo;
+
 
     public Seguro() {
         this.numero = new Random().nextInt();
