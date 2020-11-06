@@ -1,19 +1,22 @@
-package segurosxy.modelos;
+package segurosxy.modelos.seguro;
+
+import segurosxy.modelos.interfaces.ICertificado;
+import segurosxy.modelos.interfaces.IPoliza;
 
 import java.util.Random;
 
 public abstract class Seguro {
 
     protected Integer numero;
-    protected Certificado certificado;
-    protected Poliza poliza;
+    protected ICertificado certificado;
+    protected IPoliza poliza;
     protected String nivelRiesgo = "NINGUNO";
 
     public Seguro() {
         this.numero = new Random().nextInt();
     }
 
-    public Certificado getCertificado() {
+    public ICertificado getCertificado() {
         return certificado;
     }
 
@@ -21,7 +24,7 @@ public abstract class Seguro {
         this.certificado = certificado;
     }
 
-    public Poliza getPoliza() {
+    public IPoliza getPoliza() {
         return poliza;
     }
 
@@ -41,7 +44,7 @@ public abstract class Seguro {
         return this.nivelRiesgo;
     }
 
-    public abstract String getDetalleSeguro();
+    public abstract String detalleSeguro();
 
-    public abstract void cacularRiesgo();
+    public abstract void calcularRiesgo();
 }

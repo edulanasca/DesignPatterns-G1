@@ -1,4 +1,7 @@
-package segurosxy.modelos;
+package segurosxy.modelos.seguro.tarjeta;
+
+import segurosxy.modelos.Tarjeta;
+import segurosxy.modelos.seguro.Seguro;
 
 public class SeguroTarjeta extends Seguro {
 
@@ -19,7 +22,7 @@ public class SeguroTarjeta extends Seguro {
     }
 
     @Override
-    public void cacularRiesgo()   {
+    public void calcularRiesgo()   {
 
         if (this.tarjeta.getBancoTarjeta().equals("AZTECA")) {
             this.nivelRiesgo = "ALTO";
@@ -30,7 +33,7 @@ public class SeguroTarjeta extends Seguro {
     }
 
     @Override
-    public String getDetalleSeguro() {
+    public String detalleSeguro() {
 
         return "Seg. Tarjeta Numero: " + this.numero + " con riesgo: " + this.nivelRiesgo;
     }

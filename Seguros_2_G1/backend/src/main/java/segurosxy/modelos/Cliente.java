@@ -1,5 +1,7 @@
 package segurosxy.modelos;
 
+import segurosxy.modelos.seguro.Seguro;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class Cliente {
         System.out.println("Nombre: " + this.nombre );
         for (Seguro seguro : seguros )  {
 
-            System.out.println( "Seguro: " + seguro.getDetalleSeguro());
+            System.out.println( "Seguro: " + seguro.detalleSeguro());
         }
 
     }
