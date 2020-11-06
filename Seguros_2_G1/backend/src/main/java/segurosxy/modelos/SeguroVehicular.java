@@ -1,21 +1,32 @@
 package segurosxy.modelos;
 
-import java.util.Random;
 
 public class SeguroVehicular extends Seguro {
 
+    private Vehiculo vehiculo;
 
     public SeguroVehicular(String marca, String modelo)    {
-
         super();
-        this.marca = marca;
-        this.modelo = modelo;
+        this.vehiculo = new Vehiculo(marca, modelo);
+    }
+
+    public SeguroVehicular(Vehiculo vehiculo) {
+        super();
+        this.vehiculo = vehiculo;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 
     @Override
     public void cacularRiesgo()   {
 
-        if (this.marca.equals("Toyota") && this.modelo.equals("Yaris")) {
+        if (this.vehiculo.getMarca().equals("Toyota") && this.vehiculo.getModelo().equals("Yaris")) {
             this.nivelRiesgo = "ALTO";
         }
         else {
