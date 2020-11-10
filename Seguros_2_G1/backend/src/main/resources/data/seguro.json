@@ -1,0 +1,32 @@
+{
+  "nombre": "String",
+  "seguros": [
+    {
+      "numero": "Random Int",
+      "certificado":{
+        "numero": "Random Int"
+      },
+      "poliza": {
+        "numero": 1
+      },
+      "nivelRiesgo": "String",
+      "vehiculo": {
+        "marca": "String",
+        "modelo": "String"
+      }
+    },
+    {
+      "numero": "Random Int",
+      "certificado":{
+        "numero": 1
+      },
+      "poliza": {
+        "numero": 1
+      },
+      "nivelRiesgo": "String",
+      "tarjeta": {
+        "bancoTarjeta": "String"
+      }
+    }
+  ]
+}

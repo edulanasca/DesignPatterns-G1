@@ -1,12 +1,15 @@
-package segurosxy.modelos.seguro.vehiculo;
+package segurosxy.seguro.vehiculo.model;
 
 
 import segurosxy.modelos.Vehiculo;
-import segurosxy.modelos.seguro.Seguro;
+import segurosxy.seguro.Seguro;
 
 public abstract class SeguroVehicular extends Seguro {
 
-    private Vehiculo vehiculo;
+    protected Vehiculo vehiculo;
+
+    public SeguroVehicular() {
+    }
 
     public SeguroVehicular(String marca, String modelo) {
         super();
@@ -26,23 +29,20 @@ public abstract class SeguroVehicular extends Seguro {
         this.vehiculo = vehiculo;
     }
 
+    public static SeguroVehicular getSeguroVehicular(String tipo) {
+        switch (tipo.toLowerCase()) {
+            case "choque":
+                return new SeguroChoque();
+            case "robo":
+                return new SeguroRobo();
+            case "soat":
+                return new SeguroSOAT();
+            default:
+                return new SeguroTodoRiesgo();
+        }
+    }
+
     public abstract String detalleSeguro();
     public abstract void calcularRiesgo();
 
-//    @Override
-//    public void cacularRiesgo()   {
-//
-//        if (this.vehiculo.getMarca().equals("Toyota") && this.vehiculo.getModelo().equals("Yaris")) {
-//            this.nivelRiesgo = "ALTO";
-//        }
-//        else {
-//            this.nivelRiesgo = "BAJO";
-//        }
-//    }
-//
-//    @Override
-//    public String getDetalleSeguro()    {
-//
-//        return "Seg. Vehicular Numero: " + this.numero + " con riesgo: " + this.nivelRiesgo;
-//    }
 }

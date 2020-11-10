@@ -1,19 +1,23 @@
-package segurosxy.modelos.seguro;
+package segurosxy.seguro;
 
+import com.mongodb.BasicDBObject;
+import lombok.ToString;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.types.ObjectId;
+import segurosxy.modelos.Certificado;
+import segurosxy.modelos.Poliza;
 import segurosxy.modelos.interfaces.ICertificado;
 import segurosxy.modelos.interfaces.IPoliza;
 
-import java.util.Random;
-
+@ToString
 public abstract class Seguro {
 
-    protected Integer numero;
     protected ICertificado certificado;
     protected IPoliza poliza;
     protected String nivelRiesgo = "NINGUNO";
 
     public Seguro() {
-        this.numero = new Random().nextInt();
+        this.certificado = new Certificado();
     }
 
     public ICertificado getCertificado() {
@@ -30,14 +34,6 @@ public abstract class Seguro {
 
     public void setPoliza(Poliza poliza) {
         this.poliza = poliza;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
     }
 
     public String getNivelRiesgo()  {

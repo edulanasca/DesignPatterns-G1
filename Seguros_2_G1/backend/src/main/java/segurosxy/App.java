@@ -1,27 +1,26 @@
 package segurosxy;
 
-import segurosxy.modelos.Cliente;
-import segurosxy.modelos.seguro.tarjeta.SeguroTarjeta;
-import segurosxy.modelos.seguro.vehiculo.SeguroTodoRiesgo;
-import segurosxy.modelos.seguro.vehiculo.SeguroVehicular;
+import io.javalin.Javalin;
+import segurosxy.cliente.ClienteController;
 
 public class App {
 
-    public static void main( String[] args )
-    {
+    private final ClienteController clienteController;
 
-        Cliente cliente = new Cliente("Juan Perez");
-
-        SeguroVehicular seguro = new SeguroTodoRiesgo("Toyota","Yaris"); // Se va a romper
-        seguro.calcularRiesgo();
-        cliente.setCompraSeguro(seguro);
-
-        SeguroTarjeta seguro2 = new SeguroTarjeta("BCP");
-        seguro2.calcularRiesgo();
-        cliente.setCompraSeguro(seguro2);
-
-        cliente.getListaSeguroCliente();
-
+    public App() {
+        this.clienteController = new ClienteController();
     }
+
+    public void init() {
+        Javalin javalin = Javalin.create().start(7000);
+
+        clienteEndPoints(javalin);
+    }
+
+    public void clienteEndPoints(Javalin server) {
+        server.post("clientes/", clienteController::createCliente);
+    }
+
+    public static void main(String[] args ) { new App().init(); }
 
 }

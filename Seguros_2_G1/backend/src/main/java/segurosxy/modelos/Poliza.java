@@ -1,7 +1,9 @@
-package segurosxy.modelos.seguro;
+package segurosxy.modelos;
 
+import lombok.AllArgsConstructor;
 import segurosxy.modelos.interfaces.IPoliza;
 
+@AllArgsConstructor
 public class Poliza implements IPoliza {
 
     private Integer numero;

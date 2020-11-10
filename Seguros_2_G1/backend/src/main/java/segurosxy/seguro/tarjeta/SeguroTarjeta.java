@@ -1,11 +1,13 @@
-package segurosxy.modelos.seguro.tarjeta;
+package segurosxy.seguro.tarjeta;
 
 import segurosxy.modelos.Tarjeta;
-import segurosxy.modelos.seguro.Seguro;
+import segurosxy.seguro.Seguro;
 
 public class SeguroTarjeta extends Seguro {
 
     private Tarjeta tarjeta;
+
+    public SeguroTarjeta() { }
 
     public SeguroTarjeta(String bancoTarjeta)    {
 
@@ -35,6 +37,6 @@ public class SeguroTarjeta extends Seguro {
     @Override
     public String detalleSeguro() {
 
-        return "Seg. Tarjeta Numero: " + this.numero + " con riesgo: " + this.nivelRiesgo;
+        return "Seg. Tarjeta Numero: " + this.tarjeta.getBancoTarjeta() + " con riesgo: " + this.nivelRiesgo;
     }
 }

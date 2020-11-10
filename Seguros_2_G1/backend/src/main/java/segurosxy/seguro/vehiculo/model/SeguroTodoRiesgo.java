@@ -1,8 +1,10 @@
-package segurosxy.modelos.seguro.vehiculo;
+package segurosxy.seguro.vehiculo.model;
 
 import segurosxy.modelos.Vehiculo;
 
 public class SeguroTodoRiesgo extends SeguroVehicular{
+
+  public SeguroTodoRiesgo() { }
 
   public SeguroTodoRiesgo(String marca, String modelo) {
     super(marca, modelo);
