@@ -19,6 +19,7 @@ public class App {
 
     public void clienteEndPoints(Javalin server) {
         server.post("clientes/", clienteController::createCliente);
+        server.get("clientes/", clienteController::allClientes);
     }
 
     public static void main(String[] args ) { new App().init(); }

@@ -44,6 +44,11 @@ public class ClienteController {
         .json(saved);
   }
 
+  public void allClientes(Context context) {
+    context.status(HttpStatus.OK_200)
+        .json(clienteService.allClientes());
+  }
+
   private Seguro filtrarSeguro(Map<String, Object> seguroObj) {
     Seguro seguro;
 
