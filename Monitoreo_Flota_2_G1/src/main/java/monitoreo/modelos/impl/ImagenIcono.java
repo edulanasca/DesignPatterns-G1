@@ -10,11 +10,10 @@ public class ImagenIcono extends Icono {
 
         Image img = new Image(ruta);
         ImageView view = new ImageView(img);
-        view.setFitHeight(40);
+        view.setFitHeight(50);
         view.setPreserveRatio(true);
 
         this.imageView = view;
-        //this.imageView = null;
     }
 
     @Override

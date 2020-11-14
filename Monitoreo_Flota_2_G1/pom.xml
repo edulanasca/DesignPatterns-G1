@@ -21,6 +21,15 @@
             <id>arcgis</id>
             <url>https://esri.bintray.com/arcgis</url>
         </repository>
+        <repository>
+            <id>maven</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>com.springsource.repository.bundles.external</id>
+            <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -50,6 +59,12 @@
             <artifactId>arcgis-java-resources</artifactId>
             <version>${arcgis.version}</version>
             <type>zip</type>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-swing -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>11</version>
         </dependency>
     </dependencies>
 
