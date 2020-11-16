@@ -118,10 +118,9 @@ public class Mapa implements IMapa {
 
   @Override
   public IMapa copiar() {
-    //return new Mapa(this);
     Mapa m = new Mapa();
-    this.idVentana++;
-    m.idVentana = this.idVentana;
+//    this.idVentana++;
+    m.idVentana = this.idVentana + 1;
     m.coordenadaXInicial = this.coordenadaXInicial;
     m.coordenadaYInicial = this.coordenadaYInicial;
     m.coordenadaXActual = this.coordenadaXActual;

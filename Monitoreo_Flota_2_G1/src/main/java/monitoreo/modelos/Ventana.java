@@ -2,7 +2,6 @@ package monitoreo.modelos;
 
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,16 +10,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import monitoreo.modelos.impl.IconoNulo;
 import monitoreo.modelos.impl.ImagenGif;
 import monitoreo.modelos.impl.ImagenIcono;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-
+@Deprecated
 public class Ventana extends Application {
 
   private Mapa mapaBase;
@@ -81,41 +77,41 @@ public class Ventana extends Application {
   }
 
   public void muestraNuevaVentana() {
-    Stage stage = new Stage();
-    BorderPane clonePane = new BorderPane();
-    Scene scene = new Scene(clonePane);
-    stage.setScene(scene);
-    stage.setTitle("Sistema de Monitoreo de Vehiculos");
-    stage.setWidth(800);
-    stage.setHeight(700);
-
-    //  Clonacion de MapaBase
-    Mapa mapaBase2 = (Mapa) mapaBase.copiar();
-
-    mapaBase2.imprimeCoordenadasActual();
-    clonePane.setCenter(mapaBase2.getMapView());
-
-    clonePane.setCenter(mapaBase.getMapView());  // el mapa se pone al centro de la escena
-    stage.show();
+//    Stage stage = new Stage();
+//    BorderPane clonePane = new BorderPane();
+//    Scene scene = new Scene(clonePane);
+//    stage.setScene(scene);
+//    stage.setTitle("Sistema de Monitoreo de Vehiculos");
+//    stage.setWidth(800);
+//    stage.setHeight(700);
+//
+//    //  Clonacion de MapaBase
+//    Mapa mapaBase2 = (Mapa) mapaBase.copiar();
+//
+//    mapaBase2.imprimeCoordenadasActual();
+//    clonePane.setCenter(mapaBase2.getMapView());
+//
+//    clonePane.setCenter(mapaBase.getMapView());  // el mapa se pone al centro de la escena
+//    stage.show();
   }
 
   public void screenshot(Stage stage) {
     // export image from map view
     ListenableFuture<Image> mapImage = this.mapaBase.getMapView().exportImageAsync();
-    mapImage.addDoneListener(() -> {
-      try {
-        // get image
-        Image image = mapImage.get();
-        // choose a location to save the file
-        File file = fileChooser.showSaveDialog(stage);
-        if (file != null) {
-          // write the image to the save location
-          ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-        }
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
-    });
+//    mapImage.addDoneListener(() -> {
+//      try {
+//        // get image
+//        Image image = mapImage.get();
+//        // choose a location to save the file
+//        File file = fileChooser.showSaveDialog(stage);
+//        if (file != null) {
+//          // write the image to the save location
+//          ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+//        }
+//      } catch (Exception ex) {
+//        ex.printStackTrace();
+//      }
+//    });
   }
 
   public void addBtn(ButtonBase btn) {

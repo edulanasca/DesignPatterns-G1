@@ -6,6 +6,7 @@ module MonitoreoXY {
   requires com.esri.arcgisruntime;
 
   exports monitoreo.modelos to javafx.graphics;
+  exports monitoreo to javafx.graphics;
   exports monitoreo.modelos.interfaces;
   exports monitoreo.modelos.impl;
 }
