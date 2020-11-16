@@ -195,7 +195,7 @@ public class Ventana implements IVentana {
 
     v.setWidth(this.getWidth());
     v.setHeight(this.getHeight());
-
+    v.setMapBase(this.mapBase.copiar());
     return v;
   }
 }
