@@ -16,6 +16,7 @@ import monitoreo.modelos.interfaces.IMapa;
 import java.util.concurrent.ExecutionException;
 
 public class Mapa implements IMapa {
+  private static Mapa instancia;
 
   private MapView mapView;
   private int idVentana;
@@ -127,5 +128,13 @@ public class Mapa implements IMapa {
     m.coordenadaYActual = this.coordenadaYActual;
     return m;
   }
+
+//Singleton Mapa uwu
+public static Mapa getInstancia(){
+    if (instancia == null){
+      instancia = new Mapa();
+    }
+    return instancia;
+}
 
 }

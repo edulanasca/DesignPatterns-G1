@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import monitoreo.modelos.impl.IconoNulo;
@@ -27,7 +28,7 @@ public class Ventana extends Application {
   private final FileChooser fileChooser = new FileChooser();
 
   @Override
-  public void start(Stage stage) {
+  public void start(Stage stage) throws Exception{
 
     initPane(stage);
 
@@ -52,6 +53,31 @@ public class Ventana extends Application {
         ));
     // https://developers.arcgis.com/java/latest/java/sample-code/change-viewpoint/
     addBtn(btnNuevo); // Se añade opcion
+
+    btnNuevo = new Button();
+    btnNuevo.setText("Nuevo Singleton");
+    btnNuevo.setOnAction(event -> nuevo_Singleton());
+    addBtn(btnNuevo); // Se añade opcion
+
+  }
+  public void nuevo_Singleton(){
+    Stage stage = new Stage();
+    BorderPane clonePane = new BorderPane();
+    Scene scene = new Scene(clonePane);
+    stage.setScene(scene);
+    stage.setTitle("Sistema de Monitoreo de Vehiculos");
+    stage.setWidth(800);
+    stage.setHeight(700);
+
+    //  Clonacion de MapaBase
+    Mapa mapaBase2 = Mapa.getInstancia();
+
+    mapaBase2.imprimeCoordenadasActual();
+    clonePane.setCenter(mapaBase2.getMapView());
+
+    clonePane.setCenter(mapaBase.getMapView());  // el mapa se pone al centro de la escena
+    stage.show();
+
   }
 
   public void muestraNuevaVentana() {
@@ -109,7 +135,8 @@ public class Ventana extends Application {
     stage.setScene(scene);
 
     // create a MapView to display the map and add it to the stack pane
-    mapaBase = new Mapa();
+   // mapaBase = new Mapa(); (antes del Singleton)
+    mapaBase = Mapa.getInstancia();
     mapaBase.imprimeCoordenadasActual();
 
     pane.setCenter(mapaBase.getMapView());  // el mapa se pone al centro de la escena
