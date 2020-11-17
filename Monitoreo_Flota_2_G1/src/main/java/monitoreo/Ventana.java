@@ -35,7 +35,7 @@ public class Ventana implements IVentana {
   public Ventana() {
     this.parent = new BorderPane();
     this.menuBtn = new HBox();
-    this.mapBase = new Mapa();
+    this.mapBase = new Mapa(); // TODO clone map when creating a new win
     init();
   }
 

@@ -6,12 +6,12 @@ import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import monitoreo.modelos.Mapa;
+import monitoreo.modelos.RegistroLog;
 
 public class Server extends Application {
 
     public static void main(String[] args) {
-
-        System.out.println("Iniciando servidor...");
+        RegistroLog.getInstance().log("Iniciando servidor...");
         ArcGISRuntimeEnvironment.setInstallDirectory("/opt/arcgis-runtime-sdk-java-100.9.0");
         launch(args);
     }
