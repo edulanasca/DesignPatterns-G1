@@ -1,12 +1,15 @@
 package monitoreo;
 
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
+import com.esri.arcgisruntime.mapping.Basemap;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBase;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -102,6 +105,7 @@ public class Ventana implements IVentana {
     this.menuBtn.setAlignment(Pos.CENTER);
     this.addBtn(nuevo());
     this.addBtn(captura());
+    this.menuBtn.getChildren().add(tipoMapa());
 
     this.parent.setCenter(((Mapa) this.mapBase).getMapView());
     this.parent.setBottom(this.menuBtn);
@@ -136,8 +140,8 @@ public class Ventana implements IVentana {
     Stage stage = new Stage();
     Ventana ventana = copiar();
 
-    RegistroLog.getInstance().log(this.toString());
-    RegistroLog.getInstance().log(ventana.toString());
+    RegistroLog.getInstance().log(RegistroLog.Level.DEBUG, this.toString());
+    RegistroLog.getInstance().log(RegistroLog.Level.DEBUG, ventana.toString());
 
     Scene scene = new Scene(ventana.getParent());
 
@@ -187,6 +191,19 @@ public class Ventana implements IVentana {
         ex.printStackTrace();
       }
     });
+  }
+
+  public ListView<Basemap.Type> tipoMapa() {
+    ListView<Basemap.Type> basemapList = new ListView<>(FXCollections.observableArrayList(Basemap.Type.values()));
+    basemapList.setMaxSize(250, 150);
+
+    basemapList
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(o -> ((Mapa) mapBase).setType(basemapList.getSelectionModel().getSelectedItem()));
+
+    basemapList.getSelectionModel().select(1);
+    return basemapList;
   }
 
   @Override

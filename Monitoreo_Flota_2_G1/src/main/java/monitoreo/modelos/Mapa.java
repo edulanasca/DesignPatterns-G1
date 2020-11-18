@@ -16,10 +16,10 @@ import monitoreo.modelos.interfaces.IMapa;
 import java.util.concurrent.ExecutionException;
 
 public class Mapa implements IMapa {
-  private static Mapa instancia;
 
   private MapView mapView;
   private int idVentana;
+  private Basemap.Type type;
 
   private double coordenadaXInicial;
   private double coordenadaYInicial;
@@ -29,38 +29,27 @@ public class Mapa implements IMapa {
   private final RegistroLog registro = RegistroLog.getInstance();
 
   public Mapa() {
+    this(Basemap.Type.IMAGERY, -12.05462, -77.08396); // UNMSM
+  }
+
+  public Mapa(Basemap.Type type, double coordenadaXInicial, double coordenadaYInicial) {
+    this.coordenadaXInicial = coordenadaXInicial;
+    this.coordenadaYInicial = coordenadaYInicial;
+    this.type = type;
 
     // create a MapView to display the map and add it to the stack pane
     mapView = new MapView();
     idVentana++;
 
     // create an ArcGISMap with the default imagery basemap
-    final ArcGISMap map = new ArcGISMap(Basemap.createImagery());
+    ArcGISMap map = new ArcGISMap(type, this.coordenadaXInicial, this.coordenadaYInicial, 12);
 
     // display the map by setting the map on the map view
     mapView.setMap(map);
+    showCalloutWhenMouseClicked();
+  }
 
-    // latitude, longitude, scale
-    //Viewpoint viewpoint = new Viewpoint(27.3805833, 33.6321389, 6E3);
-    this.coordenadaXInicial = -12.05462;
-    this.coordenadaYInicial = -77.08396;
-    Viewpoint viewpoint = new Viewpoint(this.coordenadaXInicial, this.coordenadaYInicial, 12000);   // UNMSM
-
-    // take 5 seconds to move to viewpoint
-    final ListenableFuture<Boolean> viewpointSetFuture = mapView.setViewpointAsync(viewpoint, 5);
-    viewpointSetFuture.addDoneListener(() -> {
-      try {
-        boolean completed = viewpointSetFuture.get();
-        if (completed) {
-          registro.log("IdVentana:[" + idVentana + "] - Acercamiento completado");
-        }
-      } catch (InterruptedException e) {
-        registro.log("IdVentana:[" + idVentana + "] - Acercamiento interrumpido");
-      } catch (ExecutionException e) {
-        // Deal with exception during animation...
-      }
-    });
-
+  private void showCalloutWhenMouseClicked() {
     // click event to display the callout with the formatted coordinates of the clicked location
     mapView.setOnMouseClicked(e -> {
       // check that the primary mouse button was clicked and user is not panning
@@ -79,13 +68,16 @@ public class Mapa implements IMapa {
     Callout callout = mapView.getCallout();
     callout.setTitle("Location:");
 
-    this.coordenadaXActual = location.getX();
-    this.coordenadaYActual = location.getY();
     registro.log("IdVentana:[" + idVentana + "] - " +
         "Coordenadas: " + this.coordenadaXActual + ", " + this.coordenadaYActual);
 
     String latLonDecimalDegrees = CoordinateFormatter.toLatitudeLongitude(location, CoordinateFormatter
         .LatitudeLongitudeFormat.DECIMAL_DEGREES, 4);
+
+    String[] s = latLonDecimalDegrees.trim().split(" ");
+    this.coordenadaXActual = -Double.parseDouble(s[0].substring(0, s[0].length() - 1));
+    this.coordenadaYActual = -Double.parseDouble(s[1].substring(0, s[1].length() - 1));
+
     String latLonDegMinSec = CoordinateFormatter.toLatitudeLongitude(location, CoordinateFormatter
         .LatitudeLongitudeFormat.DEGREES_MINUTES_SECONDS, 1);
 
@@ -109,6 +101,43 @@ public class Mapa implements IMapa {
     this.mapView = mapView;
   }
 
+  public Basemap.Type getType() {
+    return type;
+  }
+
+  public void setType(Basemap.Type type) {
+    this.type = type;
+
+    double x = this.coordenadaXActual == 0 ? this.coordenadaXInicial : this.coordenadaXActual;
+    double y = this.coordenadaYActual == 0 ? this.coordenadaYInicial : this.coordenadaYActual;
+    double scale = isNaN(this.mapView.getMapScale()) ? 12000 : this.mapView.getMapScale();
+
+    this.mapView.setMap(new ArcGISMap(type, x, y, 6));
+
+    Viewpoint viewpoint = new Viewpoint(x, y, scale);
+
+    // take n seconds to move to viewpoint
+    ListenableFuture<Boolean> viewpointSetFuture = mapView.setViewpointAsync(viewpoint, 3);
+
+    viewpointSetFuture.addDoneListener(() -> {
+      try {
+        boolean completed = viewpointSetFuture.get();
+        if (completed) {
+          registro.log("IdVentana:[" + idVentana + "] - Acercamiento completado");
+
+        }
+      } catch (InterruptedException e) {
+        registro.log("IdVentana:[" + idVentana + "] - Acercamiento interrumpido");
+      } catch (ExecutionException e) {
+        registro.log(RegistroLog.Level.ERROR, e.getMessage());
+      }
+    });
+
+  }
+
+  private boolean isNaN(double x) {
+    return x != x;
+  }
 
   public void imprimeCoordenadasActual() {
 
@@ -125,15 +154,8 @@ public class Mapa implements IMapa {
     m.coordenadaYInicial = this.coordenadaYInicial;
     m.coordenadaXActual = this.coordenadaXActual;
     m.coordenadaYActual = this.coordenadaYActual;
+    m.setType(this.type);
     return m;
   }
-
-//Singleton Mapa uwu
-public static Mapa getInstancia(){
-    if (instancia == null){
-      instancia = new Mapa();
-    }
-    return instancia;
-}
 
 }

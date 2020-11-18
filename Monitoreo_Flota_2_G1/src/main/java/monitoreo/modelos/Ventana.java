@@ -66,10 +66,10 @@ public class Ventana extends Application {
     stage.setHeight(700);
 
     //  Clonacion de MapaBase
-    Mapa mapaBase2 = Mapa.getInstancia();
+//    Mapa mapaBase2 = Mapa.getInstancia();
 
-    mapaBase2.imprimeCoordenadasActual();
-    clonePane.setCenter(mapaBase2.getMapView());
+//    mapaBase2.imprimeCoordenadasActual();
+//    clonePane.setCenter(mapaBase2.getMapView());
 
     clonePane.setCenter(mapaBase.getMapView());  // el mapa se pone al centro de la escena
     stage.show();
@@ -131,9 +131,9 @@ public class Ventana extends Application {
     stage.setScene(scene);
 
     // create a MapView to display the map and add it to the stack pane
-   // mapaBase = new Mapa(); (antes del Singleton)
-    mapaBase = Mapa.getInstancia();
-    mapaBase.imprimeCoordenadasActual();
+    // mapaBase = new Mapa(); (antes del Singleton)
+//    mapaBase = Mapa.getInstancia();
+//    mapaBase.imprimeCoordenadasActual();
 
     pane.setCenter(mapaBase.getMapView());  // el mapa se pone al centro de la escena
     pane.setBottom(this.menuBtn);   // se pone un HBox a modo de menu
