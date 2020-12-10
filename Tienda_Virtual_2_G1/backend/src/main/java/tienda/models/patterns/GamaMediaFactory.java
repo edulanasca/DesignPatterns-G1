@@ -2,29 +2,25 @@ package tienda.models.patterns;
 
 import tienda.models.*;
 
-public class GamaAltaFactory implements IProductoFactory {
+public class GamaMediaFactory implements IProductoFactory{
 
     @Override
     public LineaProducto getLineaProducto() {
-        
-        return new LineaGamaAlta();
+        return new LineaGamaMedia();
     }
 
     @Override
     public MantenimientoProducto getMantenimiento() {
-        
-        return new MantenimientoPremium();
+        return new MantenimientoEstandar();
     }
 
     @Override
     public BateriaProducto getBateria() {
-        return new BateriaDuracionAlta();
+        return new BateriaDuracionMedia();
     }
 
     @Override
     public CamaraProducto getCamaraProducto() {
-        return new CamaraResolucionAlta();
+        return new CamaraResolucionMedia();
     }
-
-
 }

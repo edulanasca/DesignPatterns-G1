@@ -1,0 +1,38 @@
+[INFO]24 nov. 2020 - Iniciando servidor...
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - Iniciando servidor...
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - Iniciando servidor...
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[DEBUG]24 nov. 2020 - monitoreo.Ventana@7f1e2faf
+[DEBUG]24 nov. 2020 - monitoreo.Ventana@7e16cc35
+[INFO]24 nov. 2020 - IdVentana:[2] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[2] - Acercamiento completado
+[INFO]24 nov. 2020 - Iniciando servidor...
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas: 0.0, 0.0
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas: -12.0757, -77.0523
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[INFO]24 nov. 2020 - Iniciando servidor...
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado
+[DEBUG]24 nov. 2020 - monitoreo.Ventana@12843c16
+[DEBUG]24 nov. 2020 - monitoreo.Ventana@2a721dfc
+[INFO]24 nov. 2020 - IdVentana:[2] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[2] - Acercamiento completado
+[DEBUG]24 nov. 2020 - monitoreo.Ventana@2a721dfc
+[DEBUG]24 nov. 2020 - monitoreo.Ventana@44aee857
+[INFO]24 nov. 2020 - IdVentana:[3] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[3] - Acercamiento completado
+[INFO]24 nov. 2020 - Iniciando servidor...
+[INFO]24 nov. 2020 - IdVentana:[1] - Coordenadas actual: [0.0, 0.0]
+[INFO]24 nov. 2020 - IdVentana:[1] - Acercamiento completado

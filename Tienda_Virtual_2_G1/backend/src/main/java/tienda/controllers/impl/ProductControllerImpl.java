@@ -95,6 +95,11 @@ public class ProductControllerImpl implements ProductController {
         productRepository.create(pr2);
         Producto pr3 = new Producto("P01010018","Samsung S20", 3000.00, lineaA, mantenimientoA);
         productRepository.create(pr3);
+
+        //nueva prueba
+
+
+
     }
     
 }

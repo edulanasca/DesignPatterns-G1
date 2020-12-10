@@ -15,5 +15,15 @@ public class GamaBajaFactory implements IProductoFactory {
 
         return new MantenimientoEstandar();
     }
-    
+
+    @Override
+    public BateriaProducto getBateria() {
+        return new BateriaDuracionBaja();
+    }
+
+    @Override
+    public CamaraProducto getCamaraProducto() {
+        return new CamaraResolucionBaja();
+    }
+
 }

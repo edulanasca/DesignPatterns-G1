@@ -11,6 +11,13 @@ public class Producto {
     private String lineaProducto;
     private String mantenimiento;
 
+    //tipo de camara
+    private String camaraFrontal;
+    private String camaraTrasera;
+
+    //tipo de Bateria
+    private String bateria;
+
     public Producto()   {
     }
 
@@ -21,6 +28,19 @@ public class Producto {
         this.precioBase = precioBase;
         this.lineaProducto = linea;
         this.mantenimiento = mantenimiento;
+    }
+
+    //constructor con los nuevos atributos de camara y bateria
+    public Producto(String id, String codigo, String descripcion, Double precioBase, String lineaProducto, String mantenimiento, String camaraFrontal, String camaraTrasera, String bateria) {
+        this.id = id;
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.precioBase = precioBase;
+        this.lineaProducto = lineaProducto;
+        this.mantenimiento = mantenimiento;
+        this.camaraFrontal = camaraFrontal;
+        this.camaraTrasera = camaraTrasera;
+        this.bateria = bateria;
     }
 
     public Producto(String id)   {
@@ -75,4 +95,17 @@ public class Producto {
         this.codigo = codigo;
     }
 
+
+    //get an set de camara y bateria
+    public String getCamaraFrontal() {return camaraFrontal;}
+
+    public void setCamaraFrontal(String camaraFrontal) {this.camaraFrontal = camaraFrontal;}
+
+    public String getCamaraTrasera() {return camaraTrasera;}
+
+    public void setCamaraTrasera(String camaraTrasera) {this.camaraTrasera = camaraTrasera;}
+
+    public String getBateria() {return bateria;}
+
+    public void setBateria(String bateria) {this.bateria = bateria;}
 }
