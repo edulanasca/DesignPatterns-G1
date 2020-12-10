@@ -2,6 +2,7 @@ package segurosxy.cliente.model;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
+import segurosxy.modelos.patrones.UbigeoContext;
 import segurosxy.seguro.Seguro;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.List;
 public class Cliente {
 
     private String id;
+    private UbigeoContext ubigeoCasa;
+    private UbigeoContext ubigeoTrabajo;
     private String nombre;
     private List<Seguro> seguros;
 
@@ -32,6 +35,27 @@ public class Cliente {
             System.out.println( "Seguro: " + seguro.detalleSeguro());
         }
 
+    }
+
+    public UbigeoContext getUbigeoCasa() {
+        return ubigeoCasa;
+    }
+
+    public void setUbigeoCasa(UbigeoContext ubigeoCasa) {
+        this.ubigeoCasa = ubigeoCasa;
+    }
+
+    public UbigeoContext getUbigeoTrabajo() {
+        return ubigeoTrabajo;
+    }
+
+    public void setUbigeoTrabajo(UbigeoContext ubigeoTrabajo) {
+        this.ubigeoTrabajo = ubigeoTrabajo;
+    }
+
+    public void printUbigeos(){
+        System.out.println("[Ubigeo] Casa: "+ ubigeoCasa.getDepartamento() +", "+ ubigeoCasa.getProvincia() +", "+ ubigeoCasa.getDistrito());
+        System.out.println("[Ubigeo] Trabajo: "+ ubigeoTrabajo.getDepartamento() +", "+ ubigeoTrabajo.getProvincia() +", "+ ubigeoTrabajo.getDistrito());
     }
 
 }

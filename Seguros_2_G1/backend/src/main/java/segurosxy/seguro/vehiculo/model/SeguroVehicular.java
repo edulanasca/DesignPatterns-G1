@@ -2,10 +2,13 @@ package segurosxy.seguro.vehiculo.model;
 
 
 import segurosxy.modelos.Vehiculo;
+import segurosxy.modelos.interfaces.ICobertura;
+import segurosxy.modelos.interfaces.INivelRiesgo;
 import segurosxy.seguro.Seguro;
 
-public abstract class SeguroVehicular extends Seguro {
+public abstract class SeguroVehicular extends Seguro implements INivelRiesgo {
 
+    private ICobertura cobertura;
     protected Vehiculo vehiculo;
 
     public SeguroVehicular() {
@@ -40,6 +43,13 @@ public abstract class SeguroVehicular extends Seguro {
             default:
                 return new SeguroTodoRiesgo();
         }
+    }
+
+    public void calcularCobeturaVehicular( ICobertura cobertura )  {
+
+        cobertura.calculaCobertura();
+
+        System.out.println();
     }
 
     public abstract String detalleSeguro();
