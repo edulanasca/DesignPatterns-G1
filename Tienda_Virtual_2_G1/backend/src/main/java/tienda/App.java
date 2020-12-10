@@ -9,14 +9,17 @@ import io.swagger.v3.oas.models.info.Info;
 import tienda.config.DBConnectionManager;
 import tienda.controllers.impl.CustomerControllerImpl;
 import tienda.controllers.impl.OrderControllerImpl;
+import tienda.controllers.impl.ProductControllerImpl;
 import tienda.repositories.impl.ClienteRepositorioImpl;
 import tienda.repositories.impl.PedidoRepositorioImpl;
+import tienda.repositories.impl.ProductoRepositorioImpl;
 
 public class App {
 
     private final DBConnectionManager manager;
     private final CustomerControllerImpl customerController;
     private final OrderControllerImpl orderController;
+    private final ProductControllerImpl productController;
 
     public App() {
         this.manager = new DBConnectionManager();
@@ -27,6 +30,8 @@ public class App {
         PedidoRepositorioImpl orderRepositoryImpl = new PedidoRepositorioImpl(this.manager.getDatabase());
         this.orderController = new OrderControllerImpl(orderRepositoryImpl);
 
+        ProductoRepositorioImpl productRepositoryImpl = new ProductoRepositorioImpl(this.manager.getDatabase());
+        this.productController = new ProductControllerImpl(productRepositoryImpl);
     }
 
     public void startup() {
@@ -48,10 +53,16 @@ public class App {
         server.get("api/customers", this.customerController::findAll);
         server.post("api/customers", this.customerController::create);
 
-        server.get("api/order/:id", this.orderController::find);
-        server.delete("api/order/:id", this.orderController::delete);
+        server.get("api/orders/:id", this.orderController::find);
+        server.delete("api/orders/:id", this.orderController::delete);
         server.get("api/orders", this.orderController::findAll);
-        server.post("api/order", this.orderController::create);
+        server.post("api/orders", this.orderController::create);
+
+        server.get("api/products/:id", this.productController::find);
+        server.delete("api/products/:id", this.productController::delete);
+        server.get("api/products", this.productController::findAll);
+        server.post("api/products", this.productController::create);
+        server.post("api/loadProducts", this.productController::loadProducts);
 
         //server.post("api/order/pay/:id", this.orderController::pay);
 

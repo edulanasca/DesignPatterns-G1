@@ -5,24 +5,28 @@ import tienda.models.interfaces.Modelo;
 
 public class Producto {
     private String id;
-    private String nombre;
-    private Double price;
-    private Marca marc;
-    private Modelo model;
+    private String codigo;
+    private String descripcion;
+    private Double precioBase;
+    private String lineaProducto;
+    private String mantenimiento;
 
-    public String imprimirProducto(){
-        String producto="";
-        producto =
-        "ID: "+id+"\n"+
-        "Nombre: "+nombre+"\n"+
-        "Precio: "+price+"\n"
-        +marc.printMarca()+"\n"
-        +model.printModel()+"\n"
-        ;
-        return producto;
+    public Producto()   {
     }
 
-    
+    public Producto(String codigo, String descripcion, Double precioBase, String linea, String mantenimiento)   {
+
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.precioBase = precioBase;
+        this.lineaProducto = linea;
+        this.mantenimiento = mantenimiento;
+    }
+
+    public Producto(String id)   {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
@@ -31,19 +35,44 @@ public class Producto {
         this.id = id;
     }
 
-    public String getNombre(){
-        return nombre;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Double getPrice(){
-        return price;
+    public Double getPrecioBase() {
+        return precioBase;
     }
 
-    public void setPrice(Double price){
-        this.price = price;
+    public void setPrecioBase(Double precioBase) {
+        this.precioBase = precioBase;
     }
+
+    public String getLineaProducto() {
+        return lineaProducto;
+    }
+
+    public void setLineaProducto(String lineaProducto) {
+        this.lineaProducto = lineaProducto;
+    }
+
+    public String getMantenimiento() {
+        return mantenimiento;
+    }
+
+    public void setMantenimiento(String mantenimiento) {
+        this.mantenimiento = mantenimiento;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
 }
