@@ -1,3 +1,4 @@
+
 package segurosxy.modelos.patrones;
 
 public class UbigeoContext {

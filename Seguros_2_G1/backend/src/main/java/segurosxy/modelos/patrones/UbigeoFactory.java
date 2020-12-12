@@ -3,8 +3,9 @@ package segurosxy.modelos.patrones;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.connection.Connection;
 import org.bson.Document;
-import segurosxy.config.Connection;
+//import segurosxy.config.Connection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +32,8 @@ public class UbigeoFactory {
         if(megaCache.isEmpty()){
             System.out.println("[UbigeoFactory] Cargando data desde mongo");
             // get data from db
-            MongoDatabase db = new Connection().getDatabase();
+            //MongoDatabase db = new Connection().getDatabase();
+            MongoDatabase db =null;
             MongoCollection<Document> ubigeos = db.getCollection("ubigeo");
             MongoCursor<Document> cursor = ubigeos.find().iterator();
             try {

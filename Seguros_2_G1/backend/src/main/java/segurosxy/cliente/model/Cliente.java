@@ -23,6 +23,7 @@ public class Cliente {
         this.seguros = new ArrayList<>();
     }
 
+
     public void setCompraSeguro(Seguro seguro) {
         this.seguros.add( seguro );
     }
@@ -58,4 +59,12 @@ public class Cliente {
         System.out.println("[Ubigeo] Trabajo: "+ ubigeoTrabajo.getDepartamento() +", "+ ubigeoTrabajo.getProvincia() +", "+ ubigeoTrabajo.getDistrito());
     }
 
+
+    public String getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
