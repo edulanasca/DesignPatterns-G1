@@ -45,8 +45,6 @@ const CreateProduct = () => {
 		updatedElementForm.value = e.target.value;
 		updatedInputs[id] = updatedElementForm;
 
-		console.log(id);
-
 		setInputs(updatedInputs);
 	};
 
@@ -59,12 +57,20 @@ const CreateProduct = () => {
 			formData[identifier] = inputs[identifier].value;
 		}
 
-		fetch('endpoint', {
+		fetch('http://localhost:7000/api/products', {
 			method: 'POST',
 			body: JSON.stringify(formData)
 		}).then(data => {
 			if (data.status === 201) {
 				setShowMessage(true);
+
+				setInputs({
+					...inputs, 
+					codigo: {...inputs.codigo, value: ''}, 
+					descripcion: {...inputs.descripcion, value: ''}, 
+					precioBase: {...inputs.precioBase, value: ''}
+				});
+
 
 				setTimeout(() => {
 					setShowMessage(false);

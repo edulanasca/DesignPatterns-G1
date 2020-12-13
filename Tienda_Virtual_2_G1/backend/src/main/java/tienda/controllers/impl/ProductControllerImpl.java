@@ -49,7 +49,7 @@ public class ProductControllerImpl implements ProductController {
         Producto producto = new Producto(
             (String) product.get("codigo"),
             (String) product.get("descripcion"),
-            (double) product.get("precioBase"),
+            Double.valueOf((String) product.get("precioBase")),
             productoFactory.getLineaProducto().getLinea(),
             productoFactory.getMantenimiento().getPeriodo(),
             productoFactory.getCamaraProducto().getCamaraFrontal(),
