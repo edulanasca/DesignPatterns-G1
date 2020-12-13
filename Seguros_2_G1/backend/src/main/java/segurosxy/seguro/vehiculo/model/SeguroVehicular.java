@@ -4,11 +4,13 @@ package segurosxy.seguro.vehiculo.model;
 import segurosxy.modelos.Vehiculo;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.interfaces.INivelRiesgo;
+import segurosxy.modelos.patrones.cobertura.CoberturaBasicaVehicular;
+import segurosxy.modelos.patrones.cobertura.CoberturaDecorator;
 import segurosxy.seguro.Seguro;
 
 public abstract class SeguroVehicular extends Seguro implements INivelRiesgo {
 
-    private ICobertura cobertura;
+    protected ICobertura cobertura = new CoberturaDecorator(new CoberturaBasicaVehicular());
     protected Vehiculo vehiculo;
 
     public SeguroVehicular() {
@@ -30,6 +32,14 @@ public abstract class SeguroVehicular extends Seguro implements INivelRiesgo {
 
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+
+    public ICobertura getCobertura() {
+        return cobertura;
+    }
+
+    public void setCobertura(ICobertura cobertura) {
+        this.cobertura = cobertura;
     }
 
     public static SeguroVehicular getSeguroVehicular(String tipo) {

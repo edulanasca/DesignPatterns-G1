@@ -1,5 +1,5 @@
 package segurosxy.modelos.interfaces;
 
 public interface ICobertura {
-  void calculaCobertura();
+  String calculaCobertura();
 }

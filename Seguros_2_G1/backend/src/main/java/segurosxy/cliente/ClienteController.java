@@ -1,12 +1,13 @@
 package segurosxy.cliente;
 
 import io.javalin.http.Context;
-import org.bson.Document;
+import org  .bson.Document;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.http.HttpStatus;
 import segurosxy.cliente.model.Cliente;
 import segurosxy.modelos.Poliza;
 import segurosxy.modelos.Vehiculo;
+import segurosxy.modelos.patrones.UbigeoContext;
 import segurosxy.seguro.Seguro;
 import segurosxy.seguro.tarjeta.SeguroTarjeta;
 import segurosxy.seguro.vehiculo.model.SeguroVehicular;
@@ -35,6 +36,7 @@ public class ClienteController {
     Document d = new Document();
     d.put("nombre", json.get("nombre").toString());
     d.put("seguros", cliente.getSeguros());
+    d.put("ubigeos", json.get("ubigeos"));
 
     Document saved = clienteService.saveCliente(d);
 

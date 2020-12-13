@@ -9,16 +9,14 @@ public class UbigeoContext {
     private String departamento;
     private String provincia;
     private String distrito;
-    
-    private UbigeoFlyweight flyweight;
 
     public UbigeoContext(String codigoDepartamento, String codigoProvincia, String codigoDistrito) {
 
-        this.flyweight = UbigeoFactory.getInstance().getUbigeo( codigoDepartamento, codigoProvincia, codigoDistrito);
+        UbigeoFlyweight flyweight = UbigeoFactory.getInstance().getUbigeo(codigoDepartamento, codigoProvincia, codigoDistrito);
 
-        this.departamento = this.flyweight.getDepartamento();
-        this.provincia = this.flyweight.getProvincia();
-        this.distrito = this.flyweight.getDistrito();
+        this.departamento = flyweight.getDepartamento();
+        this.provincia = flyweight.getProvincia();
+        this.distrito = flyweight.getDistrito();
         
         this.codigoDepartamento = codigoDepartamento;
         this.codigoProvincia = codigoProvincia;

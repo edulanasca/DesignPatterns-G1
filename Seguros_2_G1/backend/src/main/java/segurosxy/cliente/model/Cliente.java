@@ -7,13 +7,13 @@ import segurosxy.seguro.Seguro;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class Cliente {
 
     private String id;
-    private UbigeoContext ubigeoCasa;
-    private UbigeoContext ubigeoTrabajo;
+    private Map<String, UbigeoContext> ubigeos;
     private String nombre;
     private List<Seguro> seguros;
 
@@ -38,25 +38,14 @@ public class Cliente {
 
     }
 
-    public UbigeoContext getUbigeoCasa() {
-        return ubigeoCasa;
-    }
-
-    public void setUbigeoCasa(UbigeoContext ubigeoCasa) {
-        this.ubigeoCasa = ubigeoCasa;
-    }
-
-    public UbigeoContext getUbigeoTrabajo() {
-        return ubigeoTrabajo;
-    }
-
-    public void setUbigeoTrabajo(UbigeoContext ubigeoTrabajo) {
-        this.ubigeoTrabajo = ubigeoTrabajo;
-    }
-
     public void printUbigeos(){
-        System.out.println("[Ubigeo] Casa: "+ ubigeoCasa.getDepartamento() +", "+ ubigeoCasa.getProvincia() +", "+ ubigeoCasa.getDistrito());
-        System.out.println("[Ubigeo] Trabajo: "+ ubigeoTrabajo.getDepartamento() +", "+ ubigeoTrabajo.getProvincia() +", "+ ubigeoTrabajo.getDistrito());
+
+        for (Map.Entry<String, UbigeoContext> ubigeo : this.ubigeos.entrySet()) {
+            System.out.println("[Ubigeo] " + ubigeo.getKey() + ": "
+                + ubigeo.getValue().getDepartamento()
+                + ubigeo.getValue().getProvincia()
+                + ubigeo.getValue().getDistrito());
+        }
     }
 
 

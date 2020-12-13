@@ -1,0 +1,20 @@
+{
+  "id": "String",
+  "ubigeos": {
+    "casa": {
+      "codigoDepartamento": "String",
+      "codigoProvincia": "String",
+      "codigoDistrito": "String",
+      "departamento": "String",
+      "provincia": "String",
+      "distrito": "String"
+    },
+    "trabajo": {
+
+    }
+  },
+  "nombre": "String",
+  "seguros": [
+    {}
+  ]
+}

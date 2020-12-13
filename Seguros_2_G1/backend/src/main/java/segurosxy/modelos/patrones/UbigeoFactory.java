@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.connection.Connection;
 import org.bson.Document;
+import segurosxy.config.Database;
 //import segurosxy.config.Connection;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.List;
 
 public class UbigeoFactory {
     
-    private static HashMap<String, HashMap<String, HashMap<String, List<String>>>> megaCache = new HashMap<>();
-    private static HashMap<String, UbigeoFlyweight> ubigeos = new HashMap<>();
+    private static final HashMap<String, HashMap<String, HashMap<String, List<String>>>> megaCache = new HashMap<>();
+    private static final HashMap<String, UbigeoFlyweight> ubigeos = new HashMap<>();
 
     private static UbigeoFactory ubigeoFactory = null;
 
@@ -31,10 +32,7 @@ public class UbigeoFactory {
 
         if(megaCache.isEmpty()){
             System.out.println("[UbigeoFactory] Cargando data desde mongo");
-            // get data from db
-            //MongoDatabase db = new Connection().getDatabase();
-            MongoDatabase db =null;
-            MongoCollection<Document> ubigeos = db.getCollection("ubigeo");
+            MongoCollection<Document> ubigeos = Database.getDatabase().getCollection("ubigeo");
             MongoCursor<Document> cursor = ubigeos.find().iterator();
             try {
                 while(cursor.hasNext()) {
@@ -48,14 +46,10 @@ public class UbigeoFactory {
                     codUbi = codUbi.substring(4);
                     String descUbi = (String) ubi.get("desc_ubigeo_inei");
 
-                    if (megaCache.get(codDep) == null){
-                        megaCache.put(codDep, new HashMap<>());
-                    }
-                    if (megaCache.get(codDep).get(codProv) == null){
-                        megaCache.get(codDep).put(codProv, new HashMap<>());
-                    }
+                    megaCache.computeIfAbsent(codDep, k -> new HashMap<>());
+                    megaCache.get(codDep).computeIfAbsent(codProv, k -> new HashMap<>());
                     if (megaCache.get(codDep).get(codProv).get(codUbi) == null){
-                        List<String> list = new ArrayList<String>();
+                        List<String> list = new ArrayList<>();
                         list.add(descDep);
                         list.add(descProv);
                         list.add(descUbi);
@@ -73,7 +67,7 @@ public class UbigeoFactory {
 
     public UbigeoFlyweight getUbigeo( String codigoDepartamento, String codigoProvincia, String codigoDistrito)  {
 
-        UbigeoFlyweight flyweight = null;
+        UbigeoFlyweight flyweight;
 
         if ( ubigeos.get( codigoDepartamento + codigoProvincia + codigoDistrito)==null  )   {
 
@@ -82,8 +76,8 @@ public class UbigeoFactory {
             ubigeos.put( codigoDepartamento + codigoProvincia + codigoDistrito, flyweight);
             System.out.println("[UbigeoFactory] Creando y recuperando los datos de UbigeoFlyweight");
         }
-        else{
-            flyweight = (UbigeoFlyweight)ubigeos.get( codigoDepartamento + codigoProvincia + codigoDistrito);
+        else {
+            flyweight = ubigeos.get( codigoDepartamento + codigoProvincia + codigoDistrito);
         }
         return flyweight;
     }

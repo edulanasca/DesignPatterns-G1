@@ -1,10 +1,16 @@
 package segurosxy.seguro.vehiculo.model;
 
 import segurosxy.modelos.Vehiculo;
+import segurosxy.modelos.patrones.cobertura.CoberturaPorChoqueDecorator;
 
 public class SeguroChoque extends SeguroVehicular {
 
-  public SeguroChoque() {}
+  {
+    super.cobertura = new CoberturaPorChoqueDecorator(super.cobertura);
+  }
+
+  public SeguroChoque() {
+  }
 
   public SeguroChoque(String marca, String modelo) {
     super(marca, modelo);
