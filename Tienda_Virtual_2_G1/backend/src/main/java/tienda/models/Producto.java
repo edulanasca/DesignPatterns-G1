@@ -31,12 +31,12 @@ public class Producto {
     }
 
     //constructor con los nuevos atributos de camara y bateria
-    public Producto(String id, String codigo, String descripcion, Double precioBase, String lineaProducto, String mantenimiento, String camaraFrontal, String camaraTrasera, String bateria) {
-        this.id = id;
+    public Producto(String codigo, String descripcion, Double precioBase, String linea, String mantenimiento, String camaraFrontal, String camaraTrasera, String bateria) {
+
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precioBase = precioBase;
-        this.lineaProducto = lineaProducto;
+        this.lineaProducto = linea;
         this.mantenimiento = mantenimiento;
         this.camaraFrontal = camaraFrontal;
         this.camaraTrasera = camaraTrasera;

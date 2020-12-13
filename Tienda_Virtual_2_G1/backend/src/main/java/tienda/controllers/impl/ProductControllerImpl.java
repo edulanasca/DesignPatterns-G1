@@ -6,6 +6,7 @@ import tienda.controllers.ProductController;
 import tienda.models.Producto;
 import tienda.models.patterns.GamaAltaFactory;
 import tienda.models.patterns.GamaBajaFactory;
+import tienda.models.patterns.GamaMediaFactory;
 import tienda.models.patterns.IProductoFactory;
 import tienda.repositories.ProductoRepositorio;
 import io.javalin.http.Context;
@@ -89,6 +90,22 @@ public class ProductControllerImpl implements ProductController {
         String lineaB = factoryProduct.getLineaProducto().getLinea();
         String mantenimientoB = factoryProduct.getMantenimiento().getPeriodo();
 
+        //FAbrica de gama media
+        factoryProduct = new GamaMediaFactory();
+        String LineaC = factoryProduct.getLineaProducto().getLinea();
+        String mantenimientoC = factoryProduct.getMantenimiento().getPeriodo();
+
+        //camara frontal de gama media
+        String camaraFront = factoryProduct.getCamaraProducto().getCamaraFrontal();
+
+        //Camara trasera de gama media
+        String camaraTras = factoryProduct.getCamaraProducto().getCamaraTrasera();
+
+        //Bateria de gama media
+        String bateria = factoryProduct.getBateria().getDuracionBateria();
+
+
+
         Producto pr1 = new Producto("P01010016","Samsung S10", 2500.00, lineaA, mantenimientoA);
         productRepository.create(pr1);
         Producto pr2 = new Producto("P01010017","Samsung A10", 1000.00, lineaB, mantenimientoB);
@@ -96,9 +113,8 @@ public class ProductControllerImpl implements ProductController {
         Producto pr3 = new Producto("P01010018","Samsung S20", 3000.00, lineaA, mantenimientoA);
         productRepository.create(pr3);
 
-        //nueva prueba
-
-
+       Producto pr4 = new Producto("P01010018","Xiaomi A1",1000.00,LineaC,mantenimientoC,camaraFront,camaraTras,bateria);
+       // productRepository.create(pr4);
 
     }
     

@@ -50,6 +50,7 @@ public class OrderControllerImpl implements OrderController {
         IDescuento descuento = factoryDiscount.crearDescuento(DescuentoFactory.DESCUENTO_CUPON);
         order.setMontoTotal( order.calcularMontoPedido(descuento) );
 
+
         System.out.println("Precio Total " + order.getMontoTotal());
 
         MetodoPagoFactory factory = new BlockChainMetodoPagoFactory();
