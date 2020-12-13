@@ -44,8 +44,8 @@ public class OrderControllerImpl implements OrderController {
         items.add(oi1);
         items.add(oi2);
         order.setDetallePedido(items);
-
-        DescuentoFactory factoryDiscount = new DescuentoFactory();
+        //instancia Singleton del DescuentoFactory
+        DescuentoFactory factoryDiscount = DescuentoFactory.getInstance();
         //IDescuento descuento = factoryDiscount.crearDescuento(DescuentoFactory.DESCUENTO_ANIVERSARIO);
         IDescuento descuento = factoryDiscount.crearDescuento(DescuentoFactory.DESCUENTO_CUPON);
         order.setMontoTotal( order.calcularMontoPedido(descuento) );
