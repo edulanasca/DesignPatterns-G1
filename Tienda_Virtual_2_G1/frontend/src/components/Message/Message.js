@@ -1,9 +1,9 @@
 import './Message';
 
-const Message = () => (
-  <div class="message alert alert-success" role="alert">
-    Usuario agregado correctamente
-  </div>
+const Message = ({ mensaje }) => (
+	<div class='message alert alert-success' role='alert'>
+		{mensaje}
+	</div>
 );
 
 export default Message;
