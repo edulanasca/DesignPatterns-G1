@@ -40,7 +40,11 @@ public abstract class Seguro {
         return this.nivelRiesgo;
     }
 
-    public abstract String detalleSeguro();
+    public String infoSeguroCsv() {
+        return String.join(",","certificado", "poliza", "nivelRiesgo");
+    }
 
+    public abstract String detalleSeguro();
     public abstract void calcularRiesgo();
+
 }

@@ -62,6 +62,18 @@ public abstract class SeguroVehicular extends Seguro implements INivelRiesgo {
         System.out.println();
     }
 
+    @Override
+    public String infoSeguroCsv() {
+        return String.join(",", super.infoSeguroCsv(), "cobertura", "marca", "modelo") + "\n" +
+            String.join(",",
+                certificado == null ? "" : certificado.detalleCertificado(),
+                poliza == null ? "" : poliza.detallePoliza(),
+                nivelRiesgo,
+                cobertura.calculaCobertura().replace('\n',' '),
+                vehiculo.getMarca(),
+                vehiculo.getModelo());
+    }
+
     public abstract String detalleSeguro();
     public abstract void calcularRiesgo();
 
