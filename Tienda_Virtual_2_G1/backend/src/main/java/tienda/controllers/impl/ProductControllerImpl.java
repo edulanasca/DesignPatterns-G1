@@ -16,6 +16,8 @@ import io.javalin.http.NotFoundResponse;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.http.HttpStatus;
 
+import java.util.HashMap;
+
 
 public class ProductControllerImpl implements ProductController {
     private static final String ID = "id";
@@ -26,19 +28,38 @@ public class ProductControllerImpl implements ProductController {
         this.productRepository = postRepository;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void create(@NotNull Context context) {
 
-        Producto Product = context.bodyAsClass(Producto.class);
-        System.out.println("Producto: " + Product);
+//        Producto Product = context.bodyAsClass(Producto.class);
+//        System.out.println("Producto: " + Product);
 
-        //if (Product.getId() != null) {
-        //    throw new BadRequestResponse(String.format("Unable to create a new post with existing id: %s", Product));
-        //}
+        HashMap<String, Object> product = context.bodyAsClass(HashMap.class);
 
-        productRepository.create(Product);
+        IProductoFactory productoFactory = null;
+
+        switch ((String) product.get("gama")) {
+            case "alta": productoFactory = new GamaAltaFactory(); break;
+            case "media": productoFactory = new GamaMediaFactory(); break;
+            case "baja": productoFactory = new GamaBajaFactory(); break;
+        }
+
+        assert productoFactory != null;
+        Producto producto = new Producto(
+            (String) product.get("codigo"),
+            (String) product.get("descripcion"),
+            (double) product.get("precioBase"),
+            productoFactory.getLineaProducto().getLinea(),
+            productoFactory.getMantenimiento().getPeriodo(),
+            productoFactory.getCamaraProducto().getCamaraFrontal(),
+            productoFactory.getCamaraProducto().getCamaraTrasera(),
+            productoFactory.getBateria().getDuracionBateria()
+        );
+
+        productRepository.create(producto);
         context.status(HttpStatus.CREATED_201)
-                .header(HttpHeader.LOCATION.name(), Paths.formatPostLocation(Product.getId()));
+                .header(HttpHeader.LOCATION.name(), Paths.formatPostLocation(producto.getId()));
 
     }
 
