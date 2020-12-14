@@ -2,6 +2,7 @@ package tienda.controllers.impl;
 
 import tienda.config.Paths;
 import tienda.controllers.OrderController;
+import tienda.models.Director;
 import tienda.models.Entrega;
 import tienda.models.Pedido;
 import tienda.models.impl.PedidoDetalleInternet;
@@ -19,6 +20,7 @@ import io.javalin.http.Context;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.NotFoundResponse;
 
+import java.awt.image.DirectColorModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,15 +66,15 @@ public class OrderControllerImpl implements OrderController {
                 .header(HttpHeader.LOCATION.name(), Paths.formatPostLocation(idO));
 
         // Realiza la entrega del pedido
-        EntregaBuilder deliveryBuilder = new EntregaBuilder( idO );
-        Entrega entregaPedido = deliveryBuilder.withDatosContacto( "Lionel Messi", "6541122" )
+        //EntregaBuilder deliveryBuilder = new EntregaBuilder( "idO" );
+        //Entrega entregaPedido = deliveryBuilder.withDatosContacto( "Lionel Messi", "6541122" )
             //.withEntregaDomicilio("Calle Las Azucenas 177", "24/11/2020", "Turno Tarde")
-            .withRecojoEnTienda("Tienda Los Olivos", "24/11/2020", "Turno Tarde")
-            .withPersonalPropio("Sí")
-            .build();
-        System.out.println("Entrega: " + entregaPedido);
+            //.withRecojoEnTienda("Tienda Los Olivos", "24/11/2020", "Turno Tarde")
+            //.withPersonalPropio("Sí")
+            //.build();
+        //System.out.println("Entrega: " + entregaPedido);
 
-        order.setEntregaPedido(entregaPedido);
+        //order.setEntregaPedido(entregaPedido);
 
         try {
             orderRepository.update(order, order.getId());

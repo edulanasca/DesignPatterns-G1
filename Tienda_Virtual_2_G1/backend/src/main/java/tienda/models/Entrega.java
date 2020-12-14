@@ -12,11 +12,7 @@ public class Entrega {
     private String tiendaRecojo;
     private String personalPropio;
 
-    public Entrega() {
-
-    }
-
-    public Entrega(String idOrder, String nombrePersona, String telefonoPersona, String direccionEntrega, String fechaEntrega, String horario,
+    /*public Entrega(String idOrder, String nombrePersona, String telefonoPersona, String direccionEntrega, String fechaEntrega, String horario,
                    String tiendaRecojo, String fechaRecojo, String personalPropio)    {
 
         this.idOrder = idOrder;
@@ -28,75 +24,38 @@ public class Entrega {
         this.tiendaRecojo = tiendaRecojo;
         this.fechaRecojo = fechaRecojo;
         this.personalPropio = personalPropio;
-    }
-
-    public String getIdOrder() {
-        return idOrder;
-    }
+    }*/
 
     public void setIdOrder(String idOrder) {
         this.idOrder = idOrder;
-    }
-
-    public String getTelefonoPersona() {
-        return telefonoPersona;
     }
 
     public void setTelefonoPersona(String telefonoPersona) {
         this.telefonoPersona = telefonoPersona;
     }
 
-    public String getNombrePersona() {
-        return nombrePersona;
-    }
-
     public void setNombrePersona(String nombrePersona) {
         this.nombrePersona = nombrePersona;
-    }
-
-    public String getDireccionEntrega() {
-        return direccionEntrega;
     }
 
     public void setDireccionEntrega(String direccionEntrega) {
         this.direccionEntrega = direccionEntrega;
     }
 
-    public String getFechaEntrega() {
-        return fechaEntrega;
-    }
-
     public void setFechaEntrega(String fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
-    }
-
-    public String getHorario() {
-        return horario;
     }
 
     public void setHorario(String horario) {
         this.horario = horario;
     }
 
-    public String getFechaRecojo() {
-        return fechaRecojo;
-    }
-
     public void setFechaRecojo(String fechaRecojo) {
         this.fechaRecojo = fechaRecojo;
     }
 
-    public String getTiendaRecojo() {
-        return tiendaRecojo;
-    }
-
     public void setTiendaRecojo(String tiendaRecojo) {
         this.tiendaRecojo = tiendaRecojo;
-    }
-
-
-    public String getPersonalPropio() {
-        return personalPropio;
     }
 
     public void setPersonalPropio(String personalPropio) {

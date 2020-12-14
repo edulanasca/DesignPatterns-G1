@@ -2,9 +2,9 @@ package tienda.models.patterns;
 
 import tienda.models.Entrega;
 
-public class EntregaBuilder implements IEntregaBuilder {
+public abstract class EntregaBuilder{
 
-    private String idOrder;
+    /*private String idOrder;
     private String telefonoPersona;
     private String nombrePersona;
     private String direccionEntrega;
@@ -20,34 +20,25 @@ public class EntregaBuilder implements IEntregaBuilder {
     }
 
     public EntregaBuilder withDatosContacto(String nombrePersona, String telefonoPersona)  {
-        this.nombrePersona = nombrePersona;
-        this.telefonoPersona = telefonoPersona;
-        return this;
+        return null;
     }
 
     public EntregaBuilder withEntregaDomicilio(String direccionEntrega, String fechaEntrega, String horario)  {
-        this.direccionEntrega = direccionEntrega;
-        this.fechaEntrega = fechaEntrega;
-        this.horario = horario;
-        return this;
+        return null;
     }
 
     public EntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario)  {
-        this.tiendaRecojo = tiendaRecojo;
-        this.fechaRecojo = fechaRecojo;
-        this.horario = horario;
-        return this;
+        return null;
     }
 
     public EntregaBuilder withPersonalPropio(String personalPropio)  {
-        this.personalPropio = personalPropio;
-        return this;
+        return null;
     }
 
     @Override
     public Entrega build() {
 
-        Entrega delivery = new Entrega();        
+        Entrega delivery = new Entrega();
         delivery.setIdOrder(this.idOrder);
         delivery.setNombrePersona(this.nombrePersona);
         delivery.setTelefonoPersona(this.telefonoPersona);
@@ -58,6 +49,27 @@ public class EntregaBuilder implements IEntregaBuilder {
         delivery.setFechaRecojo(this.fechaRecojo);
         delivery.setPersonalPropio(this.personalPropio);
         return delivery;
+    }*/
+    protected Entrega entrega;
+
+    public Entrega getEntrega() {
+        return entrega;
     }
-    
+
+    public void createEntrega() {
+        entrega = new Entrega();
+        System.out.println("entrega creada");
+    }
+
+   public abstract EntregaBuilder withDatosContacto(String nombrePersona, String telefonoPersona);
+
+    public abstract EntregaBuilder withEntregaDomicilio(String direccionEntrega, String fechaEntrega, String horario);
+
+    public abstract EntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario);
+
+    public abstract EntregaBuilder withPersonalPropio(String personalPropio);
+
+    public abstract Entrega build();
+
+
 }
