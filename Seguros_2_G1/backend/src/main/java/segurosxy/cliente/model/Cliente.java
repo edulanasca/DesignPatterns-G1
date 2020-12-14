@@ -2,6 +2,7 @@ package segurosxy.cliente.model;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
+import segurosxy.modelos.patrones.PaisContext;
 import segurosxy.modelos.patrones.UbigeoContext;
 import segurosxy.seguro.Seguro;
 
@@ -16,6 +17,9 @@ public class Cliente {
     private UbigeoContext ubigeoTrabajo;
     private String nombre;
     private List<Seguro> seguros;
+
+    private PaisContext paisNacimiento;
+    private PaisContext paisDomicilio;
 
     public Cliente(String nombre)   {
         id = new ObjectId().toString();
@@ -66,5 +70,23 @@ public class Cliente {
 
     public String getNombre() {
         return nombre;
+    }
+
+
+
+    public PaisContext getPaisNacimiento() {
+        return paisNacimiento;
+    }
+
+    public void setPaisNacimiento(PaisContext paisNacimiento) {
+        this.paisNacimiento = paisNacimiento;
+    }
+
+    public PaisContext getPaisDomicilio() {
+        return paisDomicilio;
+    }
+
+    public void setPaisDomicilio(PaisContext paisDomicilio) {
+        this.paisDomicilio = paisDomicilio;
     }
 }
