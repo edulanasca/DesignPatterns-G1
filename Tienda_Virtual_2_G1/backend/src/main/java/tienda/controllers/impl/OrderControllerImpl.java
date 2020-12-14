@@ -2,6 +2,8 @@ package tienda.controllers.impl;
 
 import tienda.config.Paths;
 import tienda.controllers.OrderController;
+import tienda.models.Entrega;
+import tienda.models.EntregaBuilderDirector;
 import tienda.models.Pedido;
 import tienda.models.impl.PedidoDetalleInternet;
 import tienda.models.impl.PedidoDetallePromocion;
@@ -10,6 +12,7 @@ import tienda.models.metodopago.BlockChainMetodoPagoFactory;
 import tienda.models.metodopago.MetodoPago;
 import tienda.models.metodopago.MetodoPagoFactory;
 import tienda.models.patterns.DescuentoFactory;
+import tienda.models.patterns.EntregaBuilder;
 import tienda.models.patterns.IDescuento;
 import tienda.repositories.PedidoRepositorio;
 
@@ -62,15 +65,21 @@ public class OrderControllerImpl implements OrderController {
                 .header(HttpHeader.LOCATION.name(), Paths.formatPostLocation(idO));
 
         // Realiza la entrega del pedido
-        //EntregaBuilder deliveryBuilder = new EntregaBuilder( "idO" );
-        //Entrega entregaPedido = deliveryBuilder.withDatosContacto( "Lionel Messi", "6541122" )
-            //.withEntregaDomicilio("Calle Las Azucenas 177", "24/11/2020", "Turno Tarde")
-            //.withRecojoEnTienda("Tienda Los Olivos", "24/11/2020", "Turno Tarde")
-            //.withPersonalPropio("Sí")
-            //.build();
-        //System.out.println("Entrega: " + entregaPedido);
+        EntregaBuilder deliveryBuilder = new EntregaBuilder( "idO" );
+        deliveryBuilder.withDatosContacto("Lionel Messi", "6541122").withPersonalPropio("SI");
+        EntregaBuilderDirector entregaDirector = new EntregaBuilderDirector(deliveryBuilder);
+        Entrega entregaPedido = entregaDirector.buildEntregaTienda("24/11/2020", "Tienda Los Olivos", "Turno Tarde");
+        System.out.println("Entrega: " + entregaPedido);
 
-        //order.setEntregaPedido(entregaPedido);
+        order.setEntregaPedido(entregaPedido);
+
+        //ANTES DE LAS MODIFICACIONES
+        //Entrega entregaPedido = deliveryBuilder.withDatosContacto( "Lionel Messi", "6541122" )
+        //.withEntregaDomicilio("Calle Las Azucenas 177", "24/11/2020", "Turno Tarde")
+        //.withRecojoEnTienda("Tienda Los Olivos", "24/11/2020", "Turno Tarde")
+        //.withPersonalPropio("Sí")
+        //.build();
+
 
         try {
             orderRepository.update(order, order.getId());

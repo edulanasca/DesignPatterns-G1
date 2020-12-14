@@ -2,7 +2,7 @@ package tienda.models.patterns;
 
 import tienda.models.Entrega;
 
-public class EntregaHogarBuilder extends EntregaBuilder{
+public class EntregaHogarBuilder implements IEntregaBuilder{
 
     private String idOrder;
     private String telefonoPersona;
@@ -30,7 +30,7 @@ public class EntregaHogarBuilder extends EntregaBuilder{
         return this;
     }
 
-    //no se utiliza porque es entrea en hogar
+    //no se utiliza porque es entrega en hogar
     @Override
     public EntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario) {
         return this;
