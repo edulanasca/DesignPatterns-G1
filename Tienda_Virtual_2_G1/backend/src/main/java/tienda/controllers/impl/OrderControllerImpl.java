@@ -2,8 +2,6 @@ package tienda.controllers.impl;
 
 import tienda.config.Paths;
 import tienda.controllers.OrderController;
-import tienda.models.Director;
-import tienda.models.Entrega;
 import tienda.models.Pedido;
 import tienda.models.impl.PedidoDetalleInternet;
 import tienda.models.impl.PedidoDetallePromocion;
@@ -12,7 +10,6 @@ import tienda.models.metodopago.BlockChainMetodoPagoFactory;
 import tienda.models.metodopago.MetodoPago;
 import tienda.models.metodopago.MetodoPagoFactory;
 import tienda.models.patterns.DescuentoFactory;
-import tienda.models.patterns.EntregaBuilder;
 import tienda.models.patterns.IDescuento;
 import tienda.repositories.PedidoRepositorio;
 
@@ -20,7 +17,6 @@ import io.javalin.http.Context;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.NotFoundResponse;
 
-import java.awt.image.DirectColorModel;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -30,6 +30,7 @@ public class EntregaHogarBuilder extends EntregaBuilder{
         return this;
     }
 
+    //no se utiliza porque es entrea en hogar
     @Override
     public EntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario) {
         return this;

@@ -2,15 +2,22 @@ package tienda.models;
 
 public class Entrega {
 
+    //en entrega domicilio y en tienda
     private String idOrder;
     private String telefonoPersona;
     private String nombrePersona;
+    private String horario;
+    private String personalPropio;
+
+    //solo entrega domicilio
     private String direccionEntrega;
     private String fechaEntrega;
-    private String horario;
+
+    //solo en tienda
     private String fechaRecojo;
     private String tiendaRecojo;
-    private String personalPropio;
+
+
 
     /*public Entrega(String idOrder, String nombrePersona, String telefonoPersona, String direccionEntrega, String fechaEntrega, String horario,
                    String tiendaRecojo, String fechaRecojo, String personalPropio)    {

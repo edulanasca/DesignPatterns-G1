@@ -23,6 +23,7 @@ public class EntregaTiendaBuilder extends EntregaBuilder{
         return this;
     }
 
+    //no se utiliza porque es entrea en tienda
     @Override
     public EntregaBuilder withEntregaDomicilio(String direccionEntrega, String fechaEntrega, String horario) {
         return this;
