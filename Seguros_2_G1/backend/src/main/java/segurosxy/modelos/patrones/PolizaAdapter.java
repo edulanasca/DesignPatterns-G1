@@ -30,4 +30,7 @@ public class PolizaAdapter implements IImprimible {
 
         return aXML();
     }
+
+
+
 }
