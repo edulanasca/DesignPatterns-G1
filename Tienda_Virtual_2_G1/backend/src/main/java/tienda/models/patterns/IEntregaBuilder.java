@@ -4,13 +4,13 @@ import tienda.models.Entrega;
 
 public interface IEntregaBuilder {
 
-    EntregaBuilder withDatosContacto(String nombrePersona, String telefonoPersona);
+    IEntregaBuilder withDatosContacto(String nombrePersona, String telefonoPersona);
 
-    EntregaBuilder withEntregaDomicilio(String direccionEntrega, String fechaEntrega, String horario);
+    IEntregaBuilder withEntregaDomicilio(String direccionEntrega, String fechaEntrega, String horario);
 
-    EntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario);
+    IEntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario);
 
-    EntregaBuilder withPersonalPropio(String personalPropio);
+    IEntregaBuilder withPersonalPropio(String personalPropio);
 
     Entrega build();
 }

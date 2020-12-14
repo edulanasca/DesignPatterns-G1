@@ -25,7 +25,7 @@ public class EntregaTiendaBuilder implements IEntregaBuilder{
 
     //no se utiliza porque es entrega en tienda
     @Override
-    public EntregaBuilder withEntregaDomicilio(String direccionEntrega, String fechaEntrega, String horario) {
+    public IEntregaBuilder withEntregaDomicilio(String direccionEntrega, String fechaEntrega, String horario) {
         return this;
     }
 

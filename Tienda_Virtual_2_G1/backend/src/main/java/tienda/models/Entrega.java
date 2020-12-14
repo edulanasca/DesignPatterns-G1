@@ -19,20 +19,6 @@ public class Entrega {
 
 
 
-    /*public Entrega(String idOrder, String nombrePersona, String telefonoPersona, String direccionEntrega, String fechaEntrega, String horario,
-                   String tiendaRecojo, String fechaRecojo, String personalPropio)    {
-
-        this.idOrder = idOrder;
-        this.nombrePersona = nombrePersona;
-        this.telefonoPersona = telefonoPersona;
-        this.direccionEntrega = direccionEntrega;
-        this.fechaEntrega = fechaEntrega;
-        this.horario = horario;
-        this.tiendaRecojo = tiendaRecojo;
-        this.fechaRecojo = fechaRecojo;
-        this.personalPropio = personalPropio;
-    }*/
-
     public void setIdOrder(String idOrder) {
         this.idOrder = idOrder;
     }

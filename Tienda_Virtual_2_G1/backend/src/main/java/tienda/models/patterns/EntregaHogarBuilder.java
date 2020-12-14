@@ -32,7 +32,7 @@ public class EntregaHogarBuilder implements IEntregaBuilder{
 
     //no se utiliza porque es entrega en hogar
     @Override
-    public EntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario) {
+    public IEntregaBuilder withRecojoEnTienda(String tiendaRecojo, String fechaRecojo, String horario) {
         return this;
     }
 
