@@ -1,9 +1,11 @@
 package tienda.models;
 
+import java.util.List;
+
 public class Cliente {
     private String id;
     private String nombre;
-    private String direccion;
+    private List<Direccion> direcciones;
     private String numeroDocumento;
 
     public String getId() {
@@ -22,12 +24,12 @@ public class Cliente {
         return this.nombre;
     }
 
-    public void setDireccion(String direccion)    {
-        this.direccion = direccion;
+    public List<Direccion> getDirecciones() {
+        return direcciones;
     }
 
-    public String getDireccion()   {
-        return this.direccion;
+    public void setDirecciones(List<Direccion> direcciones) {
+        this.direcciones = direcciones;
     }
 
     public void setNumeroDocumento(String numeroDocumento)    {
@@ -38,3 +40,4 @@ public class Cliente {
         return this.numeroDocumento;
     }
 }
+

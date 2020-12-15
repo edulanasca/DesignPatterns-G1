@@ -3,6 +3,7 @@ package tienda.controllers.impl;
 import tienda.config.Paths;
 import tienda.controllers.OrderController;
 import tienda.models.Entrega;
+import tienda.models.EntregaBuilderDirector;
 import tienda.models.Pedido;
 import tienda.models.impl.PedidoDetalleInternet;
 import tienda.models.impl.PedidoDetallePromocion;
@@ -50,6 +51,7 @@ public class OrderControllerImpl implements OrderController {
         IDescuento descuento = factoryDiscount.crearDescuento(DescuentoFactory.DESCUENTO_CUPON);
         order.setMontoTotal( order.calcularMontoPedido(descuento) );
 
+
         System.out.println("Precio Total " + order.getMontoTotal());
 
         MetodoPagoFactory factory = new BlockChainMetodoPagoFactory();
@@ -63,15 +65,21 @@ public class OrderControllerImpl implements OrderController {
                 .header(HttpHeader.LOCATION.name(), Paths.formatPostLocation(idO));
 
         // Realiza la entrega del pedido
-        EntregaBuilder deliveryBuilder = new EntregaBuilder( idO );
-        Entrega entregaPedido = deliveryBuilder.withDatosContacto( "Lionel Messi", "6541122" )
-            //.withEntregaDomicilio("Calle Las Azucenas 177", "24/11/2020", "Turno Tarde")
-            .withRecojoEnTienda("Tienda Los Olivos", "24/11/2020", "Turno Tarde")
-            .withPersonalPropio("Sí")
-            .build();
+        EntregaBuilder deliveryBuilder = new EntregaBuilder( "idO" );
+        deliveryBuilder.withDatosContacto("Lionel Messi", "6541122").withPersonalPropio("SI");
+        EntregaBuilderDirector entregaDirector = new EntregaBuilderDirector(deliveryBuilder);
+        Entrega entregaPedido = entregaDirector.buildEntregaTienda("24/11/2020", "Tienda Los Olivos", "Turno Tarde");
         System.out.println("Entrega: " + entregaPedido);
 
         order.setEntregaPedido(entregaPedido);
+
+        //ANTES DE LAS MODIFICACIONES
+        //Entrega entregaPedido = deliveryBuilder.withDatosContacto( "Lionel Messi", "6541122" )
+        //.withEntregaDomicilio("Calle Las Azucenas 177", "24/11/2020", "Turno Tarde")
+        //.withRecojoEnTienda("Tienda Los Olivos", "24/11/2020", "Turno Tarde")
+        //.withPersonalPropio("Sí")
+        //.build();
+
 
         try {
             orderRepository.update(order, order.getId());
