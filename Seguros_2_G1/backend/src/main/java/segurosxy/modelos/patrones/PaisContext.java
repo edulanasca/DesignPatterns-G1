@@ -2,16 +2,11 @@ package segurosxy.modelos.patrones;
 
 public class PaisContext {
     private String codPais;
-    private String nomPais;
-    private String codMarcPais;
-    private PaisFlyweight pais;
+    private String descPais;
 
-    //Codigo del pais a 2 letras en mayuscula
-    public PaisContext(String codPais ) {
+    public PaisContext(String codPais) {
         this.codPais = codPais;
-        this.pais = PaisFactory.getInstance().getPais(codPais);
-        this.nomPais = this.pais.getNomPais();
-        this.codMarcPais = this.pais.getCodMarcacion();
+        this.descPais = PaisFactory.getInstance().getPais(codPais).getDescPais();
     }
 
     public String getCodPais() {
@@ -22,27 +17,11 @@ public class PaisContext {
         this.codPais = codPais;
     }
 
-    public String getNomPais() {
-        return nomPais;
+    public String getDescPais() {
+        return descPais;
     }
 
-    public void setNomPais(String nomPais) {
-        this.nomPais = nomPais;
-    }
-
-    public PaisFlyweight getPais() {
-        return pais;
-    }
-
-    public void setPais(PaisFlyweight pais) {
-        this.pais = pais;
-    }
-
-    public String getCodMarcPais() {
-        return codMarcPais;
-    }
-
-    public void setCodMarcPais(String codMarcPais) {
-        this.codMarcPais = codMarcPais;
+    public void setDescPais(String descPais) {
+        this.descPais = descPais;
     }
 }

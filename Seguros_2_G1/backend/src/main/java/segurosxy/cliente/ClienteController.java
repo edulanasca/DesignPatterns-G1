@@ -7,6 +7,7 @@ import org.eclipse.jetty.http.HttpStatus;
 import segurosxy.cliente.model.Cliente;
 import segurosxy.modelos.Poliza;
 import segurosxy.modelos.Vehiculo;
+import segurosxy.modelos.patrones.PaisContext;
 import segurosxy.modelos.patrones.UbigeoContext;
 import segurosxy.seguro.Seguro;
 import segurosxy.seguro.tarjeta.SeguroTarjeta;
@@ -33,10 +34,31 @@ public class ClienteController {
     Cliente cliente = new Cliente((String) json.get("nombre"));
     seguros.forEach(seguro -> cliente.setCompraSeguro(filtrarSeguro(seguro)));
 
+    Map<String, String> ubigeoCasa = (Map<String, String>) json.get("ubigeoCasa");
+    Map<String, String> ubigeoTrabajo = (Map<String,String>) json.get("ubigeoTrabajo");
+
+    if (ubigeoCasa != null || ubigeoTrabajo != null) {
+      cliente.getUbigeos().put("ubigeoCasa", new UbigeoContext(
+              ubigeoCasa.get("codigoDepartamento"),
+              ubigeoCasa.get("codigoProvincia"),
+              ubigeoCasa.get("codigoDistrito")
+      ));
+
+      cliente.getUbigeos().put("ubigeoTrabajo", new UbigeoContext(
+              ubigeoTrabajo.get("codigoDepartamento"),
+              ubigeoTrabajo.get("codigoProvincia"),
+              ubigeoTrabajo.get("codigoDistrito")
+      ));
+    }
+
+    cliente.getPaises().put("paisResidencia", new PaisContext((String) json.get("paisResidencia")));
+    cliente.getPaises().put("paisNacimiento", new PaisContext((String) json.get("paisNacimiento")));
+
     Document d = new Document();
     d.put("nombre", json.get("nombre").toString());
     d.put("seguros", cliente.getSeguros());
-    d.put("ubigeos", json.get("ubigeos"));
+    d.put("ubigeos", cliente.getUbigeos());
+    d.put("paises", cliente.getPaises());
 
     Document saved = clienteService.saveCliente(d);
 

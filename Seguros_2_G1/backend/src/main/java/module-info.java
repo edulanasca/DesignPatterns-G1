@@ -13,4 +13,11 @@ module Seguros {
 
   opens segurosxy.modelos.patrones.cobertura;
   exports segurosxy.modelos.patrones.cobertura.vista to javafx.graphics;
+
+  exports segurosxy.modelos to mongo.java.driver;
+  exports segurosxy.modelos.interfaces to mongo.java.driver;
+  exports segurosxy.modelos.patrones to mongo.java.driver;
+  exports segurosxy.seguro to mongo.java.driver;
+  exports segurosxy.seguro.tarjeta to mongo.java.driver;
+  exports segurosxy.seguro.vehiculo to mongo.java.driver;
 }

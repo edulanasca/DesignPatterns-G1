@@ -1,20 +1,37 @@
 {
-  "id": "String",
-  "ubigeos": {
-    "casa": {
-      "codigoDepartamento": "String",
-      "codigoProvincia": "String",
-      "codigoDistrito": "String",
-      "departamento": "String",
-      "provincia": "String",
-      "distrito": "String"
-    },
-    "trabajo": {
-
-    }
+  "_id": {
+    "timestamp": 1608006283,
+    "counter": 14512811,
+    "time": 1608006283000,
+    "machineIdentifier": 2585099,
+    "timeSecond": 1608006283,
+    "processIdentifier": 12282,
+    "date": 1608006283000
   },
   "nombre": "String",
   "seguros": [
-    {}
-  ]
+    {
+      "certificado": {
+        "numero": 1557625863
+      },
+      "nivelRiesgo": "BAJO",
+      "poliza": {
+        "numero": 1234
+      },
+      "tarjeta": {
+        "bancoTarjeta": "bcp"
+      }
+    }
+  ],
+  "ubigeos": {},
+  "paises": {
+    "paisResidencia": {
+      "codPais": "PE",
+      "descPais": "Peru"
+    },
+    "paisNacimiento": {
+      "codPais": "PE",
+      "descPais": "Peru"
+    }
+  }
 }

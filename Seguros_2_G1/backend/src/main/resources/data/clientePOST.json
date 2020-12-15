@@ -1,0 +1,14 @@
+{
+  "ubigeoCasa": null,
+  "ubigeoTrabajo": null,
+  "paisResidencia": "PE",
+  "paisNacimiento": "PE",
+  "nombre": "String",
+  "seguros": [
+    {
+      "tipoSeguro": "tarjeta",
+      "bancoTarjeta": "bcp",
+      "numeroPoliza": 1234
+    }
+  ]
+}

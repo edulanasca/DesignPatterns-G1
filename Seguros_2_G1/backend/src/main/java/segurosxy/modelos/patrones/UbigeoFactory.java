@@ -33,9 +33,8 @@ public class UbigeoFactory {
         if(megaCache.isEmpty()){
             System.out.println("[UbigeoFactory] Cargando data desde mongo");
             MongoCollection<Document> ubigeos = Database.getDatabase().getCollection("ubigeo");
-            MongoCursor<Document> cursor = ubigeos.find().iterator();
-            try {
-                while(cursor.hasNext()) {
+            try (MongoCursor<Document> cursor = ubigeos.find().iterator()) {
+                while (cursor.hasNext()) {
                     Document ubi = cursor.next();
                     String codDep = (String) ubi.get("cod_dep_inei");
                     String descDep = (String) ubi.get("desc_dep_inei");
@@ -48,7 +47,7 @@ public class UbigeoFactory {
 
                     megaCache.computeIfAbsent(codDep, k -> new HashMap<>());
                     megaCache.get(codDep).computeIfAbsent(codProv, k -> new HashMap<>());
-                    if (megaCache.get(codDep).get(codProv).get(codUbi) == null){
+                    if (megaCache.get(codDep).get(codProv).get(codUbi) == null) {
                         List<String> list = new ArrayList<>();
                         list.add(descDep);
                         list.add(descProv);
@@ -57,8 +56,6 @@ public class UbigeoFactory {
                     }
                     //System.out.println(codDep+","+codProv+","+codUbi);
                 }
-            } finally {
-                cursor.close();
             }
 
         }

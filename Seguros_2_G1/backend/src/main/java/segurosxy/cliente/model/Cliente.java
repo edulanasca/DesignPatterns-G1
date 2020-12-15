@@ -7,6 +7,7 @@ import segurosxy.modelos.patrones.UbigeoContext;
 import segurosxy.seguro.Seguro;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,14 +18,14 @@ public class Cliente {
     private Map<String, UbigeoContext> ubigeos;
     private String nombre;
     private List<Seguro> seguros;
-
-    private PaisContext paisNacimiento;
-    private PaisContext paisDomicilio;
+    private Map<String, PaisContext> paises;
 
     public Cliente(String nombre)   {
         id = new ObjectId().toString();
         this.nombre = nombre;
         this.seguros = new ArrayList<>();
+        this.ubigeos = new HashMap<>();
+        this.paises = new HashMap<>();
     }
 
 
@@ -52,30 +53,4 @@ public class Cliente {
         }
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-
-
-    public PaisContext getPaisNacimiento() {
-        return paisNacimiento;
-    }
-
-    public void setPaisNacimiento(PaisContext paisNacimiento) {
-        this.paisNacimiento = paisNacimiento;
-    }
-
-    public PaisContext getPaisDomicilio() {
-        return paisDomicilio;
-    }
-
-    public void setPaisDomicilio(PaisContext paisDomicilio) {
-        this.paisDomicilio = paisDomicilio;
-    }
 }
