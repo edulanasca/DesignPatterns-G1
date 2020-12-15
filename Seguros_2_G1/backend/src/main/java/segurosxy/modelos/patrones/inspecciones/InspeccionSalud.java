@@ -9,6 +9,7 @@ public class InspeccionSalud implements IInspeccion {
     public void hacerInspeccion(Cliente cliente) {
         System.out.println("-----------------------------");
         //Se hace la logica de negocio de la Inspeccion de Salud
+        cliente.getNombre();
         //Se interpreta el resultado
         System.out.println("Inspeccion de Salud: "+interpretarResultado(true));
     }

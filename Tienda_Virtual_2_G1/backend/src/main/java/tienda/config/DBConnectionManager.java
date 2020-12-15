@@ -24,8 +24,7 @@ public class DBConnectionManager {
                         PojoCodecProvider.builder().automatic(true).build()
                 )
         );
-        MongoDatabase database = this.mongoClient.getDatabase("SRP").withCodecRegistry(pojoCodecRegistry);
-        return database;
+        return this.mongoClient.getDatabase("SRP").withCodecRegistry(pojoCodecRegistry);
     }
 
     public void closeDatabase() {
