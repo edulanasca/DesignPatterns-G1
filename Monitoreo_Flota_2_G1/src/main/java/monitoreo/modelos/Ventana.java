@@ -3,6 +3,7 @@ package monitoreo.modelos;
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,9 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import monitoreo.modelos.impl.IconoNulo;
-import monitoreo.modelos.impl.ImagenGif;
-import monitoreo.modelos.impl.ImagenIcono;
+import monitoreo.modelos.impl.*;
+import monitoreo.modelos.interfaces.ITipoServicio;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -29,6 +29,62 @@ public class Ventana extends Application {
 
   @Override
   public void start(Stage stage) throws Exception{
+
+    FachadaMapa facade = new FachadaMapa(stage);
+    facade.mostrarMapa();
+
+    facade.getMapaBase().imprimeCoordenadasActual();
+
+    // Entregas programadas para una misma ruta
+    // Double costoTotal = 0.0; No es necesario usar un acumulador
+    GuiaEntrega guia = new GuiaEntrega();
+    guia.agregarEntrega(new EntregaProgramada("09:00-10:00", "14/12/2020"));
+    guia.agregarEntrega(new EntregaProgramada("10:00-11:00", "14/12/2020"));
+    guia.agregarEntrega(new EntregaProgramada("12:00-13:00", "14/12/2020"));
+    guia.listarEntrega();
+
+    GuiaEntrega guiaGeneral = new GuiaEntrega();
+    guiaGeneral.agregarEntrega(new EntregaProgramada("13:00-14:00", "15/12/2020"));
+    guiaGeneral.agregarEntrega(new EntregaProgramada("15:00-16:00", "15/12/2020"));
+    guiaGeneral.agregarEntrega(guia);
+
+    System.out.println("[Cliente][Guia General] Costo total "+guiaGeneral.calcularCosto());
+
+    // Crear ruta con entrega y recojo
+    // Alertas y notificaciones
+    // Eliminar clases que repiten comportamiento
+    ITipoServicio recojo = new RecojoTipoServicio();
+    ITipoServicio entrega = new EntregaTipoServicio();
+
+    //graphicsOverlay = new GraphicsOverlay();
+    Punto puntoRecojo = new Punto(recojo, -12.054901, -77.085470);
+    puntoRecojo.ejecutarServicio();
+    //graphicsOverlay.getGraphics().add(puntoRecojo.getPunto());
+    facade.addGraphicsOverlay(puntoRecojo.getGrafico());
+
+
+    Double[][] puntosEntrega = {
+            {-12.054901, -77.085470},
+            {-12.051833, -77.087903},
+            {-12.061104, -77.084243},
+            {-12.060876, -77.082660},
+            {-12.067592, -77.081687},
+            {-12.072936, -77.083132}
+    };
+    PoliLinea poliEntrega = new PoliLinea(entrega, puntosEntrega);
+    //graphicsOverlay.getGraphics().add(poliEntrega.getPoligono());
+    facade.addGraphicsOverlay(poliEntrega.getGrafico());
+    poliEntrega.ejecutarServicio();
+
+    Punto puntoEntrega = new Punto(entrega,-12.072936, -77.083132);
+    //graphicsOverlay.getGraphics().add(puntoEntrega.getPunto());
+    facade.addGraphicsOverlay(puntoEntrega.getGrafico());
+    puntoEntrega.ejecutarServicio();
+
+    //facade.getMapaBase().getMapView().getGraphicsOverlays().add(graphicsOverlay);
+    facade.addGraphicOverlay();
+    //facade.getStackPane().getChildren().add(mapaBase.getMapView());
+    facade.stackAddMapView();
 
     initPane(stage);
 
@@ -44,6 +100,11 @@ public class Ventana extends Application {
         ));
     addBtn(btnNuevo);
 
+    // https://developers.arcgis.com/java/latest/java/sample-code/change-viewpoint/
+    facade.getStackPane().getChildren().add(btnNuevo);
+    StackPane.setAlignment(btnNuevo, Pos.BOTTOM_CENTER);
+    StackPane.setMargin(btnNuevo, new Insets(10, 10, 10, 10));
+
     btnNuevo = new Button();
     btnNuevo.setText("Captura");
     btnNuevo.setOnAction(event -> screenshot(stage));
@@ -53,30 +114,6 @@ public class Ventana extends Application {
         ));
     // https://developers.arcgis.com/java/latest/java/sample-code/change-viewpoint/
     addBtn(btnNuevo); // Se añade opcion
-
-    btnNuevo = new Button();
-    btnNuevo.setText("Nuevo Singleton");
-    btnNuevo.setOnAction(event -> nuevo_Singleton());
-    addBtn(btnNuevo); // Se añade opcion
-
-  }
-  public void nuevo_Singleton(){
-    Stage stage = new Stage();
-    BorderPane clonePane = new BorderPane();
-    Scene scene = new Scene(clonePane);
-    stage.setScene(scene);
-    stage.setTitle("Sistema de Monitoreo de Vehiculos");
-    stage.setWidth(800);
-    stage.setHeight(700);
-
-    //  Clonacion de MapaBase
-    Mapa mapaBase2 = Mapa.getInstancia();
-
-    mapaBase2.imprimeCoordenadasActual();
-    clonePane.setCenter(mapaBase2.getMapView());
-
-    clonePane.setCenter(mapaBase.getMapView());  // el mapa se pone al centro de la escena
-    stage.show();
 
   }
 

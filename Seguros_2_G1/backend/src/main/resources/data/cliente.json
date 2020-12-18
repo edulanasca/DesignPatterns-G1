@@ -23,7 +23,18 @@
       }
     }
   ],
-  "ubigeos": {},
+  "ubigeos": {
+    "ubigeoCasa": {
+  "codigoDep": "",
+  "codP": ""
+},
+    "ubigeoTrabajo": {
+
+    },
+    "ubigeoT": {
+
+    }
+  },
   "paises": {
     "paisResidencia": {
       "codPais": "PE",
