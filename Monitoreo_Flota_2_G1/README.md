@@ -1,16 +1,8 @@
-Projecto Seguros / sector vehicular
-----
+# Monitoreo
 
-##### Descripcion de las ramas
+## ArcGIS Runtime SDK 
 
-    Rama v1.0 contiene la implementacion de las clases,
-    sin aplicar los 3 patrones a desarrollar.
-    
-    Rama v1.1 contiene los principios:
-    - Prototype
-    - Singleton
-    - Null Object Pattern
-    
-    
+### Windows
+    Descargar el sdk para Java y descomprimirlo en la carpeta Descargas
 
     
