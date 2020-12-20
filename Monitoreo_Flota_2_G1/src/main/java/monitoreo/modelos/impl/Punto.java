@@ -9,16 +9,14 @@ import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
 import monitoreo.modelos.interfaces.IGrafico;
 import monitoreo.modelos.interfaces.ITipoServicio;
 
-public class Punto implements IGrafico {
-
-    private ITipoServicio tipoServicio;
+public class Punto extends IGrafico {
 
     private Graphic punto;
     private static final SpatialReference SPATIAL_REFERENCE = SpatialReferences.getWgs84();
     SimpleMarkerSymbol circleSymbol;
 
     public Punto(ITipoServicio tipoServicio, Double latitud, Double longitud){
-        this.tipoServicio = tipoServicio;
+        super(tipoServicio);
 
         circleSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, 0xFFFF0000, 10);
         punto = new Graphic(new Point(longitud, latitud, SPATIAL_REFERENCE), circleSymbol);
@@ -46,9 +44,4 @@ public class Punto implements IGrafico {
         return 1.0;
     }
 
-    @Override
-    public void ejecutarServicio() {
-        //System.out.println("[Punto] Ejecutando punto");
-        tipoServicio.ejecutarServicio();
-    }
 }

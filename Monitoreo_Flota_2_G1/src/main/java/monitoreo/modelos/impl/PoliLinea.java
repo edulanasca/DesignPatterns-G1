@@ -8,17 +8,14 @@ import monitoreo.modelos.interfaces.ITipoServicio;
 
 import java.util.List;
 
-public class PoliLinea implements IGrafico {
-
-    private ITipoServicio tipoServicio;
+public class PoliLinea extends IGrafico {
 
     private Graphic poligono;
 
     private static final SpatialReference SPATIAL_REFERENCE = SpatialReferences.getWgs84();
 
-    public PoliLinea(ITipoServicio tipoServicio, Double[][] puntos) {
-
-        this.tipoServicio = tipoServicio;
+    public PoliLinea( ITipoServicio tipoServicio, Double[][] puntos) {
+        super(tipoServicio);
 
         // create a green (0xFF005000) simple line symbol
         SimpleLineSymbol outlineSymbol = new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0xffffff00, 3.0f);
@@ -60,9 +57,4 @@ public class PoliLinea implements IGrafico {
         return 1.0;
     }
 
-    @Override
-    public void ejecutarServicio() {
-        //System.out.println("[Punto] Ejecutando punto");
-        tipoServicio.ejecutarServicio();
-    }
 }
