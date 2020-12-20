@@ -10,5 +10,10 @@ public interface IGrafico {
 
     void ejecutarServicio();
 
-    Graphic getGrafico();
+    void agregar(IGrafico grafico);
+
+    void eliminar(IGrafico grafico);
+
+    void mostrar();
+
 }

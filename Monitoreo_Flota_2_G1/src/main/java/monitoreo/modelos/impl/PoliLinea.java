@@ -1,43 +1,34 @@
 package monitoreo.modelos.impl;
 
-import com.esri.arcgisruntime.geometry.*;
 import com.esri.arcgisruntime.mapping.view.Graphic;
-import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
+import monitoreo.GraficoFacade;
 import monitoreo.modelos.interfaces.IGrafico;
 import monitoreo.modelos.interfaces.ITipoServicio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PoliLinea implements IGrafico {
 
-    private ITipoServicio tipoServicio;
+    private final String nombre;
 
-    private Graphic poligono;
+    private final List<IGrafico> graficos = new ArrayList<>();
+    private final ITipoServicio tipoServicio;
+    private final Graphic poligono;
 
-    private static final SpatialReference SPATIAL_REFERENCE = SpatialReferences.getWgs84();
+    public PoliLinea(String nombre, int color, Double[][] puntos) {
+        this(nombre, null, color, puntos);
+    }
 
-    public PoliLinea(ITipoServicio tipoServicio, Double[][] puntos) {
+    public PoliLinea(ITipoServicio tipoServicio, int color, Double[][] puntos) {
+        this("", tipoServicio, color, puntos);
+    }
 
+    public PoliLinea(String nombre, ITipoServicio tipoServicio, int color, Double[][] puntos) {
+        this.nombre = nombre;
         this.tipoServicio = tipoServicio;
-
-        // create a green (0xFF005000) simple line symbol
-        SimpleLineSymbol outlineSymbol = new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0xffffff00, 3.0f);
-        
-        // create a new point collection for polygon
-        PointCollection points = new PointCollection(SPATIAL_REFERENCE);
-
-        // create and add points to the point collection
-        for(Double[] punto: puntos){
-            points.add(new Point(punto[1], punto[0]));
-        }
-
-        // create the polyline from the point collection
-        Polyline polygon = new Polyline(points);
-
-        // create the graphic with polyline and symbol
-        System.out.println(polygon.toJson().toString());
-        this.poligono = new Graphic(polygon, outlineSymbol);
-
+        this.poligono = GraficoFacade.getInstance()
+            .dibujarLineaSolida(color, 3.0f, puntos);
     }
 
     public Graphic getGrafico(){
@@ -64,5 +55,21 @@ public class PoliLinea implements IGrafico {
     public void ejecutarServicio() {
         //System.out.println("[Punto] Ejecutando punto");
         tipoServicio.ejecutarServicio();
+    }
+
+    @Override
+    public void mostrar() {
+        System.out.println("[Ruta] " + nombre);
+        for (IGrafico grafico : graficos) grafico.mostrar();
+    }
+
+    @Override
+    public void agregar(IGrafico grafico) {
+        this.graficos.add(grafico);
+    }
+
+    @Override
+    public void eliminar(IGrafico grafico) {
+        this.graficos.remove(grafico);
     }
 }
