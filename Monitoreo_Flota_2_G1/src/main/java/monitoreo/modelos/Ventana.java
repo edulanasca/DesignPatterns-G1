@@ -56,6 +56,13 @@ public class Ventana extends Application {
     ITipoServicio recojo = new RecojoTipoServicio();
     ITipoServicio entrega = new EntregaTipoServicio();
 
+    ITipoServicio mantenimiento = new MantenimientoVehiculoServicio();
+    ITipoServicio paradaProgramada = new ParadaProgramdaServicio();
+
+    Punto puntoMantenimiento = new Punto(mantenimiento, -12.055332, -77.084903);
+    puntoMantenimiento.ejecutarServicio();
+    facade.addGraphicsOverlay(puntoMantenimiento.getGrafico());
+
     //graphicsOverlay = new GraphicsOverlay();
     Punto puntoRecojo = new Punto(recojo, -12.054901, -77.085470);
     puntoRecojo.ejecutarServicio();
@@ -63,18 +70,28 @@ public class Ventana extends Application {
     facade.addGraphicsOverlay(puntoRecojo.getGrafico());
 
 
+
+
+
     Double[][] puntosEntrega = {
+            {-12.055332, -77.084903},
             {-12.054901, -77.085470},
             {-12.051833, -77.087903},
             {-12.061104, -77.084243},
             {-12.060876, -77.082660},
+            {-12.061899, -77.081970},
             {-12.067592, -77.081687},
-            {-12.072936, -77.083132}
+            {-12.072936, -77.083132},
+
     };
-    PoliLinea poliEntrega = new PoliLinea(entrega,0xffffff00, puntosEntrega);
+    PoliLinea poliEntrega = new PoliLinea(entrega, puntosEntrega);
     //graphicsOverlay.getGraphics().add(poliEntrega.getPoligono());
     facade.addGraphicsOverlay(poliEntrega.getGrafico());
     poliEntrega.ejecutarServicio();
+
+    Punto puntoProgramada = new Punto(paradaProgramada, -12.061899, -77.081970);
+    puntoProgramada.ejecutarServicio();
+    facade.addGraphicsOverlay(puntoProgramada.getGrafico());
 
     Punto puntoEntrega = new Punto(entrega,-12.072936, -77.083132);
     //graphicsOverlay.getGraphics().add(puntoEntrega.getPunto());
