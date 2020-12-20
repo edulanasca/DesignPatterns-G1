@@ -69,10 +69,6 @@ public class Ventana extends Application {
     //graphicsOverlay.getGraphics().add(puntoRecojo.getPunto());
     facade.addGraphicsOverlay(puntoRecojo.getGrafico());
 
-
-
-
-
     Double[][] puntosEntrega = {
             {-12.055332, -77.084903},
             {-12.054901, -77.085470},
@@ -84,7 +80,7 @@ public class Ventana extends Application {
             {-12.072936, -77.083132},
 
     };
-    PoliLinea poliEntrega = new PoliLinea(entrega, puntosEntrega);
+    PoliLinea poliEntrega = new PoliLinea(entrega, 0xFFFFFF00, puntosEntrega);
     //graphicsOverlay.getGraphics().add(poliEntrega.getPoligono());
     facade.addGraphicsOverlay(poliEntrega.getGrafico());
     poliEntrega.ejecutarServicio();

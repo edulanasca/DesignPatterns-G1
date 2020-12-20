@@ -5,21 +5,20 @@ import monitoreo.GraficoFacade;
 import monitoreo.modelos.interfaces.IGrafico;
 import monitoreo.modelos.interfaces.ITipoServicio;
 
-public class Punto implements IGrafico {
+public class Punto extends IGrafico {
 
-    private String nombre;
-
-    private ITipoServicio tipoServicio;
     private final Graphic punto;
 
     public Punto(String nombre, Double latitud, Double longitud) {
-        this.nombre = nombre;
-        this.punto = GraficoFacade.getInstance()
-            .dibujarPuntoCircular(latitud, longitud, 0xFFFF0000, 10);
+        this(nombre, null, latitud, longitud);
     }
 
     public Punto(ITipoServicio tipoServicio, Double latitud, Double longitud){
-        this.tipoServicio = tipoServicio;
+        this("", tipoServicio, latitud, longitud);
+    }
+
+    public Punto(String nombre, ITipoServicio tipoServicio, Double latitud, Double longitud){
+        super(nombre, tipoServicio);
         this.punto = GraficoFacade.getInstance()
             .dibujarPuntoCircular(latitud, longitud, 0xFFFF0000, 10);
     }

@@ -8,12 +8,11 @@ import monitoreo.modelos.interfaces.ITipoServicio;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PoliLinea implements IGrafico {
+public class PoliLinea extends IGrafico {
 
-    private final String nombre;
+
 
     private final List<IGrafico> graficos = new ArrayList<>();
-    private final ITipoServicio tipoServicio;
     private final Graphic poligono;
 
     public PoliLinea(String nombre, int color, Double[][] puntos) {
@@ -25,8 +24,7 @@ public class PoliLinea implements IGrafico {
     }
 
     public PoliLinea(String nombre, ITipoServicio tipoServicio, int color, Double[][] puntos) {
-        this.nombre = nombre;
-        this.tipoServicio = tipoServicio;
+        super(nombre, tipoServicio);
         this.poligono = GraficoFacade.getInstance()
             .dibujarLineaSolida(color, 3.0f, puntos);
     }
