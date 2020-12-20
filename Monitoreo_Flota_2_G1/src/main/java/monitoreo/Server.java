@@ -14,7 +14,7 @@ public class Server {
         ArcGISRuntimeEnvironment.setInstallDirectory(
                 Paths.get(System.getProperty("user.home"),
                         "Downloads",
-                        "arcgis-runtime-sdk-java-100.9.0",
+                       // "arcgis-runtime-sdk-java-100.9.0",
                         "arcgis-runtime-sdk-java-100.9.0")
                         .toString()
         );
