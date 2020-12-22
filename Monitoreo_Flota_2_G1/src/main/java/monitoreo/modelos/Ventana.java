@@ -30,6 +30,7 @@ public class Ventana extends Application {
     btnNuevo.setText("Nuevo");
     btnNuevo.setOnAction(event -> muestraNuevaVentana());
 
+
     // https://developers.arcgis.com/java/latest/java/sample-code/change-viewpoint/
     facade.getStackPane().getChildren().add(btnNuevo);
     StackPane.setAlignment(btnNuevo, Pos.BOTTOM_CENTER);
@@ -41,12 +42,20 @@ public class Ventana extends Application {
     guia.agregarEntrega(new EntregaProgramada("09:00-10:00", "14/12/2020"));
     guia.agregarEntrega(new EntregaProgramada("10:00-11:00", "14/12/2020"));
     guia.agregarEntrega(new EntregaProgramada("12:00-13:00", "14/12/2020"));
+    //Entrega Reprogramada
+    guia.agregarEntrega(new EntregaReprogramada("15:00-16:00","14/12/2020"));
+
     guia.listarEntrega();
 
     GuiaEntrega guiaGeneral = new GuiaEntrega();
     guiaGeneral.agregarEntrega(new EntregaProgramada("13:00-14:00", "15/12/2020"));
     guiaGeneral.agregarEntrega(new EntregaProgramada("15:00-16:00", "15/12/2020"));
+    //Entrega Reprogramada
+    guiaGeneral.agregarEntrega(new EntregaReprogramada("16:00-17:00","15/12/2020"));
     guiaGeneral.agregarEntrega(guia);
+    guiaGeneral.listarEntrega();
+
+
 
     System.out.println("[Cliente][Guia General] Costo total "+guiaGeneral.calcularCosto());
 
