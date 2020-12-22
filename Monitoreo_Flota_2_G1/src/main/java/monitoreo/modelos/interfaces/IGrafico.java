@@ -2,13 +2,26 @@ package monitoreo.modelos.interfaces;
 
 import com.esri.arcgisruntime.mapping.view.Graphic;
 
-public interface IGrafico {
+public abstract class IGrafico {
 
-    void mover(Integer x, Integer Y);
+    protected String nombre;
+    protected ITipoServicio tipoServicio;
 
-    Double getPrecio();
+    public IGrafico(String nombre, ITipoServicio tipoServicio) {
+        this.nombre = nombre;
+        this.tipoServicio = tipoServicio;
+    }
 
-    void ejecutarServicio();
+    public abstract void mover(Integer x, Integer Y);
 
-    Graphic getGrafico();
+    public abstract Double getPrecio();
+
+    public void ejecutarServicio(){
+        tipoServicio.ejecutarServicio();
+    };
+
+    public abstract Graphic getGrafico();
+    public abstract void mostrar();
+    public abstract void agregar(IGrafico grafico);
+    public abstract void eliminar(IGrafico grafico);
 }

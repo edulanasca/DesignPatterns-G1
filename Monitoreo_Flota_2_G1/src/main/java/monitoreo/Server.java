@@ -8,18 +8,17 @@ import java.nio.file.Paths;
 
 public class Server {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        System.out.println("Iniciando servidor...");
-        ArcGISRuntimeEnvironment.setInstallDirectory(
-                Paths.get(System.getProperty("user.home"),
-                        "Downloads",
-                        "arcgis-runtime-sdk-java-100.9.0",
-                        "arcgis-runtime-sdk-java-100.9.0")
-                        .toString()
-        );
+    System.out.println("Iniciando servidor...");
+    ArcGISRuntimeEnvironment.setInstallDirectory(
+        Paths.get(System.getProperty("user.home"),
+            "Downloads",
+            "arcgis-runtime-sdk-java-100.9.0")
+            .toString()
+    );
 
-        Application.launch(Ventana.class, args);
-    }
+    Application.launch(Ventana.class, args);
+  }
 
 }

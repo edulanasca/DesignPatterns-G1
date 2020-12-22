@@ -1,28 +1,26 @@
 package monitoreo.modelos.impl;
 
-import com.esri.arcgisruntime.geometry.Point;
-import com.esri.arcgisruntime.geometry.SpatialReference;
-import com.esri.arcgisruntime.geometry.SpatialReferences;
 import com.esri.arcgisruntime.mapping.view.Graphic;
-import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
-import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
+import monitoreo.GraficoFacade;
 import monitoreo.modelos.interfaces.IGrafico;
 import monitoreo.modelos.interfaces.ITipoServicio;
 
-public class Punto implements IGrafico {
+public class Punto extends IGrafico {
 
-    private ITipoServicio tipoServicio;
+    private final Graphic punto;
 
-    private Graphic punto;
-    private static final SpatialReference SPATIAL_REFERENCE = SpatialReferences.getWgs84();
-    SimpleMarkerSymbol circleSymbol;
+    public Punto(String nombre, Double latitud, Double longitud) {
+        this(nombre, null, latitud, longitud);
+    }
 
     public Punto(ITipoServicio tipoServicio, Double latitud, Double longitud){
-        this.tipoServicio = tipoServicio;
+        this("", tipoServicio, latitud, longitud);
+    }
 
-        circleSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, 0xFFFF0000, 10);
-        punto = new Graphic(new Point(longitud, latitud, SPATIAL_REFERENCE), circleSymbol);
-        //graphicsOverlay.getGraphics().add(punto);
+    public Punto(String nombre, ITipoServicio tipoServicio, Double latitud, Double longitud){
+        super(nombre, tipoServicio);
+        this.punto = GraficoFacade.getInstance()
+            .dibujarPuntoCircular(latitud, longitud, 0xFFFF0000, 10);
     }
 
     public Graphic getGrafico(){
@@ -50,5 +48,20 @@ public class Punto implements IGrafico {
     public void ejecutarServicio() {
         //System.out.println("[Punto] Ejecutando punto");
         tipoServicio.ejecutarServicio();
+    }
+
+    @Override
+    public void agregar(IGrafico grafico) {
+        System.out.println("No se puede agregar rutas a un punto");
+    }
+
+    @Override
+    public void eliminar(IGrafico grafico) {
+        System.out.println("No se puede quitar un punto");
+    }
+
+    @Override
+    public void mostrar() {
+        System.out.println("[Punto] " + nombre);
     }
 }
