@@ -1,0 +1,9 @@
+{
+  "nombre": "Josue",
+  "asientos": [
+    23, 25, 32
+  ],
+  "metodoPago": "paypal",
+  "sector": "palco",
+  "tipoObra": "comedia"
+}
