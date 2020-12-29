@@ -1,10 +1,7 @@
 package com.grupouno.teatro.ticket;
 
 
-import com.grupouno.teatro.butacas.Sector;
-import com.grupouno.teatro.butacas.SectorGeneral;
-import com.grupouno.teatro.butacas.SectorPalco;
-import com.grupouno.teatro.butacas.SectorPremium;
+import com.grupouno.teatro.butacas.*;
 import com.grupouno.teatro.obra.Obra;
 import com.grupouno.teatro.obra.ObraComedia;
 import com.grupouno.teatro.obra.ObraDrama;
@@ -27,7 +24,7 @@ public class FacadeTicket {
 
     SectorGeneral general = new SectorGeneral();
 
-    asientos.forEach(asiento -> general.agregarButaca(new com.grupouno.teatro.butacas.Asiento(asiento)));
+    asientos.forEach(asiento -> general.agregarButaca(new Asiento(asiento)));
 
     switch (cliente.getSector()) {
       case "palco":
