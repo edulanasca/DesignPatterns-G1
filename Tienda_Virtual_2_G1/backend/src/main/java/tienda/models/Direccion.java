@@ -21,48 +21,96 @@ public class Direccion {
     private String grupo;
     private String distrito;
 
+    public String getTipoCalle() {
+        return tipoCalle;
+    }
+
     public void setTipoCalle(String tipoCalle) {
         this.tipoCalle = tipoCalle;
+    }
+
+    public String getNombreCalle() {
+        return nombreCalle;
     }
 
     public void setNombreCalle(String nombreCalle) {
         this.nombreCalle = nombreCalle;
     }
 
+    public int getNumeroPuerta() {
+        return numeroPuerta;
+    }
+
     public void setNumeroPuerta(int numeroPuerta) {
         this.numeroPuerta = numeroPuerta;
+    }
+
+    public String getManzana() {
+        return manzana;
     }
 
     public void setManzana(String manzana) {
         this.manzana = manzana;
     }
 
+    public int getLote() {
+        return lote;
+    }
+
     public void setLote(int lote) {
         this.lote = lote;
+    }
+
+    public String getConjuntoVivienda() {
+        return conjuntoVivienda;
     }
 
     public void setConjuntoVivienda(String conjuntoVivienda) {
         this.conjuntoVivienda = conjuntoVivienda;
     }
 
-    public void setNumeroInterior(int númeroInterior) {
+    public int getNumeroInterior() {
+        return numeroInterior;
+    }
+
+    public void setNumeroInterior(int numeroInterior) {
         this.numeroInterior = numeroInterior;
+    }
+
+    public String getNombreEdificio() {
+        return nombreEdificio;
     }
 
     public void setNombreEdificio(String nombreEdificio) {
         this.nombreEdificio = nombreEdificio;
     }
 
+    public String getNombreConjuntoResidencial() {
+        return nombreConjuntoResidencial;
+    }
+
     public void setNombreConjuntoResidencial(String nombreConjuntoResidencial) {
         this.nombreConjuntoResidencial = nombreConjuntoResidencial;
+    }
+
+    public String getSector() {
+        return sector;
     }
 
     public void setSector(String sector) {
         this.sector = sector;
     }
 
+    public String getGrupo() {
+        return grupo;
+    }
+
     public void setGrupo(String grupo) {
         this.grupo = grupo;
+    }
+
+    public String getDistrito() {
+        return distrito;
     }
 
     public void setDistrito(String distrito) {

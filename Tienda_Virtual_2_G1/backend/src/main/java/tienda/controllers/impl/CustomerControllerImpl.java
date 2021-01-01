@@ -4,6 +4,7 @@ import tienda.config.Paths;
 //import tienda.config.Paths;
 import tienda.controllers.CustomerController;
 import tienda.models.Cliente;
+import tienda.models.patterns.state.cliente.ClienteCreado;
 import tienda.repositories.ClienteRepositorio;
 import io.javalin.http.Context;
 import io.javalin.http.BadRequestResponse;
@@ -16,7 +17,7 @@ import org.eclipse.jetty.http.HttpStatus;
 public class CustomerControllerImpl implements CustomerController {
     private static final String ID = "id";
 
-    private ClienteRepositorio customerRepository;
+    private final ClienteRepositorio customerRepository;
 
     public CustomerControllerImpl(ClienteRepositorio postRepository) {
         this.customerRepository = postRepository;
@@ -28,13 +29,12 @@ public class CustomerControllerImpl implements CustomerController {
         Cliente customer = context.bodyAsClass(Cliente.class);
         System.out.println("Cliente: " + customer);
 
-        //if (customer.getId() != null) {
-        //    throw new BadRequestResponse(String.format("Unable to create a new post with existing id: %s", customer));
-        //}
+        customer.setEstadoCliente(new ClienteCreado());
+        customer.verificarDatos();
 
         customerRepository.create(customer);
         context.status(HttpStatus.CREATED_201)
-                .header(HttpHeader.LOCATION.name(), Paths.formatPostLocation(customer.getId().toString()));
+                .header(HttpHeader.LOCATION.name(), Paths.formatPostLocation(customer.getId()));
 
     }
 
@@ -67,7 +67,7 @@ public class CustomerControllerImpl implements CustomerController {
         Cliente customer = context.bodyAsClass(Cliente.class);
         String id = context.pathParam(ID);
 
-        if (customer.getId() != null && !customer.getId().toString().equals(id)) {
+        if (customer.getId() != null && !customer.getId().equals(id)) {
             throw new BadRequestResponse("Id update is not allowed");
         }
 

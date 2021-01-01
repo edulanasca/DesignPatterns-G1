@@ -1,0 +1,52 @@
+POST http://localhost:7000/api/customers
+Content-Type: application/json
+
+{
+  "nombre": "Katy",
+  "direcciones": [
+    {
+      "tipoCalle": "Avenida",
+      "nombreCalle": "Palmeritas",
+      "numeroPuerta": 32,
+      "manzana": "",
+      "lote": 3,
+      "conjuntoVivienda": "",
+      "numeroInterior": 0,
+      "nombreEdificio": "",
+      "nombreConjuntoResidencial": "",
+      "sector": "A",
+      "grupo": "",
+      "distrito": null
+    }
+  ],
+  "numeroDocumento": "734654481",
+  "correo": "katy@abc.com"
+}
+
+###
+POST http://localhost:7000/api/customers
+Content-Type: application/json
+
+{
+  "nombre": "John Doe",
+  "direcciones": [
+    {
+      "tipoCalle": "Street",
+      "nombreCalle": "Side",
+      "numeroPuerta": 32,
+      "manzana": "",
+      "lote": 3,
+      "conjuntoVivienda": "",
+      "numeroInterior": 0,
+      "nombreEdificio": "",
+      "nombreConjuntoResidencial": "",
+      "sector": "Z",
+      "grupo": "",
+      "distrito": null
+    }
+  ],
+  "numeroDocumento": "73465448",
+  "correo": "jsa1234sd@xyz.com"
+}
+
+###

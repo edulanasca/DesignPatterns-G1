@@ -32,6 +32,7 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
     public void create(Cliente cliente) {
         System.out.println("entrando: " + cliente);
         cliente.setId((new ObjectId()).toString());
+        cliente.getEstadoCliente().verificarInfo(cliente);
         clientes.insertOne(cliente);
     }
 
