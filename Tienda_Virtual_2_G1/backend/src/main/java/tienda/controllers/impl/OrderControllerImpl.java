@@ -5,9 +5,12 @@ import tienda.controllers.OrderController;
 import tienda.models.Entrega;
 import tienda.models.EntregaBuilderDirector;
 import tienda.models.Pedido;
+import tienda.models.PedidoCreado;
 import tienda.models.impl.PedidoDetalleInternet;
 import tienda.models.impl.PedidoDetallePromocion;
 import tienda.models.interfaces.IPedidoDetalle;
+import tienda.models.metodopago.BlockChainMetodoPago;
+import tienda.models.patterns.IDetallePedidoIterator;
 import tienda.models.metodopago.BlockChainMetodoPagoFactory;
 import tienda.models.metodopago.MetodoPago;
 import tienda.models.metodopago.MetodoPagoFactory;
@@ -51,7 +54,11 @@ public class OrderControllerImpl implements OrderController {
         IDescuento descuento = factoryDiscount.crearDescuento(DescuentoFactory.DESCUENTO_CUPON);
         order.setMontoTotal( order.calcularMontoPedido(descuento) );
 
+        order.setEstadoPedido( new PedidoCreado() );
+        System.out.println("Pedido Creado.");   
+        order.procesar();
 
+        // Crear el pedido
         System.out.println("Precio Total " + order.getMontoTotal());
 
         MetodoPagoFactory factory = new BlockChainMetodoPagoFactory();
@@ -81,10 +88,23 @@ public class OrderControllerImpl implements OrderController {
         //.build();
 
 
+        System.out.println("Pedido Validado.");   
+        order.procesar();
         try {
             orderRepository.update(order, order.getId());
         } catch(Exception e) { e.getMessage(); }
 
+        System.out.println("Pedido Pagado.");
+        order.procesar();
+
+        System.out.println("Pedido Entregado.");   
+        order.procesar();
+
+        IDetallePedidoIterator iterator = order.iterator();
+        while (iterator.hasNext()) {
+            IPedidoDetalle detalle = iterator.next();
+            System.out.println("Detalle: " + detalle.getIdProduct() + " - " + detalle.getCantidad() + " - " + detalle.getPrecio() );
+        }
     }
 
     public void find(Context context) {

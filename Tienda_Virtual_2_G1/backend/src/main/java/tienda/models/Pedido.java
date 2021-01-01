@@ -2,17 +2,21 @@ package tienda.models;
 
 import java.util.List;
 import tienda.models.interfaces.IPedidoDetalle;
+import tienda.models.patterns.DetallePedidoCollection;
+import tienda.models.patterns.DetallePedidoIterator;
 import tienda.models.metodopago.MetodoPago;
 import tienda.models.patterns.IDescuento;
+import tienda.models.patterns.IDetallePedidoIterator;
+import tienda.models.patterns.IEstadoPedido;
 
-
-public class Pedido {
+public class Pedido implements DetallePedidoCollection {
     private String id;
     private Double montoTotal;
     private String direccionEntrega;
     private String cliente;
     private Entrega entregaPedido;
     private Double descuento;
+    private IEstadoPedido estadoPedido;
 
     private List<IPedidoDetalle> detallePedido;
 
@@ -23,6 +27,14 @@ public class Pedido {
             Get logic, ORM, SQL
         */
         return detallePedido;
+    }
+
+    public IEstadoPedido getEstadoPedido() {
+        return estadoPedido;
+    }
+
+    public void setEstadoPedido(IEstadoPedido estadoPedido) {
+        this.estadoPedido = estadoPedido;
     }
 
     public void setDetallePedido(List<IPedidoDetalle> detallePedido) {
@@ -98,6 +110,17 @@ public class Pedido {
 
     public void setDescuento(Double descuento) {
         this.descuento = descuento;
+    }
+
+    public void procesar() {
+
+        estadoPedido.procesar(this);
+    }
+
+    @Override
+    public IDetallePedidoIterator iterator() {
+
+        return new DetallePedidoIterator( detallePedido );
     }
 
 }

@@ -39,8 +39,7 @@ public class PedidoDetalleInternet implements IPedidoDetalle {
 
     @Override
     public Integer getCantidad() {
-        // TODO Auto-generated method stub
-        return null;
+        return quantity;
     }
 
     @Override
@@ -48,5 +47,14 @@ public class PedidoDetalleInternet implements IPedidoDetalle {
         // TODO Auto-generated method stub
 
     }
+
+    public String getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(String idProduct) {
+        this.idProduct = idProduct;
+    }
+
     
 }

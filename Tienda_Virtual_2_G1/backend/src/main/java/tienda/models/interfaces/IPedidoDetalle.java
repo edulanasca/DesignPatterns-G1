@@ -12,6 +12,8 @@ public interface IPedidoDetalle {
 
     public Integer getCantidad();
 
-    public Double getPrecio();
+    public abstract Double getPrecio();
+
+    public abstract String getIdProduct();
 
 }

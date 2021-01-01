@@ -1,5 +1,7 @@
 package tienda.models;
 
+import tienda.models.patterns.CaretakerPrecio;
+import tienda.models.patterns.MementoPrecio;
 import tienda.models.interfaces.Marca;
 import tienda.models.interfaces.Modelo;
 
@@ -18,7 +20,9 @@ public class Producto {
     //tipo de Bateria
     private String bateria;
 
-    public Producto()   {
+    private CaretakerPrecio caretakerPrecio = new CaretakerPrecio();
+
+    public Producto() {
     }
 
     public Producto(String codigo, String descripcion, Double precioBase, String linea, String mantenimiento)   {
@@ -69,6 +73,7 @@ public class Producto {
 
     public void setPrecioBase(Double precioBase) {
         this.precioBase = precioBase;
+        System.out.println("Estableciendo precio base en: " + this.precioBase);
     }
 
     public String getLineaProducto() {
@@ -95,7 +100,18 @@ public class Producto {
         this.codigo = codigo;
     }
 
+    public MementoPrecio grabaPrecio() {
+        System.out.println("Grabando en Memento Precio.");
+        return new MementoPrecio(precioBase);
+    }
+    public void recuperaPrecio(MementoPrecio m) {
+        precioBase = m.getPrecio();
+        System.out.println("Recuperando desde Memento Precio: " + precioBase);
+    }
 
+    public CaretakerPrecio getCaretakerPrecio() {
+        return caretakerPrecio;
+    }
     //get an set de camara y bateria
     public String getCamaraFrontal() {return camaraFrontal;}
 
@@ -108,4 +124,8 @@ public class Producto {
     public String getBateria() {return bateria;}
 
     public void setBateria(String bateria) {this.bateria = bateria;}
+
+    public void setCaretakerPrecio(CaretakerPrecio caretakerPrecio) {
+        this.caretakerPrecio = caretakerPrecio;
+    }
 }

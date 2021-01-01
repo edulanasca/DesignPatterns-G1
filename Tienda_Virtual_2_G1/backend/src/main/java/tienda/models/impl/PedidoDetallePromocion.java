@@ -43,8 +43,7 @@ public class PedidoDetallePromocion implements IPedidoDetalle {
 
     @Override
     public Integer getCantidad() {
-        // TODO Auto-generated method stub
-        return null;
+        return quantity;
     }
 
     @Override
@@ -52,5 +51,22 @@ public class PedidoDetallePromocion implements IPedidoDetalle {
         // TODO Auto-generated method stub
 
     }
+
+    public String getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(String idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public void setPrecio(Double precio) {
+        this.price = precio;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.quantity = cantidad;
+    }
+
     
 }

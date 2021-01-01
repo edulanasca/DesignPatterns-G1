@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import tienda.config.Paths;
 import tienda.controllers.ProductController;
 import tienda.models.Producto;
+import tienda.models.patterns.CaretakerPrecio;
 import tienda.models.patterns.GamaAltaFactory;
 import tienda.models.patterns.GamaBajaFactory;
 import tienda.models.patterns.GamaMediaFactory;
@@ -130,12 +131,14 @@ public class ProductControllerImpl implements ProductController {
         Producto pr3 = new Producto("P01010018","Samsung S20", 3000.00, lineaA, mantenimientoA);
         productRepository.create(pr3);
 
-       Producto pr4 = new Producto("P01010018","Xiaomi A1",
-               1000.00,LineaC,mantenimientoC,
-               camaraFront,camaraTras,bateria);
-
-       productRepository.create(pr4);
-
+        CaretakerPrecio caretaker = pr1.getCaretakerPrecio();
+        pr1.setPrecioBase( 2550.00 );
+        caretaker.addMementoPrecio( pr1.grabaPrecio() );
+        pr1.setPrecioBase( 2750.00 );
+        caretaker.addMementoPrecio( pr1.grabaPrecio() );
+        pr1.setPrecioBase( 2800.00 );
+        pr1.recuperaPrecio( caretaker.ultimoMementoPrecio() );
+        System.out.println("Precioo actual base:" + pr1.getPrecioBase() );
     }
     
 }
