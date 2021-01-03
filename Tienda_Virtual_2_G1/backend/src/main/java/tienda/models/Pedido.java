@@ -2,11 +2,11 @@ package tienda.models;
 
 import java.util.List;
 import tienda.models.interfaces.IPedidoDetalle;
-import tienda.models.patterns.DetallePedidoCollection;
-import tienda.models.patterns.DetallePedidoIterator;
+import tienda.models.patterns.iterator.DetallePedidoCollection;
+import tienda.models.patterns.iterator.DetallePedidoIterator;
 import tienda.models.metodopago.MetodoPago;
 import tienda.models.patterns.IDescuento;
-import tienda.models.patterns.IDetallePedidoIterator;
+import tienda.models.patterns.iterator.IDetallePedidoIterator;
 import tienda.models.patterns.IEstadoPedido;
 
 public class Pedido implements DetallePedidoCollection {
