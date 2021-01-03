@@ -24,6 +24,32 @@ Content-Type: application/json
 }
 
 ###
+PUT http://localhost:7000/api/customers/5ff0c6887ec4e5408e19a868
+Content-Type: application/json
+
+{
+  "nombre": "Katy",
+  "direcciones": [
+    {
+      "tipoCalle": "Avenida",
+      "nombreCalle": "Palmeritas",
+      "numeroPuerta": 32,
+      "manzana": "",
+      "lote": 3,
+      "conjuntoVivienda": "",
+      "numeroInterior": 0,
+      "nombreEdificio": "",
+      "nombreConjuntoResidencial": "",
+      "sector": "A",
+      "grupo": "",
+      "distrito": "Los Olivos"
+    }
+  ],
+  "numeroDocumento": "73465448",
+  "correo": "katy@abc.com"
+}
+
+###
 POST http://localhost:7000/api/customers
 Content-Type: application/json
 
@@ -47,6 +73,32 @@ Content-Type: application/json
   ],
   "numeroDocumento": "73465448",
   "correo": "jsa1234sd@xyz.com"
+}
+
+###
+PUT http://localhost:7000/api/customers/5ff0c5c71dbdc345eb7cc1cd
+Content-Type: application/json
+
+{
+  "nombre": "John Doe",
+  "direcciones": [
+    {
+      "tipoCalle": "Street",
+      "nombreCalle": "Side",
+      "numeroPuerta": 32,
+      "manzana": "",
+      "lote": 3,
+      "conjuntoVivienda": "",
+      "numeroInterior": 0,
+      "nombreEdificio": "",
+      "nombreConjuntoResidencial": "",
+      "sector": "Z",
+      "grupo": "",
+      "distrito": null
+    }
+  ],
+  "numeroDocumento": "73465448",
+  "correo": "jsa1234sd@abc.com"
 }
 
 ###

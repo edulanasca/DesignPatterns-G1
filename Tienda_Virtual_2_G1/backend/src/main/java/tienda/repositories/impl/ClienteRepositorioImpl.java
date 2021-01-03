@@ -61,6 +61,8 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 
     @Override
     public Cliente update(Cliente post, String id) {
+        post.getEstadoCliente().verificarInfo(post);
+        System.out.println(post.getEstadoCliente().getClass().getName());
         return clientes.findOneAndReplace(new Document("_id", id), post, UPDATE_OPTIONS);
     }
     

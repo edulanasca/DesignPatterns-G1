@@ -25,15 +25,17 @@ public class ClienteObservado extends ClienteState {
     if (observaciones.isEmpty()) {
 
       if (super.correosNoAdmitidos.stream()
-          .noneMatch(correo -> correo.equals(cliente.getCorreo().split("@")[1]))) {
+          .anyMatch(correo -> correo.equals(cliente.getCorreo().split("@")[1]))) {
         cliente.setEstadoCliente(new ClienteDesactivo());
         return;
       }
 
-      if (cliente.getNumeroDocumento().length() < 8 &&
-          cliente.getDirecciones().stream().anyMatch(direccion -> direccion.getDistrito() != null)) {
+      if (cliente.getNumeroDocumento().length() == 8 &&
+          cliente.getDirecciones().stream().noneMatch(direccion -> direccion.getDistrito() == null)) {
 
         cliente.setEstadoCliente(new ClienteActivo());
+      } else {
+        cliente.setEstadoCliente(new ClienteObservado());
       }
 
     } else {
