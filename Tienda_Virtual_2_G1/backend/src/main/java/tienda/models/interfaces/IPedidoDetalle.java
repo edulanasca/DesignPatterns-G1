@@ -1,19 +1,21 @@
 package tienda.models.interfaces;
 
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
 import tienda.models.*;
 
+@BsonDiscriminator
 public interface IPedidoDetalle {
 
-    public Double calculaPrecio();
+    Double calculaPrecio();
 
-    public Pedido getPedido();
+    Pedido getPedido();
 
-    public void setPedido(Pedido order);
+    void setPedido(Pedido order);
 
-    public Integer getCantidad();
+    Integer getCantidad();
 
-    public abstract Double getPrecio();
+    Double getPrecio();
 
-    public abstract String getIdProduct();
+    String getIdProduct();
 
 }

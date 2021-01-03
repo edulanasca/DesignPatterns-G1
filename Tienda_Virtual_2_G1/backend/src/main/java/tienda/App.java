@@ -49,6 +49,7 @@ public class App {
         ).start(7000);
 
         server.get("api/customers/:id", this.customerController::find);
+        server.put("api/customers/:id", this.customerController::update);
         server.delete("api/customers/:id", this.customerController::delete);
         server.get("api/customers", this.customerController::findAll);
         server.post("api/customers", this.customerController::create);

@@ -1,5 +1,10 @@
 package tienda.controllers.impl;
 
+import io.javalin.http.BadRequestResponse;
+import io.javalin.http.Context;
+import io.javalin.http.NotFoundResponse;
+import org.eclipse.jetty.http.HttpHeader;
+import org.eclipse.jetty.http.HttpStatus;
 import tienda.config.Paths;
 import tienda.controllers.OrderController;
 import tienda.models.Entrega;
@@ -9,26 +14,18 @@ import tienda.models.PedidoCreado;
 import tienda.models.impl.PedidoDetalleInternet;
 import tienda.models.impl.PedidoDetallePromocion;
 import tienda.models.interfaces.IPedidoDetalle;
-import tienda.models.metodopago.BlockChainMetodoPago;
-import tienda.models.patterns.IDetallePedidoIterator;
 import tienda.models.metodopago.BlockChainMetodoPagoFactory;
 import tienda.models.metodopago.MetodoPago;
 import tienda.models.metodopago.MetodoPagoFactory;
 import tienda.models.patterns.DescuentoFactory;
 import tienda.models.patterns.EntregaBuilder;
 import tienda.models.patterns.IDescuento;
+import tienda.models.patterns.iterator.IDetallePedidoIterator;
 import tienda.repositories.PedidoRepositorio;
 
-import io.javalin.http.Context;
-import io.javalin.http.BadRequestResponse;
-import io.javalin.http.NotFoundResponse;
-
-import java.util.ArrayList;
 import java.util.List;
 
 //import org.bson.types.ObjectId;
-import org.eclipse.jetty.http.HttpHeader;
-import org.eclipse.jetty.http.HttpStatus;
 
 public class OrderControllerImpl implements OrderController {
     private static final String ID = "id";
@@ -42,11 +39,17 @@ public class OrderControllerImpl implements OrderController {
     public void create(Context context) {
         Pedido order = context.bodyAsClass(Pedido.class);
 
-        List<IPedidoDetalle> items = new ArrayList<>();
-        PedidoDetalleInternet oi1 = new PedidoDetalleInternet( "P01010034", 1, 400.90);
-        PedidoDetallePromocion oi2 = new PedidoDetallePromocion( "P01010025", 1, 600.90);
-        items.add(oi1);
-        items.add(oi2);
+        List<IPedidoDetalle> items = List.of(
+            new PedidoDetalleInternet( "P01010034", 1, 400.90),
+            new PedidoDetallePromocion( "P01010025", 2, 600.90),
+            new PedidoDetallePromocion( "P01010012", 2, 546.8),
+            new PedidoDetalleInternet("P01010037", 3, 200.6),
+            new PedidoDetalleInternet("P01010055", 5, 345.9),
+            new PedidoDetallePromocion( "P01010044", 1, 348.8),
+            new PedidoDetalleInternet("P01010078", 7, 123.8),
+            new PedidoDetallePromocion( "P01010098", 1, 345.7)
+        );
+
         order.setDetallePedido(items);
         //instancia Singleton del DescuentoFactory
         DescuentoFactory factoryDiscount = DescuentoFactory.getInstance();
@@ -92,7 +95,7 @@ public class OrderControllerImpl implements OrderController {
         order.procesar();
         try {
             orderRepository.update(order, order.getId());
-        } catch(Exception e) { e.getMessage(); }
+        } catch(Exception e) { e.printStackTrace(); }
 
         System.out.println("Pedido Pagado.");
         order.procesar();
@@ -103,7 +106,11 @@ public class OrderControllerImpl implements OrderController {
         IDetallePedidoIterator iterator = order.iterator();
         while (iterator.hasNext()) {
             IPedidoDetalle detalle = iterator.next();
-            System.out.println("Detalle: " + detalle.getIdProduct() + " - " + detalle.getCantidad() + " - " + detalle.getPrecio() );
+            System.out.println("Detalle: " +
+                "[" + detalle.getClass().getSimpleName() + "] - " +
+                detalle.getIdProduct() + " - " +
+                detalle.getCantidad() + " - " +
+                detalle.getPrecio() );
         }
     }
 

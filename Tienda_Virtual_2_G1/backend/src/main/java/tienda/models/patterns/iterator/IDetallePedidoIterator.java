@@ -1,11 +1,11 @@
-package tienda.models.patterns;
+package tienda.models.patterns.iterator;
 
 import tienda.models.interfaces.IPedidoDetalle;
 
 public interface IDetallePedidoIterator {
 
-    public boolean hasNext();
+    boolean hasNext();
 
-    public IPedidoDetalle next();
+    IPedidoDetalle next();
     
 }

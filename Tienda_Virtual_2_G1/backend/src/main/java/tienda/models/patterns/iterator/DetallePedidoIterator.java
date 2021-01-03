@@ -1,18 +1,27 @@
-package tienda.models.patterns;
+package tienda.models.patterns.iterator;
 
 //import java.util.Iterator;
 
 import tienda.models.interfaces.IPedidoDetalle;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class DetallePedidoIterator implements IDetallePedidoIterator {    // Iterator<IPedidoDetalle>
 
-    private List<IPedidoDetalle> detallePedido;
+    private final List<IPedidoDetalle> detallePedido;
     protected int currentDetail = 0;
 
     public DetallePedidoIterator(List<IPedidoDetalle> detallePedido)    {
-        this.detallePedido = detallePedido;
+        this.detallePedido = new ArrayList<>(detallePedido);
+
+        try {
+            this.detallePedido.sort(Comparator.comparing(detalle -> detalle.getClass().getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

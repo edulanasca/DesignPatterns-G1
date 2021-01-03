@@ -1,0 +1,9 @@
+POST http://localhost:7000/api/orders
+Content-Type: application/json
+
+{
+  "cliente": "Katy",
+  "direccionEntrega": "Los Olivos"
+}
+
+###

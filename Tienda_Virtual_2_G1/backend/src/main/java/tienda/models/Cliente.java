@@ -69,7 +69,20 @@ public class Cliente {
     }
 
     public void verificarDatos() {
+        System.out.println("Verficando datos con estado: " + this.estadoCliente.getEstado());
         this.getEstadoCliente().verificarInfo(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+            "id='" + id + '\'' +
+            ", nombre='" + nombre + '\'' +
+            ", direcciones=" + direcciones +
+            ", numeroDocumento='" + numeroDocumento + '\'' +
+            ", correo='" + correo + '\'' +
+            ", estadoCliente=" + estadoCliente +
+            '}';
     }
 }
 
