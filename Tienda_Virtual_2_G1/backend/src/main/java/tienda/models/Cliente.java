@@ -78,7 +78,7 @@ public class Cliente {
         return "Cliente{" +
             "id='" + id + '\'' +
             ", nombre='" + nombre + '\'' +
-            ", direcciones=" + direcciones +
+            ", direcciones=" + direccion +
             ", numeroDocumento='" + numeroDocumento + '\'' +
             ", correo='" + correo + '\'' +
             ", estadoCliente=" + estadoCliente +
