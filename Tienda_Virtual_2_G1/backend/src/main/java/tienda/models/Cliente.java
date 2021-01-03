@@ -8,7 +8,8 @@ import java.util.List;
 public class Cliente {
     private String id;
     private String nombre;
-    private List<Direccion> direcciones;
+    //private List<Direccion> direcciones;
+    private String direccion;
     private String numeroDocumento;
     private String correo;
     private ClienteState estadoCliente;
@@ -28,13 +29,19 @@ public class Cliente {
     public String getNombre()   {
         return this.nombre;
     }
-
-    public List<Direccion> getDirecciones() {
+    /*public List<Direccion> getDirecciones() {
         return direcciones;
     }
 
     public void setDirecciones(List<Direccion> direcciones) {
         this.direcciones = direcciones;
+    }*/
+    public void setDireccion(String direccion)    {
+        this.direccion = direccion;
+    }
+
+    public String getDireccion()   {
+        return this.direccion;
     }
 
     public void setNumeroDocumento(String numeroDocumento)    {
