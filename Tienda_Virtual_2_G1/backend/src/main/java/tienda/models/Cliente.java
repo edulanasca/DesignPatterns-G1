@@ -8,11 +8,20 @@ import java.util.List;
 public class Cliente {
     private String id;
     private String nombre;
-    //private List<Direccion> direcciones;
-    private String direccion;
+    private List<Direccion> direcciones;
     private String numeroDocumento;
     private String correo;
     private ClienteState estadoCliente;
+
+    public Cliente() {
+
+    }
+
+    public Cliente(String nombre, String numeroDocumento,String correo) {
+        this.nombre = nombre;
+        this.numeroDocumento = numeroDocumento;
+        this.correo = correo;
+    }
 
     public String getId() {
         return id;
@@ -29,19 +38,13 @@ public class Cliente {
     public String getNombre()   {
         return this.nombre;
     }
-    /*public List<Direccion> getDirecciones() {
+
+    public List<Direccion> getDirecciones() {
         return direcciones;
     }
 
     public void setDirecciones(List<Direccion> direcciones) {
         this.direcciones = direcciones;
-    }*/
-    public void setDireccion(String direccion)    {
-        this.direccion = direccion;
-    }
-
-    public String getDireccion()   {
-        return this.direccion;
     }
 
     public void setNumeroDocumento(String numeroDocumento)    {
@@ -78,7 +81,6 @@ public class Cliente {
         return "Cliente{" +
             "id='" + id + '\'' +
             ", nombre='" + nombre + '\'' +
-            ", direcciones=" + direccion +
             ", numeroDocumento='" + numeroDocumento + '\'' +
             ", correo='" + correo + '\'' +
             ", estadoCliente=" + estadoCliente +
