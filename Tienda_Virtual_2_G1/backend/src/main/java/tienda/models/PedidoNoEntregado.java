@@ -13,6 +13,11 @@ public class PedidoNoEntregado implements IEstadoPedido {
         pedido.setEstadoPedido(new PedidoPorEntregar());
     }
 
+    @Override
+    public void anular(Pedido pedido) {
+        System.out.println("El pedido se va a anular");
+        pedido.setEstadoPedido(new PedidoAnulado());
+    }
 
     public String getId() {
         return id;

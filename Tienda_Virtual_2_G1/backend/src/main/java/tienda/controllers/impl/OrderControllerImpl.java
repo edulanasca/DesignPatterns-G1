@@ -106,8 +106,9 @@ public class OrderControllerImpl implements OrderController {
 
         /*
         //--Anular Pedido--//
-        order.setEstadoPedido(new PedidoAnulado());
+        order.anular();
         order.procesar();//pedido anulado
+        this.delete(context);
         */
 
 

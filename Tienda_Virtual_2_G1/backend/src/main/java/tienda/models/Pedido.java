@@ -119,6 +119,10 @@ public class Pedido implements DetallePedidoCollection {
         estadoPedido.procesar(this);
     }
 
+    public void anular() {
+        estadoPedido.anular(this);
+    }
+
     @Override
     public IDetallePedidoIterator iterator() {
 

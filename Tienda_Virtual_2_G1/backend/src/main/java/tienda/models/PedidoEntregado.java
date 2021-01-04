@@ -12,6 +12,10 @@ public class PedidoEntregado implements IEstadoPedido {
         pedido.setEstadoPedido(new PedidoFinalizado());
     }
 
+    @Override
+    public void anular(Pedido pedido) {
+        System.out.println("No se puede anular un pedido entregado");
+    }
 
     public String getId() {
         return id;

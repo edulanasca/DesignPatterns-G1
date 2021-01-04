@@ -14,6 +14,11 @@ public class PedidoFinalizado implements IEstadoPedido {
         System.out.println("Finalizando pedido.");
     }
 
+    @Override
+    public void anular(Pedido pedido) {
+        System.out.println("No se puede anular un pedido Finalizado");
+    }
+
     public String getId() {
         return id;
     }

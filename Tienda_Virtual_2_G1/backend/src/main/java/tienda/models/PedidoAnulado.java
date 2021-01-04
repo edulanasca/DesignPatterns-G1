@@ -12,6 +12,11 @@ public class PedidoAnulado implements IEstadoPedido {
         System.out.println("Se a anulado el pedido");
     }
 
+    @Override
+    public void anular(Pedido pedido) {
+        System.out.println("Ya se esta anulando el pedido");
+    }
+
     public String getId() {
         return id;
     }
