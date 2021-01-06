@@ -18,6 +18,7 @@ import tienda.models.patterns.DescuentoFactory;
 import tienda.models.patterns.EntregaBuilder;
 import tienda.models.patterns.IDescuento;
 import tienda.models.patterns.iterator.IDetallePedidoIterator;
+import tienda.models.patterns.iterator.PrecioPedidoIterator;
 import tienda.repositories.PedidoRepositorio;
 
 import java.util.List;
@@ -134,6 +135,17 @@ public class OrderControllerImpl implements OrderController {
                 detalle.getIdProduct() + " - " +
                 detalle.getCantidad() + " - " +
                 detalle.getPrecio() );
+        }
+
+        System.out.println("\n\n Iterator para ordenar pedidos por precio");
+
+        iterator = new PrecioPedidoIterator(order.getDetallePedido());
+        while (iterator.hasNext()) {
+            IPedidoDetalle detalle = iterator.next();
+            System.out.println("Detalle: " +
+                    detalle.getIdProduct() + " - " +
+                    detalle.getCantidad() + " - " +
+                    detalle.getPrecio() );
         }
     }
 
