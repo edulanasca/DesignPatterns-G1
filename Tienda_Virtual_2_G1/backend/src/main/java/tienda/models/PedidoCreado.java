@@ -24,6 +24,12 @@ public class PedidoCreado implements IEstadoPedido {
     pedido.setEstadoPedido(new PedidoValidado());
   }
 
+  @Override
+  public void anular(Pedido pedido) {
+    System.out.println("El pedido se va a anular");
+    pedido.setEstadoPedido(new PedidoAnulado());
+  }
+
   public String getId() {
     return id;
   }

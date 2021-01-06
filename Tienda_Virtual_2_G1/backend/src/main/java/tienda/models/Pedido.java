@@ -18,6 +18,8 @@ public class Pedido implements DetallePedidoCollection {
     private Double descuento;
     private IEstadoPedido estadoPedido;
 
+    //Señal si esta se entrego o no (se actuliza cuando el usuario recive el producto)
+    private boolean entregado = false;
     private List<IPedidoDetalle> detallePedido;
 
 
@@ -117,10 +119,23 @@ public class Pedido implements DetallePedidoCollection {
         estadoPedido.procesar(this);
     }
 
+    public void anular() {
+        estadoPedido.anular(this);
+    }
+
     @Override
     public IDetallePedidoIterator iterator() {
 
         return new DetallePedidoIterator( detallePedido );
     }
 
+    //geter y seter de la señar de entregado
+
+    public boolean isEntregado() {
+        return entregado;
+    }
+
+    public void setEntregado(boolean entregado) {
+        this.entregado = entregado;
+    }
 }

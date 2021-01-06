@@ -7,10 +7,7 @@ import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.http.HttpStatus;
 import tienda.config.Paths;
 import tienda.controllers.OrderController;
-import tienda.models.Entrega;
-import tienda.models.EntregaBuilderDirector;
-import tienda.models.Pedido;
-import tienda.models.PedidoCreado;
+import tienda.models.*;
 import tienda.models.impl.PedidoDetalleInternet;
 import tienda.models.impl.PedidoDetallePromocion;
 import tienda.models.interfaces.IPedidoDetalle;
@@ -57,11 +54,13 @@ public class OrderControllerImpl implements OrderController {
         IDescuento descuento = factoryDiscount.crearDescuento(DescuentoFactory.DESCUENTO_CUPON);
         order.setMontoTotal( order.calcularMontoPedido(descuento) );
 
-        order.setEstadoPedido( new PedidoCreado() );
+        //SE ESTABLECE CONTEXTO
+        order.setEstadoPedido( new PedidoCreado() );//estoy en estado PedidoCreado
         System.out.println("Pedido Creado.");   
-        order.procesar();
+        order.procesar();//pedido creado
+        //estoy en estado PedidoValidado
 
-        // Crear el pedido
+        // pagar el pedido
         System.out.println("Precio Total " + order.getMontoTotal());
 
         MetodoPagoFactory factory = new BlockChainMetodoPagoFactory();
@@ -92,16 +91,40 @@ public class OrderControllerImpl implements OrderController {
 
 
         System.out.println("Pedido Validado.");   
-        order.procesar();
+        order.procesar();//pedido validado
+        //estoy en estado PedidoPorEntregar
         try {
             orderRepository.update(order, order.getId());
         } catch(Exception e) { e.printStackTrace(); }
 
         System.out.println("Pedido Pagado.");
-        order.procesar();
 
-        System.out.println("Pedido Entregado.");   
-        order.procesar();
+        //--Fallo en la entrega del pedido--//
+        order.setEntregado(false);
+        System.out.println("pedido no entregado");
+        order.procesar();//El pedido NO llego al cliente
+        //estoy en estado PedidoNoEntregado
+        order.procesar();//Regreso al estado PedidoPorEntregar
+        //estoy en estado PedidoPorEntregar
+
+        /*
+        //--Anular Pedido--//
+        order.anular();
+        order.procesar();//pedido anulado
+        this.delete(context);
+        */
+
+
+        //--Exito en la entrega del pedido--//
+        order.setEntregado(true);
+        order.procesar();//El pedido SI llego al cliente
+        //estoy en estado PedidoEntregado
+
+        System.out.println("Pedido Entregado.");
+        order.procesar();//Finalizando pedido
+        //estoy en estado PedidoFinalizado
+
+        order.procesar();//Pedido Finalizado
 
         IDetallePedidoIterator iterator = order.iterator();
         while (iterator.hasNext()) {

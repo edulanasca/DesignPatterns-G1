@@ -112,6 +112,7 @@ public class Producto {
     public CaretakerPrecio getCaretakerPrecio() {
         return caretakerPrecio;
     }
+
     //get an set de camara y bateria
     public String getCamaraFrontal() {return camaraFrontal;}
 

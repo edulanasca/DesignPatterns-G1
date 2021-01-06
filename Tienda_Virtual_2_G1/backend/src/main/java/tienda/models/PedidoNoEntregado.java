@@ -2,23 +2,15 @@ package tienda.models;
 
 import tienda.models.patterns.IEstadoPedido;
 
-public class PedidoPorEntregar implements IEstadoPedido {
+public class PedidoNoEntregado implements IEstadoPedido {
 
     private String id;
-    
-    public PedidoPorEntregar()  {}
 
     @Override
     public void procesar(Pedido pedido) {
-
-        System.out.println("Entregando pedido: " + pedido.getId());
-
-        if (pedido.isEntregado()) {
-            pedido.setEstadoPedido(new PedidoEntregado());
-        }else {
-            pedido.setEstadoPedido(new PedidoNoEntregado());
-        }
-
+        System.out.println("Ocurrio un error con la entrega del pedido " + pedido.getId());
+        System.out.println("Reenviando pedido " + pedido.getId());
+        pedido.setEstadoPedido(new PedidoPorEntregar());
     }
 
     @Override
@@ -34,5 +26,6 @@ public class PedidoPorEntregar implements IEstadoPedido {
     public void setId(String id) {
         this.id = id;
     }
-    
+
+
 }
