@@ -13,6 +13,16 @@ public class Cliente {
     private String correo;
     private ClienteState estadoCliente;
 
+    public Cliente() {
+
+    }
+
+    public Cliente(String nombre, String numeroDocumento,String correo) {
+        this.nombre = nombre;
+        this.numeroDocumento = numeroDocumento;
+        this.correo = correo;
+    }
+
     public String getId() {
         return id;
     }
@@ -71,7 +81,6 @@ public class Cliente {
         return "Cliente{" +
             "id='" + id + '\'' +
             ", nombre='" + nombre + '\'' +
-            ", direcciones=" + direcciones +
             ", numeroDocumento='" + numeroDocumento + '\'' +
             ", correo='" + correo + '\'' +
             ", estadoCliente=" + estadoCliente +
