@@ -67,13 +67,13 @@ public class App {
         }
 
         //  Agregando Ubigeos de Casa y Trabajo
-        UbigeoContext ubigeoCasa = new UbigeoContext("01", "01", "01");
-        cliente.getUbigeos().put("ubigeoCasa", ubigeoCasa );
-
-        UbigeoContext ubigeoTrabajo = new UbigeoContext("01", "02", "01");
-        cliente.getUbigeos().put("ubigeoTrabajo", ubigeoTrabajo );
-
-        cliente.printUbigeos();
+//        UbigeoContext ubigeoCasa = new UbigeoContext("01", "01", "01");
+//        cliente.getUbigeos().put("ubigeoCasa", ubigeoCasa );
+//
+//        UbigeoContext ubigeoTrabajo = new UbigeoContext("01", "02", "01");
+//        cliente.getUbigeos().put("ubigeoTrabajo", ubigeoTrabajo );
+//
+//        cliente.printUbigeos();
 
 
         // Correo Mediator

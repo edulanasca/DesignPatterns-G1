@@ -8,6 +8,7 @@ import segurosxy.modelos.interfaces.IPoliza;
 import segurosxy.modelos.patrones.IClienteObserver;
 import segurosxy.modelos.patrones.ISeguroObservable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ToString
@@ -20,6 +21,7 @@ public abstract class Seguro implements ISeguroObservable {
 
     public Seguro() {
         this.certificado = new Certificado();
+        this.contratantes = new ArrayList<>();
     }
 
     public ICertificado getCertificado() {

@@ -14,7 +14,7 @@ public class SeguroEmpresa extends SeguroVehicular implements INivelRiesgo  {
     public SeguroEmpresa(String marca)    {
 
         super();
-        this.getVehiculo().setMarca(marca);
+        this.setVehiculo(new Vehiculo(marca, ""));
     }
 
     @Override
