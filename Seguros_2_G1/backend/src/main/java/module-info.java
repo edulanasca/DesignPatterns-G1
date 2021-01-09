@@ -10,6 +10,7 @@ module Seguros {
 
   requires com.fasterxml.jackson.core;
   requires com.fasterxml.jackson.databind;
+  requires javax.mail;
 
   opens segurosxy.modelos.patrones.cobertura;
   exports segurosxy.modelos.patrones.cobertura.vista to javafx.graphics;
