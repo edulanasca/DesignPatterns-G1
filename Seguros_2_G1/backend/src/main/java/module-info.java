@@ -21,4 +21,5 @@ module Seguros {
   exports segurosxy.seguro to mongo.java.driver;
   exports segurosxy.seguro.tarjeta to mongo.java.driver;
   exports segurosxy.seguro.vehiculo to mongo.java.driver;
+  exports segurosxy.cliente.model;
 }

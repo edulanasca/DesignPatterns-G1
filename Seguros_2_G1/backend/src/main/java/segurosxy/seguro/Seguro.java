@@ -1,20 +1,22 @@
 package segurosxy.seguro;
 
-import com.mongodb.BasicDBObject;
 import lombok.ToString;
-import org.bson.codecs.pojo.annotations.BsonId;
-import org.bson.types.ObjectId;
 import segurosxy.modelos.Certificado;
 import segurosxy.modelos.Poliza;
 import segurosxy.modelos.interfaces.ICertificado;
 import segurosxy.modelos.interfaces.IPoliza;
+import segurosxy.modelos.patrones.IClienteObserver;
+import segurosxy.modelos.patrones.ISeguroObservable;
+
+import java.util.List;
 
 @ToString
-public abstract class Seguro {
+public abstract class Seguro implements ISeguroObservable {
 
     protected ICertificado certificado;
-    protected IPoliza poliza;
+    protected Poliza poliza;
     protected String nivelRiesgo = "NINGUNO";
+    protected List<IClienteObserver> contratantes;
 
     public Seguro() {
         this.certificado = new Certificado();
@@ -42,6 +44,26 @@ public abstract class Seguro {
 
     public String infoSeguroCsv() {
         return String.join(",","certificado", "poliza", "nivelRiesgo");
+    }
+
+    public void setSumaAsegurada(final Double suma) {
+
+        this.poliza.setSumaAsegurada(suma);
+        // notify contratante
+        //System.out.println("***********************************************************");
+        System.out.println("[Seguro] Se modifico la Suma Asegurada, notificando... ");
+        //System.out.println("***********************************************************");
+        for( IClienteObserver a : this.contratantes) {
+            a.notifica();
+        }
+    }
+
+    public void addObserver(IClienteObserver observer) {
+        this.contratantes.add( observer );
+    }
+
+    public void removeObserver(IClienteObserver observer) {
+        this.contratantes.remove( observer );
     }
 
     public abstract String detalleSeguro();

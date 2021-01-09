@@ -1,9 +1,10 @@
 package segurosxy.seguro.tarjeta;
 
 import segurosxy.modelos.Tarjeta;
+import segurosxy.modelos.interfaces.INivelRiesgo;
 import segurosxy.seguro.Seguro;
 
-public class SeguroTarjeta extends Seguro {
+public class SeguroTarjeta extends Seguro implements INivelRiesgo {
 
     private Tarjeta tarjeta;
 

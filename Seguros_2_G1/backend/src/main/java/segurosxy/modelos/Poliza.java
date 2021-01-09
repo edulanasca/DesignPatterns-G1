@@ -13,6 +13,7 @@ public class Poliza implements IPoliza {
     private String nombresAsegurado;
     private String nombresTomador;
     private List<String> nombresBeneficiarios;
+    private Double sumaAsegurada;
 
     public Poliza() {
     }
@@ -26,7 +27,7 @@ public class Poliza implements IPoliza {
         this.numero = numero;
         this.nombresAsegurado = nombresAsegurado;
         this.nombresTomador = nombresTomador;
-        this.nombresBeneficiarios = new ArrayList<String>();
+        this.nombresBeneficiarios = new ArrayList<>();
     }
 
     public Integer getNumero() {
@@ -51,6 +52,14 @@ public class Poliza implements IPoliza {
 
     public void setNombresTomador(String nombresTomador) {
         this.nombresTomador = nombresTomador;
+    }
+
+    public Double getSumaAsegurada() {
+        return sumaAsegurada;
+    }
+
+    public void setSumaAsegurada(Double sumaAsegurada) {
+        this.sumaAsegurada = sumaAsegurada;
     }
 
     public String armarSalidaTexto()    {
