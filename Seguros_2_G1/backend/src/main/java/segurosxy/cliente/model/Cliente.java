@@ -2,10 +2,10 @@ package segurosxy.cliente.model;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
-import segurosxy.modelos.patrones.CorreoMediator;
 import segurosxy.modelos.patrones.IClienteObserver;
 import segurosxy.modelos.patrones.PaisContext;
 import segurosxy.modelos.patrones.UbigeoContext;
+import segurosxy.modelos.patrones.mediator.ICorredorMediator;
 import segurosxy.seguro.Seguro;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Cliente implements IClienteObserver {
     private List<Seguro> seguros;
     private Map<String, PaisContext> paises;
 
-    protected CorreoMediator correoMediator;
+    protected ICorredorMediator correoMediator;
 
     public Cliente(String nombre)   {
         id = new ObjectId().toString();
@@ -32,7 +32,7 @@ public class Cliente implements IClienteObserver {
         this.paises = new HashMap<>();
     }
 
-    public Cliente(final String nombre, final CorreoMediator correoMediator) {
+    public Cliente(final String nombre, final ICorredorMediator correoMediator) {
 
         this.nombre = nombre;
         this.correoMediator = correoMediator;

@@ -1,10 +1,10 @@
-package segurosxy.modelos.patrones;
+package segurosxy.cliente.model;
 
-import segurosxy.cliente.model.Cliente;
+import segurosxy.modelos.patrones.mediator.ICorredorMediator;
 
 public class ClienteAsegurado extends Cliente {
 
-    public ClienteAsegurado(String nombre, CorreoMediator correoMediator) {
+    public ClienteAsegurado(String nombre, ICorredorMediator correoMediator) {
 
         super(nombre, correoMediator);
     }
@@ -16,7 +16,7 @@ public class ClienteAsegurado extends Cliente {
 
     public void enviaCorreo()    {
 
-        correoMediator.setServidorCorreoSMTP("smtp.gmail.com");
+        correoMediator.setServidorCorreoSMTP("localhost");
         correoMediator.enviaCorreoSMTP(this);
     }
 }

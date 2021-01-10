@@ -1,6 +1,7 @@
 package segurosxy;
 
 import segurosxy.cliente.model.Cliente;
+import segurosxy.cliente.model.ClienteAsegurado;
 import segurosxy.modelos.*;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.patrones.*;
@@ -11,6 +12,8 @@ import segurosxy.modelos.patrones.cobertura.CoberturaBasicaVehicular;
 import segurosxy.modelos.patrones.cobertura.CoberturaPorChoqueDecorator;
 import segurosxy.modelos.patrones.cobertura.CoberturaPorRoboDecorator;
 import segurosxy.modelos.patrones.cobertura.CoberturaTodoRiesgoDecorator;
+import segurosxy.modelos.patrones.mediator.CorreoMediator;
+import segurosxy.seguro.SeguroController;
 import segurosxy.seguro.tarjeta.SeguroTarjeta;
 import segurosxy.seguro.vehiculo.model.SeguroChoque;
 import segurosxy.seguro.vehiculo.model.SeguroVehicular;
@@ -18,20 +21,27 @@ import segurosxy.seguro.vehiculo.model.SeguroVehicular;
 public class App {
 
     private final ClienteController clienteController;
+    private final SeguroController seguroController;
 
     public App() {
         this.clienteController = new ClienteController();
+        this.seguroController = new SeguroController();
     }
 
     public void init() {
         Javalin javalin = Javalin.create().start(7000);
 
         clienteEndPoints(javalin);
+        seguroEndpoints(javalin);
     }
 
     public void clienteEndPoints(Javalin server) {
         server.post("clientes/", clienteController::createCliente);
         server.get("clientes/", clienteController::allClientes);
+    }
+
+    public void seguroEndpoints(Javalin server) {
+        server.post("seguros/", seguroController::createSeguro);
     }
 
     public static void main(String[] args ) {
@@ -80,7 +90,7 @@ public class App {
         System.out.println("\n[App] Notificaciones con CorreoMediator");
         CorreoMediator correoMediator = new CorreoMediator();
         ClienteAsegurado asegurado = new ClienteAsegurado("Pedro Pablo", correoMediator);
-        asegurado.enviaCorreo();
+//        asegurado.enviaCorreo();
 
         // Agregando Observadores
         System.out.println("\n[App] Observador para cambio en Suma Asegurada");
