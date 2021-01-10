@@ -1,7 +1,7 @@
 package segurosxy.modelos.patrones;
 
 
-import segurosxy.modelos.Beneficiario;
+import segurosxy.modelos.patrones.beneficiarios.Beneficiario;
 
 public class AltaCommand implements ICommand {
 

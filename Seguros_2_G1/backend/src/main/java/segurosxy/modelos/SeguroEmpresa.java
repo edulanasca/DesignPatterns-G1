@@ -3,7 +3,7 @@ package segurosxy.modelos;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.interfaces.INivelRiesgo;
 import segurosxy.modelos.patrones.ICommand;
-import segurosxy.seguro.Seguro;
+import segurosxy.modelos.patrones.beneficiarios.Beneficiario;
 import segurosxy.seguro.vehiculo.model.SeguroVehicular;
 
 public class SeguroEmpresa extends SeguroVehicular implements INivelRiesgo  {
