@@ -15,7 +15,6 @@ public class ClienteAsegurado extends Cliente {
     }
 
     public void enviaCorreo()    {
-
         correoMediator.setServidorCorreoSMTP("smtp.gmail.com");
         correoMediator.enviaCorreoSMTP(this);
     }

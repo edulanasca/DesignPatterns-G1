@@ -1,7 +1,9 @@
 package segurosxy;
 
-import segurosxy.cliente.model.Cliente;
+import segurosxy.cliente.model.*;
+import segurosxy.cliente.model.Beneficiario;
 import segurosxy.modelos.*;
+//import segurosxy.modelos.Beneficiario;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.patrones.*;
 
@@ -36,7 +38,7 @@ public class App {
 
     public static void main(String[] args ) {
 
-        Cliente cliente = new Cliente("Juan Perez");
+        Persona cliente = new Cliente("Juan Perez");
 
         SeguroVehicular seguro = new SeguroChoque("Toyota","Yaris");
         seguro.calcularRiesgo();
@@ -48,13 +50,13 @@ public class App {
 
         seguro.calcularCobeturaVehicular( cobertura );
 
-        cliente.setCompraSeguro(seguro);
+        ((Cliente) cliente).setCompraSeguro(seguro);
         //System.out.println( seguro.getDetalleSeguro() );
 
         SeguroTarjeta seguro2 = new SeguroTarjeta("BCP");
         seguro2.calcularRiesgo();
         seguro2.setPoliza(new Poliza(122122, "Juan Pablo", "Juan Perez"));
-        cliente.setCompraSeguro(seguro2);
+        ((Cliente) cliente).setCompraSeguro(seguro2);
         //System.out.println( seguro2.getDetalleSeguro() );
 
         System.out.println();
@@ -82,16 +84,28 @@ public class App {
         ClienteAsegurado asegurado = new ClienteAsegurado("Pedro Pablo", correoMediator);
         asegurado.enviaCorreo();
 
+        //creo mas observadores
+        Persona agente = new Agente("Eduardo Cruzado",correoMediator);
+        Persona beneficiario = new Beneficiario("Josue Vallejo",correoMediator);
+        Persona contratante = new Contratante("Hugo Ciro",correoMediator);
+
         // Agregando Observadores
         System.out.println("\n[App] Observador para cambio en Suma Asegurada");
         seguro2.addObserver(cliente);
         seguro2.addObserver(asegurado);
-        seguro2.setSumaAsegurada(100000.00);
+
+        //agrego mas observadores
+        seguro2.addObserver(agente);
+        seguro2.addObserver(beneficiario);
+        seguro2.addObserver(contratante);
+
+
+        seguro2.setSumaAsegurada(100000.00);//notifica
 
         // Command by SeguroEmpresa
         System.out.println("\n[App] Logica comando para empleados");
         SeguroEmpresa seguro3 = new SeguroEmpresa("Minera XYZ");
-        Beneficiario minero1 = new Beneficiario("Luis Piedrahita");
+        segurosxy.modelos.Beneficiario minero1 = new segurosxy.modelos.Beneficiario("Luis Piedrahita");
         ICommand alta = new AltaCommand();
         ICommand baja = new BajaCommand();
 
