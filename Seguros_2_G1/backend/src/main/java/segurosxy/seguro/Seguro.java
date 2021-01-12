@@ -1,5 +1,6 @@
 package segurosxy.seguro;
 
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
 import lombok.ToString;
 import segurosxy.cliente.model.PersonaObserver;
 import segurosxy.modelos.Certificado;
@@ -12,7 +13,7 @@ import segurosxy.modelos.patrones.ISeguroObservable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
+@BsonDiscriminator
 public abstract class Seguro implements ISeguroObservable {
 
     protected ICertificado certificado;
@@ -57,6 +58,13 @@ public abstract class Seguro implements ISeguroObservable {
         System.out.println("[Seguro] Se modifico la Suma Asegurada, notificando... ");
         //System.out.println("***********************************************************");
         for( PersonaObserver a : this.contratantes) {
+            a.notifica();
+        }
+    }
+
+    public void notificarAfiliacion() {
+        System.out.println("[Seguro] Notificando a afiliados... ");
+        for( IClienteObserver a : this.contratantes) {
             a.notifica();
         }
     }

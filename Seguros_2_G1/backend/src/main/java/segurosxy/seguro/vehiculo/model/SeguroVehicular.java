@@ -5,13 +5,11 @@ import segurosxy.cliente.model.PersonaObserver;
 import segurosxy.modelos.Vehiculo;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.interfaces.INivelRiesgo;
-import segurosxy.modelos.patrones.cobertura.CoberturaBasicaVehicular;
-import segurosxy.modelos.patrones.cobertura.CoberturaDecorator;
 import segurosxy.seguro.Seguro;
 
 public abstract class SeguroVehicular extends Seguro implements INivelRiesgo {
 
-    protected ICobertura cobertura = new CoberturaDecorator(new CoberturaBasicaVehicular());
+    protected ICobertura cobertura;
     protected Vehiculo vehiculo;
 
     public SeguroVehicular() {

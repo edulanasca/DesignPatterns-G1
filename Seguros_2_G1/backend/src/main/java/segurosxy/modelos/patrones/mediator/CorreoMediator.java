@@ -1,4 +1,4 @@
-package segurosxy.modelos.patrones;
+package segurosxy.modelos.patrones.mediator;
 
 import segurosxy.cliente.model.PersonaObserver;
 import segurosxy.modelos.email.EmailUtil;

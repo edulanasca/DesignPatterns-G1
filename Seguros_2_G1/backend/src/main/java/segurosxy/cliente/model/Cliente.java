@@ -1,10 +1,13 @@
 package segurosxy.cliente.model;
 
 import lombok.Data;
+import org.bson.types.ObjectId;
+import segurosxy.modelos.patrones.IClienteObserver;
 import segurosxy.modelos.patrones.CorreoMediator;
 //import segurosxy.modelos.patrones.IClienteObserver;
 import segurosxy.modelos.patrones.PaisContext;
 import segurosxy.modelos.patrones.UbigeoContext;
+import segurosxy.modelos.patrones.mediator.ICorredorMediator;
 import segurosxy.seguro.Seguro;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ public class Cliente extends PersonaObserver {
     private Map<String, PaisContext> paises;
     private Map<String, UbigeoContext> ubigeos;
 
+    protected ICorredorMediator correoMediator;
 
 //constructores de cliente
     public Cliente(String nombre)   {
@@ -36,7 +40,7 @@ public class Cliente extends PersonaObserver {
         this.paises = new HashMap<>();
     }
 
-    public Cliente(final String nombre, final CorreoMediator correoMediator) {
+    public Cliente(final String nombre, final ICorredorMediator correoMediator) {
     //se utiliza constructor de persona
         super(nombre,correoMediator);
 
