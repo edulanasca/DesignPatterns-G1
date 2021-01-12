@@ -1,193 +1,180 @@
-import { useState } from "react";
-
-import Button from "./components/Button";
-import Input from "./components/Input";
+import { useState } from 'react';
+import styles from './App.module.css';
 
 const App = () => {
-  const formStyle = {
-    width: "500px",
-  };
+	const [showRegistroMessage, setShowRegistroMessage] = useState(false);
 
-  const [mainInputs, setMainInputs] = useState({
-    nombre: { value: "", placeholder: "Nombre completo", inputType: "input" },
-    nuermoPoliza: {
-      value: "",
-      placeholder: "Número de póliza",
-      inputType: "input",
-    },
-    tipoPoliza: {
-      inputType: "select",
-      options: [
-        { value: "", displayValue: "-- Selecciona un tipo de póliza --" },
-        { value: "vehicular", displayValue: "Vehicular" },
-        { value: "tarjeta", displayValue: "Tarjeta" },
-      ],
-      value: "",
-    },
-  });
+	const [showForm, setShowForm] = useState(false);
 
-  const [vehicularInputs, setVehicularInputs] = useState({
-    vehiculo: {
-      inputType: "select",
-      options: [
-        { value: "toyota", displayValue: "Toyota" },
-        { value: "yaris", displayValue: "Yaris" },
-      ],
-      value: "",
-    },
-    tipoSeguro: {
-      inputType: "select",
-      options: [
-        { value: "choque", displayValue: "Choque" },
-        { value: "robo", displayValue: "Robo" },
-        { value: "soat", displayValue: "SOAT" },
-        { value: "todoRiesgo", displayValue: "Todo Riesgo" },
-      ],
-      value: "",
-    },
-  });
+	const handleShowForm = () => {
+		setShowForm(prevState => !prevState);
+	};
 
-  const [tarjetaInputs, setTarjetaInputs] = useState({
-    bancoProcedencia: {
-      inputType: "select",
-      options: [
-        { value: "azteca", displayValue: "Azteca" },
-        { value: "bcp", displayValue: "BCP" },
-        { value: "interbank", displayValue: "Interbank" },
-      ],
-    },
-  });
+	const [inputs, setInputs] = useState({
+		seguro: 'robo',
+		marca: '',
+		modelo: '',
+		afil: ''
+	});
 
-  const [showVehiculos, setShowVehiculos] = useState(false);
-  const [showTarjetas, setShowTarjetas] = useState(false);
+	const { seguro, marca, modelo, afil } = inputs;
 
-  const changedMainValueHandler = (e, id) => {
-    const updatedMainInputs = { ...mainInputs };
-    const updatedFormElement = { ...updatedMainInputs[id] };
+	const handleInputChange = inputName => e => {
+		setInputs({
+			...inputs,
+			[inputName]: e.target.value
+		});
+	};
 
-    updatedFormElement.value = e.target.value;
-    updatedMainInputs[id] = updatedFormElement;
+	const [afiliados, setAfiliados] = useState([]);
 
-    setMainInputs(updatedMainInputs);
-  };
+	const handleAddAfiliado = e => {
+		if (e.key === 'Enter' && afil !== '') {
+			setAfiliados([...afiliados, e.target.value]);
+			setInputs({ ...inputs, afil: '' });
+		}
+	};
 
-  const changedVehicularValueHandler = (e, id) => {
-    const updatedVehicularInputs = { ...vehicularInputs };
-    const updatedFormElement = { ...updatedVehicularInputs[id] };
+	const handleRemoveAfiliado = nombre => {
+		const afilidosUpdated = afiliados.filter(afiliado => afiliado !== nombre);
+		setAfiliados(afilidosUpdated);
+	};
 
-    updatedFormElement.value = e.target.value;
-    updatedVehicularInputs[id] = updatedFormElement;
+	const handleSubmitForm = () => {
+		if (marca && modelo && afiliados.length) {
+			const data = {
+				tipo: seguro,
+				marca: marca,
+				modelo: modelo,
+				afiliados: afiliados
+			};
 
-    setVehicularInputs(updatedVehicularInputs);
-  };
+			console.log(data);
 
-  const changedTarjetaValueHandler = (e, id) => {
-    const updatedTarjetaInputs = { ...tarjetaInputs };
-    const updatedFormElement = { ...updatedTarjetaInputs[id] };
+			fetch('http://localhost:7000/seguros/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
 
-    updatedFormElement.value = e.target.value;
-    updatedTarjetaInputs[id] = updatedFormElement;
+					setInputs({ seguro: 'robo', marca: '', modelo: '', afil: '' });
 
-    setTarjetaInputs(updatedTarjetaInputs);
-  };
+					setAfiliados([]);
 
-  const mainInputsInfo = [];
+					setShowRegistroMessage(true);
 
-  for (const key in mainInputs) {
-    mainInputsInfo.push({ id: key, data: mainInputs[key] });
-  }
+					setTimeout(() => {
+						setShowRegistroMessage(false);
+						setShowForm(false);
+					}, 1500);
+				})
+				.catch(error => console.error(error));
+		} else {
+			alert('Los campos no pueden ir vacíos');
+		}
+	};
 
-  const mainInputsForm = mainInputsInfo.map(({ id, data }) => (
-    <Input
-      key={id}
-      id={id}
-      inputType={data.inputType}
-      value={data.value}
-      placeholder={data.placeholder}
-      options={data.options}
-      changed={changedMainValueHandler}
-    />
-  ));
+	return (
+		<div className={['container pt-5', styles.app].join(' ')}>
+			<div className={styles['button-container']}>
+				<button className='btn btn-primary' onClick={handleShowForm}>
+					Registrar Seguro
+				</button>
+			</div>
 
-  const vehicularInputsInfo = [];
+			{showForm ? (
+				<div className={['mt-5 px-5 py-4', styles.form].join(' ')}>
+					{showRegistroMessage ? (
+						<div className='alert alert-success' role='alert'>
+							Usuario registrado
+						</div>
+					) : null}
+					<div className='form-group'>
+						<label htmlFor='seguro'>Seguro</label>
 
-  for (const key in vehicularInputs) {
-    vehicularInputsInfo.push({ id: key, data: vehicularInputs[key] });
-  }
+						<select
+							className='form-control'
+							id='seguro'
+							onChange={handleInputChange('seguro')}
+							value={seguro}
+						>
+							<option value='robo'>Robo</option>
+							<option value='soat'>SOAT</option>
+							<option value='todoriesgo'>Todo Riesgo</option>
+							<option value='empresa'>Empresa</option>
+						</select>
+					</div>
 
-  const vehicularInputsForm = vehicularInputsInfo.map(({ id, data }) => (
-    <Input
-      key={id}
-      id={id}
-      inputType={data.inputType}
-      value={data.value}
-      options={data.options}
-      changed={changedVehicularValueHandler}
-    />
-  ));
+					<div className='form-group'>
+						<label htmlFor='marca'>Marca</label>
 
-  const tarjetaInputsInfo = [];
+						<input
+							className='form-control'
+							id='marca'
+							onChange={handleInputChange('marca')}
+							type='text'
+							value={marca}
+						/>
+					</div>
 
-  for (const key in tarjetaInputs) {
-    tarjetaInputsInfo.push({ id: key, data: tarjetaInputs[key] });
-  }
+					<div className='form-group'>
+						<label htmlFor='modelo'>Modelo</label>
 
-  const tarjetaInputsForm = tarjetaInputsInfo.map(({ id, data }) => (
-    <Input
-      key={id}
-      id={id}
-      inputType={data.inputType}
-      value={data.value}
-      options={data.options}
-      changed={changedTarjetaValueHandler}
-    />
-  ));
+						<input
+							className='form-control'
+							id='modelo'
+							onChange={handleInputChange('modelo')}
+							type='text'
+							value={modelo}
+						/>
+					</div>
 
-  const [inputValues, setInputValues] = useState({
-    nombre: "",
-    numeroPoliza: ""
-  })
+					<div className='form-group'>
+						<label htmlFor='afiliados'>Afiliados</label>
 
-  const changes = (e) => {
-    const target = e.target;
-    const value = target.value;
+						<input
+							className='form-control'
+							id='afiliados'
+							onChange={handleInputChange('afil')}
+							onKeyPress={handleAddAfiliado}
+							type='text'
+							value={afil}
+						/>
+						<small className='form-text text-muted'>
+							Presione enter para agregar un afiliado
+						</small>
 
-    
-  }
+						{afiliados.length ? (
+							<div className='mt-2'>
+								<h6>Afiliados</h6>
 
-  return (
-    <div className="container">
-      <div className="text-center mt-5">
-        <Button classes="btn-primary">Registrar Usuario</Button>
-      </div>
+								{afiliados.map((afiliado, i) => (
+									<p key={i} className={['mb-1', styles.afiliado].join(' ')}>
+										{afiliado}
+										<i
+											className='fas fa-times-circle'
+											onClick={() => handleRemoveAfiliado(afiliado)}
+										></i>
+									</p>
+								))}
+							</div>
+						) : null}
+					</div>
 
-      <form action="#" className="border mt-5 p-4 mx-auto" style={formStyle}>
-        <p className="h4">Datos personales</p>
-
-        <input 
-          name="nombre"
-          type="text"
-          onChange={}
-        />
-
-        <Input
-          id={}
-          inputType={data.inputType}
-          value={data.value}
-          options={data.options}
-          changed={changedTarjetaValueHandler}
-        />
-
-        {mainInputsForm}
-
-        {vehicularInputsForm}
-
-        {tarjetaInputsForm}
-
-        <Button classes="btn-success btn-block">Registrar</Button>
-      </form>
-    </div>
-  );
+					<div className={styles['button-container']}>
+						<button className='btn btn-success' onClick={handleSubmitForm}>
+							Registrarme
+						</button>
+					</div>
+				</div>
+			) : null}
+		</div>
+	);
 };
 
 export default App;
