@@ -82,6 +82,12 @@ public class Cliente extends PersonaObserver {
 
 
     //getters de los datos del cliente
+
+
+    public void setSeguros(List<Seguro> seguros) {
+        this.seguros = seguros;
+    }
+
     public List<Seguro> getSeguros() {
         return seguros;
     }

@@ -81,9 +81,7 @@ public abstract class SeguroVehicular extends Seguro implements INivelRiesgo {
         if (coberturas.contains(coberturaBuscada)){
             System.out.println("Si cumple con " + coberturaBuscada);
             System.out.println("Nontificando...");
-            for( PersonaObserver a : this.contratantes) {
-                a.notifica();
-            }
+            for( PersonaObserver a : this.contratantes) a.notifica();
         } else {
             System.out.println("No cumple con "+coberturaBuscada);
         }

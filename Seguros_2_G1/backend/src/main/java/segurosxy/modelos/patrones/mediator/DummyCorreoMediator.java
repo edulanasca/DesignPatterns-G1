@@ -1,6 +1,7 @@
 package segurosxy.modelos.patrones.mediator;
 
 import segurosxy.cliente.model.Cliente;
+import segurosxy.cliente.model.PersonaObserver;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -31,7 +32,8 @@ public class DummyCorreoMediator implements ICorredorMediator {
   }
 
   @Override
-  public void enviaCorreoSMTP(Cliente cliente) {
+  public void enviaCorreoSMTP(PersonaObserver cliente) {
+
     System.out.println("[CorreoMediator] Enviando mensaje por Correo, servidor IP: "
         + props.getProperty("mail.smtp.host") +
         "\n[CorreoMediator]                                  Cliente: " + cliente.getNombre());
@@ -52,7 +54,8 @@ public class DummyCorreoMediator implements ICorredorMediator {
           .append("<table style=\"border-collapse: collapse; width: auto;\" border=\"1\">")
           .append("<tbody>");
 
-      cliente.getSeguros().forEach(
+      //casteo para usar el metodo
+      ((Cliente)cliente).getSeguros().forEach(
           seguro -> content
           .append("<tr>")
           .append("<td style=\"width: 50%;\">").append(seguro.getClass().getSimpleName()).append("</td>")

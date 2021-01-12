@@ -16,7 +16,10 @@ public class ClienteAsegurado extends Cliente {
 
     public void enviaCorreo()    {
 
-        correoMediator.setServidorCorreoSMTP("localhost");
-        correoMediator.enviaCorreoSMTP(this);
+        try {
+            correoMediator.setServidorCorreoSMTP("localhost");
+            correoMediator.enviaCorreoSMTP(this);
+        }catch (Exception e){}
+
     }
 }

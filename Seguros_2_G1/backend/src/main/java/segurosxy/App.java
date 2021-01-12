@@ -11,6 +11,7 @@ import segurosxy.modelos.patrones.*;
 import io.javalin.Javalin;
 import segurosxy.cliente.ClienteController;
 import segurosxy.modelos.patrones.beneficiarios.Empleado;
+import segurosxy.modelos.patrones.beneficiarios.Obrero;
 import segurosxy.modelos.patrones.cobertura.CoberturaBasicaVehicular;
 import segurosxy.modelos.patrones.cobertura.CoberturaPorChoqueDecorator;
 import segurosxy.modelos.patrones.cobertura.CoberturaPorRoboDecorator;
@@ -134,7 +135,7 @@ public class App {
         // Command by SeguroEmpresa
         System.out.println("\n[App] Logica comando para empleados");
         SeguroEmpresa seguro3 = new SeguroEmpresa("Minera XYZ");
-        Beneficiario minero1 = new Beneficiario("Luis Piedrahita");
+        Obrero minero1 = new Obrero("Armando Hoyos");
         ICommand alta = new AltaCommand();
         ICommand baja = new BajaCommand();
         ICommand suspension = new SuspensionCommand();
@@ -149,7 +150,7 @@ public class App {
         //beneficiario Empleado
         System.out.println("\n");
         SeguroEmpresa seguro4 = new SeguroEmpresa("Farmacia XYZ");
-        Beneficiario farmaceutico = new Beneficiario("Eduardo Lanasca");
+        Empleado farmaceutico = new Empleado("Eduardo Lanasca");
 
         seguro4.setCommand(suspension);
         seguro4.ejecutarAccion(farmaceutico);
