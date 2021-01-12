@@ -1,7 +1,6 @@
 package segurosxy.modelos.patrones;
 
-import segurosxy.cliente.model.Cliente;
-import segurosxy.cliente.model.Persona;
+import segurosxy.cliente.model.PersonaObserver;
 import segurosxy.modelos.email.EmailUtil;
 
 public class CorreoMediator implements ICorredorMediator {
@@ -21,7 +20,7 @@ public class CorreoMediator implements ICorredorMediator {
     }
 
     @Override
-    public void enviaCorreoSMTP(Persona cliente) {
+    public void enviaCorreoSMTP(PersonaObserver cliente) {
         // enviando correo...
         System.out.println( preparaMensaje(cliente.getNombre()) );
 

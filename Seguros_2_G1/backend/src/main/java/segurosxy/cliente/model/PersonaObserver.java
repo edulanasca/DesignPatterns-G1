@@ -6,20 +6,21 @@ import segurosxy.modelos.patrones.UbigeoContext;
 
 import java.util.Map;
 
-public abstract class Persona {
+public abstract class PersonaObserver//es un obserbador
+{
 
-   //datos de toda persona
+//datos de toda persona
    private String id;
    private String nombre;
    protected CorreoMediator correoMediator;
 
 //constructores persona
-   public Persona(String nombre) {
+   public PersonaObserver(String nombre) {
       this.id = new ObjectId().toString();
       this.nombre = nombre;
    }
 
-   public Persona(final String nombre, final CorreoMediator correoMediator) {
+   public PersonaObserver(final String nombre, final CorreoMediator correoMediator) {
       this.id = new ObjectId().toString();
       this.nombre = nombre;
       this.correoMediator = correoMediator;
@@ -27,8 +28,6 @@ public abstract class Persona {
 
 //mettodo abastracto para notificar
    public abstract void notifica();
-
-
 
 //Getters y setters de los datos de persona
    public String getId() {return id;}

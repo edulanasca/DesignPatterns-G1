@@ -1,7 +1,7 @@
 package segurosxy.seguro;
 
 import lombok.ToString;
-import segurosxy.cliente.model.Persona;
+import segurosxy.cliente.model.PersonaObserver;
 import segurosxy.modelos.Certificado;
 import segurosxy.modelos.Poliza;
 import segurosxy.modelos.interfaces.ICertificado;
@@ -18,7 +18,7 @@ public abstract class Seguro implements ISeguroObservable {
     protected ICertificado certificado;
     protected Poliza poliza;
     protected String nivelRiesgo = "NINGUNO";
-    protected List<Persona> contratantes;
+    protected List<PersonaObserver> contratantes;
 
     public Seguro() {
         this.certificado = new Certificado();
@@ -56,16 +56,16 @@ public abstract class Seguro implements ISeguroObservable {
         //System.out.println("***********************************************************");
         System.out.println("[Seguro] Se modifico la Suma Asegurada, notificando... ");
         //System.out.println("***********************************************************");
-        for( Persona a : this.contratantes) {
+        for( PersonaObserver a : this.contratantes) {
             a.notifica();
         }
     }
 
-    public void addObserver(Persona observer) {
+    public void addObserver(PersonaObserver observer) {
         this.contratantes.add( observer );
     }
 
-    public void removeObserver(Persona observer) {
+    public void removeObserver(PersonaObserver observer) {
         this.contratantes.remove( observer );
     }
 

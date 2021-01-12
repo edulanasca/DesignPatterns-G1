@@ -38,7 +38,11 @@ public class App {
 
     public static void main(String[] args ) {
 
-        Persona cliente = new Cliente("Juan Perez");
+        Cliente cliente = new Cliente("Juan Perez");
+    //Cliente para la prueba del seguro
+        CorreoMediator correo = new CorreoMediator();
+        ClienteAsegurado clienteAsegurado = new ClienteAsegurado("Roberto Perez",correo);
+
 
         SeguroVehicular seguro = new SeguroChoque("Toyota","Yaris");
         seguro.calcularRiesgo();
@@ -48,15 +52,28 @@ public class App {
             new CoberturaTodoRiesgoDecorator(
                 new CoberturaPorRoboDecorator( new CoberturaBasicaVehicular() ) ) );
 
+    //servicio tecnico
+        ServicioTecnico tecnico = new ServicioTecnico("DercoCenter");
+    //Agrego observadores al Seguro
+        seguro.addObserver(clienteAsegurado);
+        seguro.addObserver(tecnico);
+
+    //le doy la cobertura extendida al seguro
+        seguro.setCobertura(cobertura);
+    //ocurre un accidente CHOQUE
+    //verifico si la cobertura lo cubre
+        seguro.validarSeguro("Cobertura Afectacion Terceros");
+        seguro.validarSeguro("Cobertura Choque");
+
         seguro.calcularCobeturaVehicular( cobertura );
 
-        ((Cliente) cliente).setCompraSeguro(seguro);
+        cliente.setCompraSeguro(seguro);
         //System.out.println( seguro.getDetalleSeguro() );
 
         SeguroTarjeta seguro2 = new SeguroTarjeta("BCP");
         seguro2.calcularRiesgo();
         seguro2.setPoliza(new Poliza(122122, "Juan Pablo", "Juan Perez"));
-        ((Cliente) cliente).setCompraSeguro(seguro2);
+        cliente.setCompraSeguro(seguro2);
         //System.out.println( seguro2.getDetalleSeguro() );
 
         System.out.println();
@@ -85,9 +102,9 @@ public class App {
         asegurado.enviaCorreo();
 
         //creo mas observadores
-        Persona agente = new Agente("Eduardo Cruzado",correoMediator);
-        Persona beneficiario = new Beneficiario("Josue Vallejo",correoMediator);
-        Persona contratante = new Contratante("Hugo Ciro",correoMediator);
+        PersonaObserver agente = new Agente("Eduardo Cruzado",correoMediator);
+        PersonaObserver beneficiario = new Beneficiario("Josue Vallejo",correoMediator);
+        PersonaObserver contratante = new Contratante("Hugo Ciro",correoMediator);
 
         // Agregando Observadores
         System.out.println("\n[App] Observador para cambio en Suma Asegurada");

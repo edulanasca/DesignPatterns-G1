@@ -1,13 +1,12 @@
 package segurosxy.modelos.patrones;
 
 
-import segurosxy.cliente.model.Cliente;
-import segurosxy.cliente.model.Persona;
+import segurosxy.cliente.model.PersonaObserver;
 
 public interface ICorredorMediator {
 
     void setServidorCorreoSMTP(String servidorIP);
 
-    void enviaCorreoSMTP(Persona cliente);
+    void enviaCorreoSMTP(PersonaObserver cliente);
 
 }

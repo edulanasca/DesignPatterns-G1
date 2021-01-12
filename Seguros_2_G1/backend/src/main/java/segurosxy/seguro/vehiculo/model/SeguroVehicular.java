@@ -1,6 +1,7 @@
 package segurosxy.seguro.vehiculo.model;
 
 
+import segurosxy.cliente.model.PersonaObserver;
 import segurosxy.modelos.Vehiculo;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.interfaces.INivelRiesgo;
@@ -72,6 +73,22 @@ public abstract class SeguroVehicular extends Seguro implements INivelRiesgo {
                 cobertura.calculaCobertura().replace('\n',' '),
                 vehiculo.getMarca(),
                 vehiculo.getModelo());
+    }
+
+    public void validarSeguro(String coberturaBuscada){
+        //coberturas que tiene el seguro
+        //System.out.println(this.cobertura.calculaCobertura());
+
+        String coberturas = cobertura.calculaCobertura();
+        if (coberturas.contains(coberturaBuscada)){
+            System.out.println("Si cumple con " + coberturaBuscada);
+            System.out.println("Nontificando...");
+            for( PersonaObserver a : this.contratantes) {
+                a.notifica();
+            }
+        } else {
+            System.out.println("No cumple con "+coberturaBuscada);
+        }
     }
 
     public abstract String detalleSeguro();

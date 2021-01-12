@@ -2,7 +2,7 @@ package segurosxy.cliente.model;
 
 import segurosxy.modelos.patrones.CorreoMediator;
 
-public class Contratante extends Persona{
+public class Contratante extends PersonaObserver {
     public Contratante(String nombre) {
         super(nombre);
     }
@@ -19,7 +19,8 @@ public class Contratante extends Persona{
         catch(Throwable t) {
             System.out.println("[Contratante] Notificacion con error" + t.getMessage() );
         }
-        enviarCorreo();
+        //SEGUN LA LOGICA DE NEGOCIO NO SE ENVIA COOREO AL CONTRATANTE
+        //enviarCorreo();
     }
     public void enviarCorreo(){
         correoMediator.setServidorCorreoSMTP("smtp.gmail.com");

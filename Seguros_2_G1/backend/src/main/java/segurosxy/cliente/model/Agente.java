@@ -2,7 +2,7 @@ package segurosxy.cliente.model;
 
 import segurosxy.modelos.patrones.CorreoMediator;
 
-public class Agente extends Persona {
+public class Agente extends PersonaObserver {
 
     public Agente(String nombre) {
         super(nombre);

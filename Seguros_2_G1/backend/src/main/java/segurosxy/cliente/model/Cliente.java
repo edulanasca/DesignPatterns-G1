@@ -1,7 +1,6 @@
 package segurosxy.cliente.model;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
 import segurosxy.modelos.patrones.CorreoMediator;
 //import segurosxy.modelos.patrones.IClienteObserver;
 import segurosxy.modelos.patrones.PaisContext;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class Cliente extends Persona {
+public class Cliente extends PersonaObserver {
 
 //datos de persona
 /*  private String id;

@@ -1,10 +1,10 @@
 package segurosxy.modelos.patrones;
 
-import segurosxy.cliente.model.Persona;
+import segurosxy.cliente.model.PersonaObserver;
 
 public interface ISeguroObservable {
 
-    void addObserver(Persona observer);
-    void removeObserver(Persona observer);
+    void addObserver(PersonaObserver observer);
+    void removeObserver(PersonaObserver observer);
     
 }
