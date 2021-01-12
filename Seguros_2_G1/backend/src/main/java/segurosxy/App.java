@@ -5,15 +5,12 @@ import segurosxy.cliente.model.*;
 import segurosxy.cliente.model.Beneficiario;
 import segurosxy.cliente.model.ClienteAsegurado;
 import segurosxy.modelos.*;
-//import segurosxy.modelos.Beneficiario;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.patrones.*;
 
 import io.javalin.Javalin;
 import segurosxy.cliente.ClienteController;
-import segurosxy.modelos.patrones.beneficiarios.Beneficiario;
 import segurosxy.modelos.patrones.beneficiarios.Empleado;
-import segurosxy.modelos.patrones.beneficiarios.Obrero;
 import segurosxy.modelos.patrones.cobertura.CoberturaBasicaVehicular;
 import segurosxy.modelos.patrones.cobertura.CoberturaPorChoqueDecorator;
 import segurosxy.modelos.patrones.cobertura.CoberturaPorRoboDecorator;
@@ -142,6 +139,7 @@ public class App {
         ICommand baja = new BajaCommand();
         ICommand suspension = new SuspensionCommand();
 
+        // TODO arreglar conflicto de Beneficiarios
         seguro3.setCommand(alta);
         seguro3.ejecutarAccion(minero1);
 
@@ -151,7 +149,7 @@ public class App {
         //beneficiario Empleado
         System.out.println("\n");
         SeguroEmpresa seguro4 = new SeguroEmpresa("Farmacia XYZ");
-        Beneficiario farmaceutico = new Empleado("Eduardo Lanasca");
+        Beneficiario farmaceutico = new Beneficiario("Eduardo Lanasca");
 
         seguro4.setCommand(suspension);
         seguro4.ejecutarAccion(farmaceutico);

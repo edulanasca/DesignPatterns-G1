@@ -1,6 +1,7 @@
 package segurosxy.cliente.model;
 
-import segurosxy.modelos.patrones.CorreoMediator;
+
+import segurosxy.modelos.patrones.mediator.CorreoMediator;
 
 public class Beneficiario extends PersonaObserver {
     public Beneficiario(String nombre) {

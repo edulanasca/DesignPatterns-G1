@@ -1,10 +1,7 @@
 package segurosxy.cliente.model;
 
 import org.bson.types.ObjectId;
-import segurosxy.modelos.patrones.CorreoMediator;
-import segurosxy.modelos.patrones.UbigeoContext;
-
-import java.util.Map;
+import segurosxy.modelos.patrones.mediator.ICorredorMediator;
 
 public abstract class PersonaObserver//es un obserbador
 {
@@ -12,15 +9,18 @@ public abstract class PersonaObserver//es un obserbador
 //datos de toda persona
    private String id;
    private String nombre;
-   protected CorreoMediator correoMediator;
+   protected ICorredorMediator correoMediator;
 
-//constructores persona
+   public PersonaObserver() {
+   }
+
+   //constructores persona
    public PersonaObserver(String nombre) {
       this.id = new ObjectId().toString();
       this.nombre = nombre;
    }
 
-   public PersonaObserver(final String nombre, final CorreoMediator correoMediator) {
+   public PersonaObserver(final String nombre, final ICorredorMediator correoMediator) {
       this.id = new ObjectId().toString();
       this.nombre = nombre;
       this.correoMediator = correoMediator;
@@ -36,8 +36,8 @@ public abstract class PersonaObserver//es un obserbador
    public String getNombre(){return this.nombre;};
    public void setNombre(String nombre) {this.nombre = nombre;}
 
-   public CorreoMediator getCorreoMediator() {return correoMediator;}
-   public void setCorreoMediator(final CorreoMediator correoMediator) {
+   public ICorredorMediator getCorreoMediator() {return correoMediator;}
+   public void setCorreoMediator(final ICorredorMediator correoMediator) {
       this.correoMediator = correoMediator;}
 
 

@@ -15,6 +15,8 @@ module Seguros {
   opens segurosxy.modelos.patrones.cobertura;
   exports segurosxy.modelos.patrones.cobertura.vista to javafx.graphics;
 
+  exports segurosxy.cliente.model;
+
   exports segurosxy.modelos to mongo.java.driver, com.fasterxml.jackson.databind;
   exports segurosxy.modelos.interfaces to mongo.java.driver, com.fasterxml.jackson.databind;
 

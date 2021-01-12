@@ -1,8 +1,9 @@
 package segurosxy.cliente.model;
 
-import segurosxy.modelos.patrones.CorreoMediator;
 
-public class ServicioTecnico extends PersonaObserver{
+import segurosxy.modelos.patrones.mediator.CorreoMediator;
+
+public class ServicioTecnico extends PersonaObserver {
     public ServicioTecnico(String nombre) {
         super(nombre);
     }

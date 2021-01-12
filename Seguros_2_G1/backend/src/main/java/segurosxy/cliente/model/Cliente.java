@@ -1,10 +1,7 @@
 package segurosxy.cliente.model;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
-import segurosxy.modelos.patrones.IClienteObserver;
-import segurosxy.modelos.patrones.CorreoMediator;
-//import segurosxy.modelos.patrones.IClienteObserver;
+import lombok.EqualsAndHashCode;
 import segurosxy.modelos.patrones.PaisContext;
 import segurosxy.modelos.patrones.UbigeoContext;
 import segurosxy.modelos.patrones.mediator.ICorredorMediator;
@@ -15,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//import segurosxy.modelos.patrones.IClienteObserver;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Cliente extends PersonaObserver {
 
