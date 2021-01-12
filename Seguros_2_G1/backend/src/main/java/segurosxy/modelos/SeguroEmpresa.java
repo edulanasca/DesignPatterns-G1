@@ -3,7 +3,6 @@ package segurosxy.modelos;
 import segurosxy.modelos.interfaces.ICobertura;
 import segurosxy.modelos.interfaces.INivelRiesgo;
 import segurosxy.modelos.patrones.ICommand;
-import segurosxy.seguro.Seguro;
 import segurosxy.seguro.vehiculo.model.SeguroVehicular;
 
 public class SeguroEmpresa extends SeguroVehicular implements INivelRiesgo  {
@@ -12,9 +11,13 @@ public class SeguroEmpresa extends SeguroVehicular implements INivelRiesgo  {
     private ICommand command;
 
     public SeguroEmpresa(String marca)    {
-
         super();
         this.setVehiculo(new Vehiculo(marca, ""));
+    }
+
+    public SeguroEmpresa(Vehiculo vehiculo) {
+        super();
+        this.vehiculo = vehiculo;
     }
 
     @Override

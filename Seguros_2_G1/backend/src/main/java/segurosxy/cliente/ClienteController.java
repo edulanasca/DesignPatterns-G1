@@ -1,14 +1,15 @@
 package segurosxy.cliente;
 
 import io.javalin.http.Context;
-import org  .bson.Document;
+import org.bson.Document;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.http.HttpStatus;
-import segurosxy.cliente.model.Cliente;
+import segurosxy.cliente.model.ClienteAsegurado;
 import segurosxy.modelos.Poliza;
 import segurosxy.modelos.Vehiculo;
 import segurosxy.modelos.patrones.PaisContext;
 import segurosxy.modelos.patrones.UbigeoContext;
+import segurosxy.modelos.patrones.mediator.DummyCorreoMediator;
 import segurosxy.seguro.Seguro;
 import segurosxy.seguro.tarjeta.SeguroTarjeta;
 import segurosxy.seguro.vehiculo.model.SeguroVehicular;
@@ -31,7 +32,9 @@ public class ClienteController {
 
     List<Map<String, Object>> seguros = (List<Map<String, Object>>) json.get("seguros");
 
-    Cliente cliente = new Cliente((String) json.get("nombre"));
+    DummyCorreoMediator correoMediator = new DummyCorreoMediator();
+
+    ClienteAsegurado cliente = new ClienteAsegurado((String) json.get("nombre"), correoMediator);
     seguros.forEach(seguro -> cliente.setCompraSeguro(filtrarSeguro(seguro)));
 
     Map<String, String> ubigeoCasa = (Map<String, String>) json.get("ubigeoCasa");
@@ -59,6 +62,8 @@ public class ClienteController {
     d.put("seguros", cliente.getSeguros());
     d.put("ubigeos", cliente.getUbigeos());
     d.put("paises", cliente.getPaises());
+
+    cliente.enviaCorreo();
 
     Document saved = clienteService.saveCliente(d);
 
