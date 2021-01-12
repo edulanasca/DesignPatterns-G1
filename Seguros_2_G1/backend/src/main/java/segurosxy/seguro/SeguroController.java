@@ -1,6 +1,9 @@
 package segurosxy.seguro;
 
 import io.javalin.http.Context;
+import org.bson.types.ObjectId;
+import org.eclipse.jetty.http.HttpHeader;
+import org.eclipse.jetty.http.HttpStatus;
 import segurosxy.cliente.model.ClienteAsegurado;
 import segurosxy.modelos.SeguroEmpresa;
 import segurosxy.modelos.Vehiculo;
@@ -39,6 +42,11 @@ public class SeguroController {
     });
 
     seguro.notificarAfiliacion();
+
+    context
+        .status(HttpStatus.CREATED_201)
+        .header(HttpHeader.LOCATION.name(), "seguros/" + ObjectId.get().toString())
+        .json(seguro);
   }
 
 }

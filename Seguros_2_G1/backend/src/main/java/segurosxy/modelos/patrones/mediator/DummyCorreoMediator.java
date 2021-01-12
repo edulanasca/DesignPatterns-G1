@@ -41,7 +41,8 @@ public class DummyCorreoMediator implements ICorredorMediator {
       Message message = new MimeMessage(session);
       message.setFrom(new InternetAddress(username));
       message.setRecipients(Message.RecipientType.TO,
-          InternetAddress.parse(cliente.getNombre().toLowerCase(Locale.ROOT) + "@gmail.com"));
+          InternetAddress.parse(cliente.getNombre().replace(" ", "")
+              .toLowerCase(Locale.ROOT) + "@gmail.com"));
 
       message.setSubject("Afiliacion a Seguros");
 

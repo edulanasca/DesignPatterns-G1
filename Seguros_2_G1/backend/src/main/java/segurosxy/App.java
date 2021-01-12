@@ -1,5 +1,6 @@
 package segurosxy;
 
+import io.javalin.core.JavalinConfig;
 import segurosxy.cliente.model.Cliente;
 import segurosxy.cliente.model.ClienteAsegurado;
 import segurosxy.modelos.*;
@@ -29,7 +30,8 @@ public class App {
     }
 
     public void init() {
-        Javalin javalin = Javalin.create().start(7000);
+        // All CORS
+        Javalin javalin = Javalin.create(JavalinConfig::enableCorsForAllOrigins).start(7000);
 
         clienteEndPoints(javalin);
         seguroEndpoints(javalin);
